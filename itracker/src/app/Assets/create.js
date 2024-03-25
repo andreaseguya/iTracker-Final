@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 import axios from 'axios';
 import Home from '../page';
+import Link from 'next/link';
 
 export default function Create() {
     function isValidEmail(email) {
@@ -41,10 +42,16 @@ export default function Create() {
     return (
         <section>
             {showForm ? (
-                <Form className="create-form mx-10 my-10 flex min-h-screen flex-col" >
+                <Form className="create-form mx-10 my-10 flex flex-col" >
                     {/* <Form.Field class="mb-5 w-[355px] h-[150px] rounded-[34px] bg-gray-200">
                         <button class="bg-[] w-[30px] h-[30px]"></button>
                     </Form.Field> */}
+                    <div class="w-[330px]">
+                        <Link href="./">
+                            <button class="text-black float-right">X</button>
+                        </Link>
+
+                    </div>
                     <h1 class="mt-3 ml-1 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.05px]
   font-family: Inter;">Create an Asset</h1>
                     <p class="ml-1 mb-3  w-[340px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
