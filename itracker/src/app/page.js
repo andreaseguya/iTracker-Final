@@ -6,6 +6,7 @@ import { RiAdminLine } from "react-icons/ri";
 import { BsCart4 } from "react-icons/bs";
 import { BsDatabaseFillGear } from "react-icons/bs";
 import { ReadHelper } from './Assets/ReadHelper';
+import Inventory from './Stock/page';
 
 export default function Home() {
   return (
@@ -26,7 +27,9 @@ export default function Home() {
           <section className="py-4" ></section>
         </Tab>
         <Tab label="test5" id=<BsDatabaseFillGear class="ml-4 size-[20px] fill-white" />>
-          <section className="py-4" ></section>
+          <section className="py-4" >
+            <Inventory />
+          </section>
         </Tab>
       </Tabs>
 

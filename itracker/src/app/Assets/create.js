@@ -6,14 +6,7 @@ import Home from '../page';
 import Link from 'next/link';
 
 export default function Create() {
-    function isValidEmail(email) {
-        var regex = /^[^\s@]+@mit\.edu$/;
-        var result = regex.test(email);
-        if (result == false) {
-            alert("Invalid Email submitted");
-            hideForm(true);
-        }
-    }
+
     const [assetImage, setassetImage] = useState('');
     const [assetName, setassetName] = useState('');
     const [AlertEmail, setAlertEmail] = useState('');
@@ -48,7 +41,7 @@ export default function Create() {
                     </Form.Field> */}
                     <div class="w-[330px]">
                         <Link href="./">
-                            <button class="text-black float-right">X</button>
+                            <button class="text-black float-right font-bold">X</button>
                         </Link>
 
                     </div>
