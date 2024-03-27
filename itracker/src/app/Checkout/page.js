@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import Search from "../search"
+
 
 export default function Check() {
     return (
@@ -16,7 +16,7 @@ export default function Check() {
                 </Link>
             </div>
             <div class="mt-5">
-                <Search />
+
             </div>
         </section>
     )
