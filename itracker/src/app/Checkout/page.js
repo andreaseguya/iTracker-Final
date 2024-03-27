@@ -1,7 +1,6 @@
 "use client"
 import Link from "next/link"
-
-
+import Search from "../Search/page"
 export default function Check() {
     return (
         <section>

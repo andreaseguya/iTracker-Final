@@ -5,11 +5,6 @@ import axios from 'axios';
 
 export default function Read() {
     const [APIData, setAPIData] = useState([]);
-    // const [recordsPerPage]=useState(6);
-    // const indexOfLastRecord = currentPage * recordsPerPage;
-    // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    // const currentRecords = data.slice(indexOfFirstRecord, 
-    //     indexOfLastRecord);
 
     useEffect(() => {
         axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
