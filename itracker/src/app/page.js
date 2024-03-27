@@ -8,6 +8,7 @@ import { BsDatabaseFillGear } from "react-icons/bs";
 import { ReadHelper } from './Assets/ReadHelper';
 import Inventory from './Stock/page';
 import Kits from './Kits/page';
+import Check from './Checkout/page';
 
 export default function Home() {
   return (
@@ -22,7 +23,9 @@ export default function Home() {
           <section className="py-4" ></section>
         </Tab>
         <Tab label="test3" id=<BsQrCodeScan class="ml-4 size-[20px] fill-white" />>
-          <section className="py-4" ></section>
+          <section className="py-4" >
+            <Check />
+          </section>
         </Tab>
         <Tab label="test4" id=<BsCart4 class="ml-4 size-[20px] fill-white" />>
           <section className="py-4" >
