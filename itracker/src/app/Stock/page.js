@@ -5,24 +5,27 @@ function LowStock() {
     const [APIData, setAPIData] = useState([]);
 
     useEffect(() => {
+
         axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
             .then((response) => {
                 setAPIData(response.data);
             })
+
     }, [])
     const setData = (data) => {
-        let { ID, assetName, Quantity, minQuantity } = data;
+        let { assetName, Quantity, minQuantity } = data;
         localStorage.setItem('Quantity', Quantity);
         localStorage.setItem("Asset Name", assetName);
         localStorage.setItem("Minimum Quantity", minQuantity);
-        localStorage.setItem("Returnable", checkbox);
 
     }
+
+
 
     return (
         <div class="grid grid-cols-4 gap-4 content-between ... p-5 mb-3">
             {APIData.map((data) => {
-                if (data.Quantity < data.minQuantity) {
+                while (data.Quantity < data.minQuantity) {
                     return (
                         <div key="ID" >
                             <div class="bg-[#DFDFDF] h-[62px] rounded-[50%] w-[63px]">
@@ -32,29 +35,15 @@ function LowStock() {
                             <p class="text-[#F11919] ml-2">{data.Quantity} unit</p>
                         </div>
                     )
+                    break;
                 }
-                else if (data.Quantity < 10) {
-                    return (
-                        <div key="ID" >
-                            <div class="bg-[#DFDFDF] h-[62px] rounded-[50%] w-[63px]">
-                                {/* Asset image */}
-                            </div>
-                            <p class="ml-2">{data.assetName}</p>
-                            <p class="text-[#FFA500] ml-2">{data.Quantity} unit</p>
-                        </div>
-                    )
-
-                }
-
-
             })}
-
-
         </div>
     )
 }
+
 export default function Inventory() {
-    const [lowStockStatus, setlowStock] = useState("true");
+
     return (
         <section class="">
             <h1 class="ml-3 text-[#2F2F2F] text-xl not-italic font-semibold leading-[normal];

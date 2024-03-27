@@ -7,6 +7,7 @@ import { BsCart4 } from "react-icons/bs";
 import { BsDatabaseFillGear } from "react-icons/bs";
 import { ReadHelper } from './Assets/ReadHelper';
 import Inventory from './Stock/page';
+import Kits from './Kits/page';
 
 export default function Home() {
   return (
@@ -24,7 +25,9 @@ export default function Home() {
           <section className="py-4" ></section>
         </Tab>
         <Tab label="test4" id=<BsCart4 class="ml-4 size-[20px] fill-white" />>
-          <section className="py-4" ></section>
+          <section className="py-4" >
+            <Kits />
+          </section>
         </Tab>
         <Tab label="test5" id=<BsDatabaseFillGear class="ml-4 size-[20px] fill-white" />>
           <section className="py-4" >
