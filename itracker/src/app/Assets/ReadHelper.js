@@ -28,8 +28,6 @@ export function ReadHelper() {
   font-family: Inter">- EXPORT</button>
                 </div>
             </div>
-            {/* <div class="mt-5 mb-3"><Search /></div> */}
-
             <section class="mt-5"><Read /></section>
 
         </section>
