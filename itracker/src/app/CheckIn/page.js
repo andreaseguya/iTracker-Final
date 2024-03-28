@@ -1,3 +1,4 @@
+import Search from "../Search/page"
 export default function CheckIn() {
     return (
         <section>

@@ -25,7 +25,7 @@ function LowStock() {
     return (
         <div class="grid grid-cols-4 gap-4 content-between ... p-5 mb-3">
             {APIData.map((data) => {
-                while (data.Quantity < data.minQuantity) {
+                while (data.Quantity <= data.minQuantity) {
                     return (
                         <div key="ID" >
                             <div class="bg-[#DFDFDF] h-[62px] rounded-[50%] w-[63px]">
