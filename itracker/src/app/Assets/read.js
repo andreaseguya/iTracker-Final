@@ -5,13 +5,21 @@ import axios from 'axios';
 
 export default function Read() {
     const [APIData, setAPIData] = useState([]);
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(6);
+    let counter = 1;
+    function increment() {
+        counter = counter + 1;
+        return counter;
+    }
     useEffect(() => {
-        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset?page=${currentPage}&limit=${itemsPerPage}`)
             .then((response) => {
                 setAPIData(response.data);
             })
-    }, [])
+    }, [currentPage, itemsPerPage])
+
+
     const setData = (data) => {
         let { ID, assetName, AlertEmail, checkbox } = data;
         localStorage.setItem('ID', ID);
@@ -19,6 +27,10 @@ export default function Read() {
         localStorage.setItem("Alert Email", AlertEmail);
         localStorage.setItem("Checkbox", checkbox);
     }
+    const totalPages = Math.ceil(APIData.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = APIData.slice(startIndex, endIndex);
 
     return (
         <section class=" w-[365px]">
@@ -49,6 +61,10 @@ export default function Read() {
                         </div>
                     )
                 })}
+                <div class="mt-5 ml-5">
+                    <button class="mr-3" onClick={(e) => setCurrentPage(counter + 1)}> next page</button>
+                    <button onClick={(e) => setCurrentPage(counter)}> previous page</button>
+                </div>
             </div>
 
 
