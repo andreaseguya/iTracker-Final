@@ -113,9 +113,7 @@ export default function Create() {
                  bg-[black] text-[white] disabled:bg-[grey] hover:bg-[#087EA4]">Submit</Button>
                 </Form>
             ) : (
-                <section>
-                    <Home />
-                </section>
+                <Home />
             )}
         </section>
 
