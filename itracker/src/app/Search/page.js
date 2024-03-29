@@ -1,14 +1,29 @@
 "use client"
 import { useState, useEffect } from "react"
 import axios from "axios"
+const SelectedAssets = [];
 
-
-import Link from "next/link";
+function Selected() {
+  const [selected, setSelected] = useState(false);
+  function handleChecked(e) {
+    setSelected(e.target.selected);
+  }
+  return (
+    <div>
+      <input type="checkbox"></input>
+    </div>
+  )
+}
 export default function Search() {
 
   const url = new URL(`https://65f8f806df151452461037b3.mockapi.io/Asset`);
   const [assetList, setAssetList] = useState([]);
+  // const [selected, setSelected] = useState(false);
   const [search, setSearch] = useState("");
+  // function handleChecked(e) {
+  //   setSelected(e.target.selected);
+
+  // }
   let counter = 1;
 
   useEffect(() => {
@@ -37,21 +52,19 @@ export default function Search() {
         })
           .map((item) => {
             return (
-              <div key={item.ID} class="ml-2 ">
-                <Link href="/Asset">
-                  <div class="w-[100px] " id="assets">
-
-                    <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] ">
-                      <input type="checkbox" class="float-right"></input>
-                    </div>
-                    <h1 class="ml-3 mt-0.5 w-[70px]">{item.assetName}</h1>
+              <div key={item.ID} class="ml-2">
+                <div class="w-[100px] " id="assets">
+                  <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] ">
+                    {/* <input type="checkbox" class="float-right" onChange={handleChecked}></input> */}
+                    <Selected />
                   </div>
-                </Link>
-
+                  <h1 class="ml-3 mt-0.5 w-[70px]">{item.assetName}</h1>
+                </div>
               </div>
 
             )
-          })
+          }
+          )
 
         }
 
