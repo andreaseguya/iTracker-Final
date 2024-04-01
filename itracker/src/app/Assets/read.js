@@ -5,9 +5,13 @@ import axios from 'axios';
 
 export default function Read() {
     const [APIData, setAPIData] = useState([]);
+    const [assetID, setAssetID] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(6);
     let counter = 1;
+    if (assetID != null) {
+        console.log("AssetID: ", assetID);
+    }
     function increment() {
         counter = counter + 1;
         return counter;
@@ -26,6 +30,7 @@ export default function Read() {
         localStorage.setItem("Asset Name", assetName);
         localStorage.setItem("Alert Email", AlertEmail);
         localStorage.setItem("Checkbox", checkbox);
+
     }
     const totalPages = Math.ceil(APIData.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -41,8 +46,8 @@ export default function Read() {
                         <div key="ID" class="mx-2 my-2">
                             <div class="w-[104px] h-[102px] bg-[#F6F7FC] rounded-[10px]">
                                 {/* <input type="checkbox" class="w-[20px] m-2 float-right rounded-[10px] " checked={isChecked} onChange={handleChange} ></input> */}
-                                <Link href="/Asset">
-                                    <button id={data.ID} class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
+                                <Link href="/AssetDetails" id={data.ID}>
+                                    <button id={data.ID} onClick={(e) => setAssetID(data.ID)} class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
                                     </button>
                                 </Link>
 
@@ -51,13 +56,6 @@ export default function Read() {
                          font-family: Inter">{data.assetName}</p>
                             <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
                          font-family: Inter">{data.Quantity} unit(s)</p>
-                            {/* <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
-                 font-family: Inter" >{data.checkbox ? 'Checked' : 'Unchecked'}</p> */}
-
-                            {/* Update button  */}
-                            {/* <Button onClick={() => setData(data)} className=" mt-5 w-[100px] h-[34px] rounded
-                        bg-[black] text-[white] disabled:bg-[grey] hover:bg-[#087EA4]" >Update</Button> */}
-
                         </div>
                     )
                 })}
@@ -72,4 +70,14 @@ export default function Read() {
         </section>
     )
 }
+
+const AssetID = () => {
+    const [assetID, setAssetID] = useState(0);
+    return (
+        <button onClick></button>
+    )
+}
+
+
+
 

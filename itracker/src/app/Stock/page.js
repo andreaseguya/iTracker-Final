@@ -35,8 +35,8 @@ function LowStock() {
                             <p class="text-[#F11919] ml-2">{data.Quantity} unit</p>
                         </div>
                     )
-                    break;
                 }
+
             })}
         </div>
     )

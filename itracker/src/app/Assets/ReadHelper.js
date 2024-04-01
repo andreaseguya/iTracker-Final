@@ -16,7 +16,7 @@ export function ReadHelper() {
             </div>
             <p class="ml-3 w-[340px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">This includes all assets regardless of loan or kit status. Assets can be checkout and updated as needed.To update an asset, click the respective profile and apply edits.
-                Scroll to add a new asset or import a list of assets below. </p>
+            </p>
             <div class="flex flex-row w-[350px] mt-2">
                 <div class="  bg-[#979797] rounded-[10px] text-center w-[97px] ml-2">
                     <button class=" hover:text-white text-black text-[15px] not-italic font-semibold leading-5 tracking-[-0.24px]
