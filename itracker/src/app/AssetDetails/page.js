@@ -16,19 +16,24 @@ export default function AssetHelper() {
     }, []);
     const AssetDisplay = () => {
         return APIData.map((res, i) => {
-            return <Assets
-                obj={res} key={i} />;
+            if(i==id){
+                return <Assets
+                        obj={res} key={i} />;
+            }
+            else return ''
+        //     return <Assets
+        //         obj={res} key={i} />;
         });
     };
-    const DisplayByID = (id) => {
-        // console.log(APIData.filter(ID, id));
-        // return (
-        //     APIData.filter((item))=>{
+    // const DisplayByID = (id) => {
+    //     // console.log(APIData.filter(ID, id));
+    //     // return (
+    //     //     APIData.filter((item))=>{
 
-        //     }
+    //     //     }
 
-        // )
-    };
+    //     // )
+    // };
 
     return (
         <section>
