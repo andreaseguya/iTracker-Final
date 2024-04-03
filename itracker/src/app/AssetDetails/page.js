@@ -55,16 +55,16 @@ const Assets = (props) => {
         <section class="ml-5 mt-5 w-[370px]">
             <Link href="./" class="float-right text-black text-l font-bold">X</Link>
             {/* Asset Header */}
-            <div id="AssetHeader" class="flex flex-row rounded-[20px] p-5 w-[360px] bg-gray-300">
-                <div class="rounded-[50%] bg-gray-200 w-[70px] h-[70px]">.
+            <div id="AssetHeader" class="flex flex-row rounded-[20px] p-5 w-[360px] bg-[rgba(151,151,151,0.14)]">
+                <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
                 </div>
                 <div class="ml-5 " >
                     <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
   font-family: Inter;">{assetName}</h1>
                     <p class="text-black text-[15px] not-italic font-medium leading-5 tracking-[-0.24px];
   font-family: Inter">Last modified by Admin</p>
-                    <button class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white">Edit</button>
-                    <button class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white">Delete</button>
+                    <button class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
+                    <button class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button>
                 </div>
 
             </div>
@@ -106,6 +106,35 @@ const Assets = (props) => {
 
                 </div>
             </div>
+            <div id="LastSection">
+                <h1 class="ml-3 mt-3 w-[182px] text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px];
+  font-family: Inter;">Loans</h1>
+                <button class=" -mt-6 mr-2 float-right text-base hover:text-red-500">Check in</button>
+                {/* Loans populate here */}
+                <div class=" mt-3 flex w-[375px] h-[1px] bg-gray-200"></div>
+                <div class="w-[343px] ">
+                    <h2 class="ml-3 mt-3">No current loans</h2>
+                </div>
+                <div class=" mt-3 flex w-[375px] h-[1px] bg-gray-200"></div>
+                <div class="mt-5 ml-3 flex flex-row">
+                    <h2 class=" text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
+  font-family: Inter;">Low Stock Email:</h2>
+                    <h2 class="ml-3 text-black text-[15px] not-italic font-normal leading-4 tracking-[-0.41px];
+  font-family: Inter;">{AlertEmail}@snocasino.com</h2>
+                </div>
+                <div class="mt-5 ml-3 flex flex-row">
+                    <h2 class=" text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
+  font-family: Inter;">Minimum Quantity:</h2>
+                    <h2 class="ml-3 text-black text-[15px] not-italic font-normal leading-4 tracking-[-0.41px];
+  font-family: Inter;">{minQuantity} units </h2>
+                </div>
+                <div>
+                    {/* Finish returnable section */}
+                    {/* <h2>Returnable</h2> */}
+
+                </div>
+            </div>
+
         </section >
     )
 }

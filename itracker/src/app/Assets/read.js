@@ -46,10 +46,7 @@ export default function Read() {
                         <div key="ID" class="mx-2 my-2">
                             <div class="w-[104px] h-[102px] bg-[#F6F7FC] rounded-[10px]">
                                 {/* <input type="checkbox" class="w-[20px] m-2 float-right rounded-[10px] " checked={isChecked} onChange={handleChange} ></input> */}
-                                <Link href="/AssetDetails" id={data.ID}>
-                                    <button id={data.ID} onClick={(e) => setAssetID(data.ID)} class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
-                                    </button>
-                                </Link>
+                                <DisplayAsset />
 
                             </div>
                             <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
@@ -71,13 +68,24 @@ export default function Read() {
     )
 }
 
-const AssetID = () => {
-    const [assetID, setAssetID] = useState(0);
+const DisplayAsset = () => {
+    const [display, setDisplay] = useState(false);
     return (
-        <button onClick></button>
+        <div>
+            {display ? (
+                <div></div>
+            ) : (
+                < Link href="/AssetDetails" >
+                    <button
+                        onClick={(e) => setDisplay(true)}
+                        class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
+                    </button>
+                </Link >
+            )}
+        </div>
+
     )
 }
-
 
 
 
