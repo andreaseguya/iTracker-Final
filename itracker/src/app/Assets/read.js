@@ -3,6 +3,15 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 
+const content ="We will edit this later"
+const Open=()=>{
+    return(
+         <button class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
+         </button>                          
+    )
+}
+const close="Close"
+
 export default function Read() {
     const [APIData, setAPIData] = useState([]);
     const [assetID, setAssetID] = useState(0);
@@ -46,10 +55,8 @@ export default function Read() {
                         <div key="ID" class="mx-2 my-2">
                             <div class="w-[104px] h-[102px] bg-[#F6F7FC] rounded-[10px]">
                                 {/* <input type="checkbox" class="w-[20px] m-2 float-right rounded-[10px] " checked={isChecked} onChange={handleChange} ></input> */}
-                                <Link href="/AssetDetails" id={data.ID}>
-                                    <button id={data.ID} onClick={(e) => setAssetID(data.ID)} class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
-                                    </button>
-                                </Link>
+                                <Open/>
+                                {/* TODO: Add the Modal  */}
 
                             </div>
                             <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
@@ -71,13 +78,75 @@ export default function Read() {
     )
 }
 
-const AssetID = () => {
-    const [assetID, setAssetID] = useState(0);
-    return (
-        <button onClick></button>
-    )
+function AssetModal (props){
+   const [showModal,setShowModal]=useState(false);
+   const [APIData, setAPIData] = useState([]);
+   const [id, setId] = useState(3);
+   useEffect(() => {
+       axios
+           .get("https://65f8f806df151452461037b3.mockapi.io/Asset")
+           .then(({ data }) => {
+               setAPIData(data);
+           })
+           .catch((error) => {
+               console.log(error);
+           });
+   }, []);
+   const AssetDisplay = () => {
+       return APIData.map((res, i) => {
+           if(i==id){
+               return <Assets
+                       obj={res} key={i} />;
+           }
+          
+       });
+   };
+
+   const openModal=()=>{
+    setShowModal(true);
+   }
+   const closeModal = () => {
+    setShowModal(false);
+};
+return(
+    <section>
+
+    </section>
+)
 }
 
+const Assets = (props) => {
+    const [singleAsset] = useState([]);
+    const {
+        _id,
+        assetName,
+        AlertEmail,
+        Quantity,
+        minQuantity,
+        status,
+        Returnable,
+        StorageLocation
+    } = props.obj;
+
+
+    return (
+        <section>
+            <div id="AssetHeader">
+                <div class="rounded-[50%] bg-gray-500 w-[50px] h-[50px]">.
+                </div>
+                <div class="" _id={1}>
+                    <h1>{assetName}</h1>
+                    <p>Last modified by ....</p>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </section>
+    )
+}
 
 
 
