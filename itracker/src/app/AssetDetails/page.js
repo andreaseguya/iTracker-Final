@@ -22,13 +22,13 @@ export default function AssetHelper() {
         });
     };
     const DisplayByID = (id) => {
-        // console.log(APIData.filter(ID, id));
-        // return (
-        //     APIData.filter((item))=>{
+        return APIData.map((res, i) => {
+            if (i == id) {
+                return <Assets
+                    obj={res} key={i} />;
+            }
 
-        //     }
-
-        // )
+        })
     };
 
     return (
