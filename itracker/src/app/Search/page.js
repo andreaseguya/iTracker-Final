@@ -51,6 +51,7 @@ export default function Search() {
           }
         })
           .map((item) => {
+
             return (
               <div key={item.ID} class="ml-2">
                 <div class="w-[100px] " id="assets">
@@ -63,6 +64,7 @@ export default function Search() {
               </div>
 
             )
+
           }
           )
 
