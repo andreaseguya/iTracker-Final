@@ -16,24 +16,17 @@ function Selected() {
 }
 export default function Search() {
 
-  const url = new URL(`https://65f8f806df151452461037b3.mockapi.io/Asset`);
   const [assetList, setAssetList] = useState([]);
-  // const [selected, setSelected] = useState(false);
   const [search, setSearch] = useState("");
-  // function handleChecked(e) {
-  //   setSelected(e.target.selected);
 
-  // }
   let counter = 1;
-
+  const url = new URL(`https://65f8f806df151452461037b3.mockapi.io/Asset`);
   useEffect(() => {
     axios.get(url)
       .then((response) => {
         setAssetList(response.data);
       })
   }, []);
-
-
 
   return (
     <div class="w-[370px]">
@@ -51,7 +44,6 @@ export default function Search() {
           }
         })
           .map((item) => {
-
             return (
               <div key={item.ID} class="ml-2">
                 <div class="w-[100px] " id="assets">
@@ -61,15 +53,16 @@ export default function Search() {
                   </div>
                   <h1 class="ml-3 mt-0.5 w-[70px]">{item.assetName}</h1>
                 </div>
+
               </div>
 
             )
+
 
           }
           )
 
         }
-
 
       </div>
 

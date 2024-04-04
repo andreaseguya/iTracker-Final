@@ -16,7 +16,8 @@ export default function Check() {
                     Select an asset to checkout or check in a loaned asset by ID </p>
             </div>
             <div class="ml-5">
-                <Search />
+                {/* Add Search here */}
+
             </div>
 
         </section>

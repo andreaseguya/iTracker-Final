@@ -25,7 +25,6 @@ const ChartData = {
 }
 export default function Read() {
     const [APIData, setAPIData] = useState([]);
-    const [assetID, setAssetID] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(6);
     const [showModal, setShowModal] = useState(false);
@@ -39,9 +38,7 @@ export default function Read() {
         setShowModal(false);
     };
     let counter = 1;
-    if (assetID != null) {
-        console.log("AssetID: ", assetID);
-    }
+
     function increment() {
         counter = counter + 1;
         return counter;
@@ -193,12 +190,12 @@ const Assets = (props) => {
                     </div>
                     <div class=" ml-7 w-[100px]">
                         <Doughnut data={ChartData} />
-                        <div class="flex flex-row mt-2 gap-7 ml-3 ">
+                        <div class="flex flex-row mt-2 gap-8 ml-3 ">
                             <div class="w-[9px] h-[9px] bg-[#5A6ACF] rounded-[50%]"></div>
                             <div class="w-[9px] h-[9px] bg-[#8593ED] rounded-[50%]"></div>
                             <div class="w-[9px] h-[9px] bg-[#C7CEFF] rounded-[50%]"></div>
                         </div>
-                        <div class="flex flex-row mt-1 gap-7 ml-3 ">
+                        <div class="flex flex-row mt-1 gap-7 ml-2 ">
                             <p class="text-[#121212] text-xs not-italic font-normal leading-3 tracking-[0.5px];
              font-family: Inter">In</p>
                             <p class="text-[#121212] text-xs not-italic font-normal leading-3 tracking-[0.5px];

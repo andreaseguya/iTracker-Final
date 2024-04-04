@@ -1,7 +1,7 @@
 "use client"
 import axios from "axios"
 import { useState, useEffect } from "react";
-
+import Search from "../Search/page";
 
 export default function Kits() {
     const [select, setSelect] = useState(true);
@@ -14,7 +14,7 @@ export default function Kits() {
                     <p class=" ml-3 mt-2 text-black text-base not-italic font-normal leading-6
   font-family: Inter">Kits allow you to bundle consumables, accessories and assets together into one loanable item. They can be checked out to a user or location. To get started, select which items you would like to add to your first kit.  Alternatively, scan or enter a bar code to add  item</p>
                     <div>
-                        {/* <KitAssets /> */}
+                        <Search />
                     </div>
                 </div>
             ) :
