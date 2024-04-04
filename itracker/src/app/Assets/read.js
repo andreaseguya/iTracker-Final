@@ -95,10 +95,11 @@ export default function Read() {
                         </motion.div>
                     )}
                 </AnimatePresence>
-                <div class="mt-5 ml-5">
-                    <button class="mr-3" onClick={(e) => setCurrentPage(counter + 1)}> next page</button>
-                    <button onClick={(e) => setCurrentPage(counter)}> previous page</button>
-                </div>
+
+            </div>
+            <div class="mt-5 ml-5">
+                <button class="mr-3" onClick={(e) => setCurrentPage(counter + 1)}> next page</button>
+                <button onClick={(e) => setCurrentPage(counter)} class=""> previous page</button>
             </div>
 
 
