@@ -1,10 +1,28 @@
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
+ChartJS.register(ArcElement, Tooltip, Legend);
 
+const ChartData = {
+    // labels: ['In', 'Out', 'Kits'],
+    datasets: [
+        {
+            label: '# of Assets',
+            data: [5, 1, 3],
+            backgroundColor: [
+                'rgb(133,147,237)',
+                'rgb(199,206,255)',
+                'rgb(90,106,207)'
+            ]
+
+
+        }
+    ]
+}
 export default function Read() {
     const [APIData, setAPIData] = useState([]);
     const [assetID, setAssetID] = useState(0);
@@ -172,6 +190,22 @@ const Assets = (props) => {
                         <select class=" mt-3 ml-3 w-[67px] h-[14px] rounded-[5px]">
                         </select>
                         {/*Add chart here */}
+                    </div>
+                    <div class=" ml-7 w-[100px]">
+                        <Doughnut data={ChartData} />
+                        <div class="flex flex-row mt-2 gap-7 ml-3 ">
+                            <div class="w-[9px] h-[9px] bg-[#5A6ACF] rounded-[50%]"></div>
+                            <div class="w-[9px] h-[9px] bg-[#8593ED] rounded-[50%]"></div>
+                            <div class="w-[9px] h-[9px] bg-[#C7CEFF] rounded-[50%]"></div>
+                        </div>
+                        <div class="flex flex-row mt-1 gap-7 ml-3 ">
+                            <p class="text-[#121212] text-xs not-italic font-normal leading-3 tracking-[0.5px];
+             font-family: Inter">In</p>
+                            <p class="text-[#121212] text-xs not-italic font-normal leading-3 tracking-[0.5px];
+             font-family: Inter">Out</p>
+                            <p class="text-[#121212] text-xs not-italic font-normal leading-3 tracking-[0.5px];
+             font-family: Inter">Kits</p>
+                        </div>
                     </div>
 
                 </div>
