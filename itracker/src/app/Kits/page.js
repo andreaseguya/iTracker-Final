@@ -1,21 +1,27 @@
 "use client"
 import axios from "axios"
 import { useState, useEffect } from "react";
-import Search from "../Search/page";
+import SearchBar from "../AssetSearch/page";
+import Read from "../Assets/read";
 
 export default function Kits() {
     const [select, setSelect] = useState(true);
     return (
         <section>
             {select ? (
-                <div class="w-[350px]">
+                <div class="w-[370px]">
+
                     <h1 class=" ml-3 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
   font-family: Inter;">Kits</h1>
                     <p class=" ml-3 mt-2 text-black text-base not-italic font-normal leading-6
-  font-family: Inter">Kits allow you to bundle consumables, accessories and assets together into one loanable item. They can be checked out to a user or location. To get started, select which items you would like to add to your first kit.  Alternatively, scan or enter a bar code to add  item</p>
+  font-family: Inter">Kits cater to bundling assets such as consumables & accessories together into one loanable item. They can be checked out to a user or location. To get started, select which items you would like to add to your first kit.  Alternatively, scan or enter a bar code to add  item</p>
                     <div>
-                        <Search />
+                        <SearchBar />
                     </div>
+                    <div>
+
+                    </div>
+
                 </div>
             ) :
 

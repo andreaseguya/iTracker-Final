@@ -5,6 +5,7 @@ import { Doughnut } from "react-chartjs-2";
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
+import Link from 'next/link';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ChartData = {
@@ -49,7 +50,14 @@ export default function Read() {
                 setAPIData(response.data);
             })
     }, [currentPage, itemsPerPage])
-
+    const handleNextPage = () => {
+        return APIData.map((res, i) => {
+            if (i + 1 == id) {
+                return <Assets
+                    obj={res} key={i} />;
+            }
+        });
+    }
     const totalPages = Math.ceil(APIData.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -81,7 +89,7 @@ export default function Read() {
                          font-family: Inter">{data.Quantity} unit(s)</p>
                         </div>
                     )
-                })}
+                },)}
                 <AnimatePresence>
                     {showModal && (
                         <motion.div
@@ -113,8 +121,9 @@ export default function Read() {
 
             </div>
             <div class="mt-5 ml-5">
-                <button class="mr-3" onClick={(e) => setCurrentPage(counter + 1)}> next page</button>
-                <button onClick={(e) => setCurrentPage(counter)} class=""> previous page</button>
+                <button class="mr-3" onClick={(e) => setCurrentPage(counter)} > previous</button>
+                <button onClick={(e) => setCurrentPage(counter + 1)}> next </button>
+
             </div>
 
 
@@ -134,7 +143,16 @@ const Assets = (props) => {
         Returnable,
         StorageLocation
     } = props.obj;
+    const setData = (data) => {
+        let { id, assetName, alertEmail, Quantity, minQuantity, Location } = data;
+        localStorage.setItem('ID', id);
+        localStorage.setItem('Asset Name', assetName);
+        localStorage.setItem('Alert Email', alertEmail);
+        localStorage.setItem('Quantity', Quantity);
+        localStorage.setItem('Minimum Quantity', minQuantity);
+        localStorage.setItem('Location', Location);
 
+    }
 
     return (
         <section class="ml-5 mt-5 w-[370px]">
@@ -148,7 +166,9 @@ const Assets = (props) => {
   font-family: Inter;">{assetName}</h1>
                     <p class="text-black text-[15px] not-italic font-medium leading-5 tracking-[-0.24px];
   font-family: Inter">Last modified by Admin</p>
-                    <button class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
+                    <Link href="/UpdateAsset">
+                        <button onClick={() => setData()} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
+                    </Link>
                     <button class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button>
                 </div>
 
@@ -230,8 +250,7 @@ const Assets = (props) => {
   font-family: Inter;">{minQuantity} units </h2>
                 </div>
                 <div>
-                    {/* Finish returnable section */}
-                    {/* <h2>Returnable</h2> */}
+
 
                 </div>
             </div>
