@@ -25,12 +25,58 @@ const ChartData = {
     ]
 }
 export default function Read() {
-    const [APIData, setAPIData] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(6);
+    const [data, setData] = useState([]);
+    const [currentPage, setcurrentPage] = useState(1);
+    const [itemsPerPage, setitemsPerPage] = useState(6);
+    const [id, setId] = useState(0);
+    const [pageNumberLimit, setpageNumberLimit] = useState(5);
+    const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
+    const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
     const [showModal, setShowModal] = useState(false);
-    const [id, setId] = useState(3);
+    axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+        .then((response) => setData(response.data));
+    const pages = [];
+    const counter = pages.length;
+    for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
+        pages.push(i);
+    }
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const pageItems = data.slice(indexOfFirstItem, indexOfLastItem);
+    const handleClick = (event) => {
+        setcurrentPage(Number(event.target.id));
+    };
 
+    const renderPageNumbers = pages.map((number) => {
+        if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+            return (
+                <li
+                    key={number}
+                    id={number}
+                    onClick={handleClick}
+                    className={currentPage == number ? "active" : null}
+                >
+                    {number}
+                </li>
+            );
+        } else {
+            return null;
+        }
+    });
+    const handleNextbtn = () => {
+        setcurrentPage(currentPage + 1);
+        if (currentPage + 1 > maxPageNumberLimit) {
+            setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+            setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+        }
+    };
+    const handlePrevbtn = () => {
+        setcurrentPage(currentPage - 1);
+        if ((currentPage - 1) % pageNumberLimit == 0) {
+            setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+            setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+        }
+    };
     const toggleModal = () => {
         setShowModal(!showModal);
     };
@@ -38,58 +84,28 @@ export default function Read() {
     const closeModal = () => {
         setShowModal(false);
     };
-    let counter = 1;
 
-    function increment() {
-        counter = counter + 1;
-        return counter;
-    }
-    useEffect(() => {
-        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset?page=${currentPage}&limit=${itemsPerPage}`)
-            .then((response) => {
-                setAPIData(response.data);
-            })
-    }, [currentPage, itemsPerPage])
-    const handleNextPage = () => {
-        return APIData.map((res, i) => {
-            if (i + 1 == id) {
-                return <Assets
-                    obj={res} key={i} />;
-            }
-        });
-    }
-    const totalPages = Math.ceil(APIData.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentItems = APIData.slice(startIndex, endIndex);
-    const AssetDisplay = () => {
-        return APIData.map((res, i) => {
-            if (i + 1 == id) {
-                return <Assets
-                    obj={res} key={i} />;
-            }
-        });
-    };
+    const displayData = (data) => {
+        return (
+            <section>
+                <div class="flex flex-row flex-wrap w-[365px]">
+                    {data.length > 0 &&
+                        data.map((asset, index) => {
+                            return (
+                                <div key={index} class="mx-2 my-2" onClick={(e) => setId(asset.id)}>
+                                    <div class="w-[104px] h-[102px] bg-[#F6F7FC] rounded-[10px]" >
+                                        <button onClick={toggleModal} class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
+                                        </button>
+                                    </div>
+                                    <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
+                         font-family: Inter">{asset.assetName}</p>
+                                    <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
+                         font-family: Inter">{asset.Quantity} unit(s)</p>
+                                </div>
 
-
-    return (
-        <section class=" w-[365px]">
-
-            <div class="flex flex-row flex-wrap">
-                {APIData.map((data) => {
-                    return (
-                        <div key="ID" class="mx-2 my-2">
-                            <div class="w-[104px] h-[102px] bg-[#F6F7FC] rounded-[10px]" onClick={(e) => setId(data.id)}>
-                                <button onClick={toggleModal} class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
-                                </button>
-                            </div>
-                            <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
-                         font-family: Inter">{data.assetName}</p>
-                            <p class="mt-1 ml-1 text-black text-[15px] not-italic font-normal leading-5 tracking-[-0.24px]
-                         font-family: Inter">{data.Quantity} unit(s)</p>
-                        </div>
-                    )
-                },)}
+                            );
+                        })}
+                </div>
                 <AnimatePresence>
                     {showModal && (
                         <motion.div
@@ -118,15 +134,45 @@ export default function Read() {
                         </motion.div>
                     )}
                 </AnimatePresence>
+            </section>
 
+        );
+    };
+    const AssetDisplay = () => {
+        return data.map((res, i) => {
+            if (i + 1 == id) {
+                return <Assets
+                    obj={res} key={i} />;
+            }
+        });
+    };
+
+
+    return (
+        <section class=" ">
+            {/* <div class="flex flex-row w-[360px] float-right">
+                <p class="text-black text-[13px] not-italic font-normal leading-[18px] tracking-[-0.08px] opacity-40;
+  font-family: Inter;">Per Page:</p>
+                <select>
+                    <option class="text-black text-[13px]">6</option>
+                    <option></option>
+                </select>
+            </div> */}
+
+            {displayData(pageItems)}
+            <div className="ml-5">
+                <button
+                    class="mr-2"
+                    onClick={handlePrevbtn}
+                    disabled={currentPage == pages[0] ? true : false}
+                > Previous
+                </button>
+                <button
+                    onClick={handleNextbtn}
+                    disabled={currentPage == pages[pages.length - 1] ? true : false}
+                > Next
+                </button>
             </div>
-            <div class="mt-5 ml-5">
-                <button class="mr-3" onClick={(e) => setCurrentPage(counter)} > previous</button>
-                <button onClick={(e) => setCurrentPage(counter + 1)}> next </button>
-
-            </div>
-
-
 
         </section>
     )
