@@ -1,8 +1,6 @@
 "use client"
 import React, { Component } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-
 class SearchBar extends Component {
     state = {
         assets: [],
@@ -56,5 +54,6 @@ class SearchBar extends Component {
         );
     }
 }
+
 
 export default SearchBar;
