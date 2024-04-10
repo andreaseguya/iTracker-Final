@@ -69,14 +69,20 @@ export default function Kits() {
                 <div class="flex flex-row mt-5 mb-2 ">
                     <p class="text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
   font-family: Inter;">Kit name:</p>
-                    <input class=" -mt-3 ml-3 w-[200px] h-8 rounded-lg bg-gray-100"></input>
+                    <input class=" -mt-3 ml-3 w-[230px] h-8 rounded-lg bg-gray-100"></input>
                 </div>
                 <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
                 <SearchComponent searchCourse={searchCourse}
                     courseSearchUserFunction={courseSearchUserFunction}
                     addCourseToCartFunction={addCourseToCartFunction}
                 />
+                <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
+                <h2 class="mt-3 text-black text-[20px] not-italic font-bold leading-[30px] tracking-[0.35px]
+  font-family: Inter;">Loanee details</h2>
+                <p class="w-[320px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
+  font-family: Inter;">Next, assign the kit to a loanee or location or select other below</p>
             </div>
+            
             <div>
                 <AnimatePresence>
                     {showModal && (
