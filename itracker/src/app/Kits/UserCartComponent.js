@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { IoIosRemoveCircleOutline } from "react-icons/io";
 export default function UserCartComponent({
     cartCourses,
     deleteCourseFromCartFunction,
@@ -8,21 +10,20 @@ export default function UserCartComponent({
 
     return (
         <section>
+            <h2 class="ml-10">Current Kit Assets</h2>
             {openCart ? (
                 <div>
-                    empty
+                    <h1 class="text-black">No assets have been added to this kit</h1>
                 </div>
             ) : (
-                <div>
+                <div className="flex flex-row gap-5 ml-10" >
                     {cartCourses.map((item) => (
-                        <div key={item.product.id} className="cart-item">
+                        <div key={item.product.id} id="cart-item">
                             <div>
-                                <div className="item-info">
-                                    <div className="item-image">
-
-                                        {/* <img src={item.product.image}
+                                <div className="mt-3" id="item-info">
+                                    <div class="w-[104px] h-[102px] bg-[#F6F7FC] rounded-[10px]"></div>
+                                    {/* <img src={item.product.image}
                                                 alt={item.product.assetName} /> */}
-                                    </div>
                                     <div id="item-details" class="flex flex-row">
                                         <h3>{item.product.assetName}</h3>
                                         <h2>{item.Quantity}</h2>
@@ -31,14 +32,7 @@ export default function UserCartComponent({
                                 </div>
                                 <div>
                                     <div className="item-actions">
-                                        <button
-                                            className=""
-                                            id="remove-button"
-                                            onClick={() =>
-                                                deleteCourseFromCartFunction(item.product)}>
-                                            Remove Product
-                                        </button>
-                                        <div className="quantity">
+                                        <div className="flex flex-row" id="quantity">
                                             <button style={{ margin: "1%" }}
                                                 onClick={(e) => {
                                                     setCartCourses((prevCartCourses) => {
@@ -53,8 +47,8 @@ export default function UserCartComponent({
                                                         );
                                                         return updatedCart;
                                                     })
-                                                }}>+</button>
-                                            <p className='quant'>{item.quantity} </p>
+                                                }}><IoIosAddCircleOutline size={24} /></button>
+                                            <h2 className="m-3" id='quant'>{item.quantity} </h2>
                                             <button
                                                 onClick={(e) => {
                                                     setCartCourses((prevCartCourses) => {
@@ -63,14 +57,22 @@ export default function UserCartComponent({
                                                                 prevItem.product.id === item.product.id
                                                                     ? {
                                                                         ...prevItem, quantity:
-                                                                            Math.max(item.quantity - 1, 0)
+                                                                            Math.max(item.quantity - 1, 1)
                                                                     }
                                                                     : prevItem
                                                         );
                                                         return updatedCart;
                                                     })
-                                                }}>-</button>
+                                                }}><IoIosRemoveCircleOutline size={24} /></button>
+
                                         </div>
+                                        <button
+                                            className="ml-2 w-[100px] text-white rounded-[5px] bg-black hover:bg-red-500 p-1"
+                                            id="remove-button"
+                                            onClick={() =>
+                                                deleteCourseFromCartFunction(item.product)}>
+                                            Remove
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -55,7 +55,7 @@ export default function Kits() {
         <section>
             <div class="ml-3">
                 <div class="mb-2 flex flex-row gap-[220px]">
-                    <h2 class="mt-3  text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
+                    <h2 class="mt-3 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
   font-family: Inter;">Kits</h2>
                     <button class="" onClick={toggleModal}>
                         <BsCart4 size={24} class="hover:fill-red-600" />
@@ -64,7 +64,14 @@ export default function Kits() {
                 <div class="w-[330px]">
                     <p class=" w-[320px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">Kits cater to bundling assets together into one loanable item. They can be checked out to a user or location. To get started, select which items you would like to add to your first kit.  Alternatively, scan a bar code to add  item</p>
+                    <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
                 </div>
+                <div class="flex flex-row mt-5 mb-2 ">
+                    <p class="text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
+  font-family: Inter;">Kit name:</p>
+                    <input class=" -mt-3 ml-3 w-[200px] h-8 rounded-lg bg-gray-100"></input>
+                </div>
+                <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
                 <SearchComponent searchCourse={searchCourse}
                     courseSearchUserFunction={courseSearchUserFunction}
                     addCourseToCartFunction={addCourseToCartFunction}

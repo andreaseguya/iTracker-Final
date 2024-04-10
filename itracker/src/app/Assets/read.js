@@ -33,14 +33,10 @@ export default function Read() {
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
     const [showModal, setShowModal] = useState(false);
-    useEffect(() => {
-        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
-            .then((response) => {
-                setData(response.data);
-            })
-
-    }, [])
-
+    axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+        .then((response) => {
+            setData(response.data);
+        })
     const pages = [];
     const counter = pages.length;
     for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {

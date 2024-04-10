@@ -3,15 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios"
 function LowStock() {
     const [APIData, setAPIData] = useState([]);
-
-    useEffect(() => {
-
-        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
-            .then((response) => {
-                setAPIData(response.data);
-            })
-
-    }, [])
+    // useEffect(() => {
+    axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+        .then((response) => {
+            setAPIData(response.data);
+        })
+    // }, [])
     const setData = (data) => {
         let { assetName, Quantity, minQuantity } = data;
         localStorage.setItem('Quantity', Quantity);
