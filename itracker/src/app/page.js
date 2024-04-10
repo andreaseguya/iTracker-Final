@@ -9,6 +9,7 @@ import { ReadHelper } from './Assets/ReadHelper';
 import Inventory from './Stock/page';
 import Kits from './Kits/page';
 import Check from './Checkout/page';
+import Admin from './Admin/page';
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
           </section>
         </Tab>
         <Tab label="test2" id=<RiAdminLine class="ml-4 size-[20px] fill-white" />>
-          <section className="py-4" ></section>
+          <section className="py-4" ><Admin/></section>
         </Tab>
         <Tab label="test3" id=<BsQrCodeScan class="ml-4 size-[20px] fill-white" />>
           <section className="py-4" >
