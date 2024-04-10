@@ -1,15 +1,15 @@
 "use client"
-import {useState} from 'react'
-export default function Admin(){
-    const [users, setUsers]=useState([])
-    return(
+import { useState } from 'react'
+import SearchBar from '../AssetSearch/page'
+export default function Admin() {
+    const [users, setUsers] = useState([])
+    return (
         <section>
-            <div id="Header" class="flex flex-row">
-                <div class="w-[104px] h-[104px] rounded-[50%] bg-[#DFDFDF]"></div>
-                <div>
-                    <h1>Admin</h1>
-                </div>
-
+            <div class="ml-3 w-[330px]">
+                <h1 class=" text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px];
+  font-family: Inter;">Admin</h1>
+                <p>Reports can be generated here as well as changes to user accounts.</p>
+                <SearchBar />
             </div>
         </section>
     )
