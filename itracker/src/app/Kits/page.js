@@ -82,7 +82,9 @@ export default function Kits() {
                 <p class="w-[320px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">Next, assign the kit to a loanee or location or select other below</p>
             </div>
-            
+            <div>
+
+            </div>
             <div>
                 <AnimatePresence>
                     {showModal && (
