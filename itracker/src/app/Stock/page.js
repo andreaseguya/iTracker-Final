@@ -1,26 +1,12 @@
-
+"use client"
 import { useState, useEffect } from "react";
 import axios from "axios"
 function LowStock() {
     const [APIData, setAPIData] = useState([]);
-
-    // useEffect(() => {
-
-    axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
-        .then((response) => {
-            setAPIData(response.data);
-        })
-
-    // }, [])
-    const setData = (data) => {
-        let { assetName, Quantity, minQuantity } = data;
-        localStorage.setItem('Quantity', Quantity);
-        localStorage.setItem("Asset Name", assetName);
-        localStorage.setItem("Minimum Quantity", minQuantity);
-
-    }
-
-
+    setTimeout(async () => {
+        let res = await axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {})
+        setAPIData(res.data);
+    }, 1000)
 
     return (
         <div class="grid grid-cols-4 gap-4 content-between ... p-5 mb-3">

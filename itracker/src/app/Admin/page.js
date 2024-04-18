@@ -9,7 +9,7 @@ export default function Admin() {
                 <h1 class=" text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px];
   font-family: Inter;">Admin</h1>
                 <p>Reports can be generated here as well as changes to user accounts.</p>
-                <SearchBar />
+
             </div>
         </section>
     )

@@ -17,22 +17,22 @@ export default function Create() {
     const [status, setStatus] = useState();
     const [checkbox, setCheckbox] = useState(false);
     const [showForm, hideForm] = useState(true);
+    setTimeout(async () => {
+        const PostData = () => {
+            alert("Asset successfully created");
+            hideForm(false);
+            axios.post(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {
+                assetName,
+                AlertEmail,
+                Quantity,
+                StorageLocation,
+                minQuantity,
+                status,
+                checkbox
+            })
+        }
+    }, 1000)
 
-    const PostData = () => {
-        alert("Asset successfully created");
-        hideForm(false);
-        axios.post(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {
-            assetName,
-            AlertEmail,
-            Quantity,
-            StorageLocation,
-            minQuantity,
-            status,
-            checkbox
-        })
-
-
-    }
     return (
         <section>
             {showForm ? (

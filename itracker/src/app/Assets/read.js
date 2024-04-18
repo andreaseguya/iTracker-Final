@@ -19,8 +19,6 @@ const ChartData = {
                 'rgb(199,206,255)',
                 'rgb(90,106,207)'
             ]
-
-
         }
     ]
 }
@@ -33,10 +31,18 @@ export default function Read() {
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
     const [showModal, setShowModal] = useState(false);
-    axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
-        .then((response) => {
-            setData(response.data);
-        })
+    // data.forEach((item, index) => {
+    setTimeout(() => {
+        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch(error => {
+                console.log('Request failed:', error);
+            });
+    }, 1000)
+    // });
+
     const pages = [];
     const counter = pages.length;
     for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
@@ -191,16 +197,16 @@ const Assets = (props) => {
         Returnable,
         StorageLocation
     } = props.obj;
-    const setData = (data) => {
-        let { id, assetName, alertEmail, Quantity, minQuantity, Location } = data;
-        localStorage.setItem('ID', id);
-        localStorage.setItem('Asset Name', assetName);
-        localStorage.setItem('Alert Email', alertEmail);
-        localStorage.setItem('Quantity', Quantity);
-        localStorage.setItem('Minimum Quantity', minQuantity);
-        localStorage.setItem('Location', Location);
+    // const setData = (data) => {
+    //     let { id, assetName, alertEmail, Quantity, minQuantity, Location } = data;
+    //     localStorage.setItem('ID', id);
+    //     localStorage.setItem('Asset Name', assetName);
+    //     localStorage.setItem('Alert Email', alertEmail);
+    //     localStorage.setItem('Quantity', Quantity);
+    //     localStorage.setItem('Minimum Quantity', minQuantity);
+    //     localStorage.setItem('Location', Location);
 
-    }
+    // }
 
     return (
         <section class="ml-5 mt-5 w-[370px]">
