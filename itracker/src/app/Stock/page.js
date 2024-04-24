@@ -1,12 +1,32 @@
 "use client"
 import { useState, useEffect } from "react";
 import axios from "axios"
+import api from '../api/assetList'
 function LowStock() {
     const [APIData, setAPIData] = useState([]);
-    setTimeout(async () => {
-        let res = await axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {})
-        setAPIData(res.data);
-    }, 1000)
+    // setTimeout(async () => {
+    //     let res = await axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {})
+    //     setAPIData(res.data);
+    // }, 1000)
+    useEffect(() => {
+        const fetchAssets = async () => {
+            try {
+                const response = await api.get('/assets');
+                setAPIData(response.data);
+            } catch (err) {
+                if (err.response) {
+                    // Not in the 200 response range 
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        }
+
+        fetchAssets();
+    }, [])
 
     return (
         <div class="grid grid-cols-4 gap-4 content-between ... p-5 mb-3">

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
+import api from '../api/assetList'
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ChartData = {
@@ -31,17 +32,33 @@ export default function Read() {
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
     const [showModal, setShowModal] = useState(false);
-    // data.forEach((item, index) => {
-    setTimeout(() => {
-        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
-            .then((response) => {
+    // axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+    //     .then((response) => {
+    //         setData(response.data);
+    //     })
+    //     .catch(error => {
+    //         console.log('Request failed:', error);
+    //     });
+    useEffect(() => {
+        const fetchAssets = async () => {
+            try {
+                const response = await api.get('/assets');
                 setData(response.data);
-            })
-            .catch(error => {
-                console.log('Request failed:', error);
-            });
-    }, 1000)
-    // });
+            } catch (err) {
+                if (err.response) {
+                    // Not in the 200 response range 
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        }
+
+        fetchAssets();
+    }, [])
+
 
     const pages = [];
     const counter = pages.length;
@@ -158,15 +175,6 @@ export default function Read() {
 
     return (
         <section class=" ">
-            {/* <div class="flex flex-row w-[360px] float-right">
-                <p class="text-black text-[13px] not-italic font-normal leading-[18px] tracking-[-0.08px] opacity-40;
-  font-family: Inter;">Per Page:</p>
-                <select>
-                    <option class="text-black text-[13px]">6</option>
-                    <option></option>
-                </select>
-            </div> */}
-
             {displayData(pageItems)}
             <div className="ml-5">
                 <button
@@ -188,7 +196,7 @@ export default function Read() {
 
 const Assets = (props) => {
     const {
-        _id,
+        id,
         assetName,
         AlertEmail,
         Quantity,
@@ -197,16 +205,26 @@ const Assets = (props) => {
         Returnable,
         StorageLocation
     } = props.obj;
-    // const setData = (data) => {
-    //     let { id, assetName, alertEmail, Quantity, minQuantity, Location } = data;
-    //     localStorage.setItem('ID', id);
-    //     localStorage.setItem('Asset Name', assetName);
-    //     localStorage.setItem('Alert Email', alertEmail);
-    //     localStorage.setItem('Quantity', Quantity);
-    //     localStorage.setItem('Minimum Quantity', minQuantity);
-    //     localStorage.setItem('Location', Location);
 
+    // const handleEdit = async (id) => {
+    //     const update = { id, assetName, AlertEmail, Quantity, StorageLocation, minQuantity, status, checkbox };
+    //     try {
+    //         const res = await api.put(`assets/${id}`, update);
+    //         setData(Data.map(asset => asset.id === id ? { ...response.data } : asset));
+    //     } catch (err) {
+    //         console.log(`Error: ${err.message}`);
+    //     }
     // }
+    // const handleDelete = async (id) => {
+    //     try {
+    //       await api.delete(`/posts/${id}`);
+    //       const postsList = posts.filter(post => post.id !== id);
+    //       setPosts(postsList);
+    //       history.push('/');
+    //     } catch (err) {
+    //       console.log(`Error: ${err.message}`);
+    //     }
+    //   }
 
     return (
         <section class="ml-5 mt-5 w-[370px]">
@@ -221,9 +239,9 @@ const Assets = (props) => {
                     <p class="text-black text-[15px] not-italic font-medium leading-5 tracking-[-0.24px];
   font-family: Inter">Last modified by Admin</p>
                     <Link href="/UpdateAsset">
-                        <button onClick={() => setData()} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
+                        <button onClick={() => handleEdit(id)} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
                     </Link>
-                    <button class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button>
+                    <button onClick={() => handleDelete(id)} class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button>
                 </div>
 
             </div>

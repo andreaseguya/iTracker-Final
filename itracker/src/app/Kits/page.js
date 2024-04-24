@@ -1,23 +1,29 @@
 "use client"
+import api from '../api/assetList'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion';
 import { BsCart4 } from "react-icons/bs";
 import { AiOutlineClose } from 'react-icons/ai';
 import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
-import axios from 'axios'
+// import axios from 'axios'
 export default function Kits() {
     const [courses, setCourses] = useState([]);
     const [cartCourses, setCartCourses] = useState([]);
+    const [users, setUsers] = useState(['Admin, Drip Supervisor']);
     const [searchCourse, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
     useEffect(() => {
-        axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+        api.get(`/assets`)
             .then((response) => {
                 setCourses(response.data);
             })
-
+        api.get('/users')
+            .then((res) => {
+                setUsers(res.data);
+            })
     }, [])
+
     const addCourseToCartFunction = (GFGcourse) => {
         const alreadyCourses = cartCourses
             .find(item => item.product.id === GFGcourse.id);

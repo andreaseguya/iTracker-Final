@@ -1,0 +1,115 @@
+{
+  "assets": [
+    {
+      "assetName": "Toner",
+      "AlertEmail": "aseguya",
+      "Quantity": "3",
+      "MinimumQuantity": 48,
+      "status": "status 1",
+      "Returnable": false,
+      "id": "1",
+      "StorageLocation": "MIS 2A",
+      "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "assetName": "Paper",
+      "AlertEmail": "aseguya",
+      "Quantity": "3",
+      "MinimumQuantity": 48,
+      "status": "status 1",
+      "Returnable": false,
+      "id": "2",
+      "StorageLocation": "MIS 7G",
+      "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "assetName": "Cartridges",
+      "AlertEmail": "aseguya",
+      "Quantity": "3",
+      "MinimumQuantity": 48,
+      "status": "status 1",
+      "Returnable": false,
+      "id": "3",
+      "StorageLocation": "MIS 7G",
+      "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "assetName": "Kiosk Paper",
+      "AlertEmail": "kishel",
+      "Quantity": "50",
+      "MinimumQuantity": 31,
+      "status": "status 2",
+      "Returnable": false,
+      "id": "4",
+      "StorageLocation": "MIS J6",
+      "minQuantity": "10",
+      "checkbox": true
+    },
+    {
+      "assetName": "POS Scanner",
+      "AlertEmail": "kishel",
+      "Quantity": "50",
+      "MinimumQuantity": 31,
+      "status": "status 2",
+      "Returnable": false,
+      "id": "5",
+      "StorageLocation": "MIS J6",
+      "minQuantity": "10",
+      "checkbox": true
+    },
+    {
+      "assetName": "Ethernet",
+      "AlertEmail": "kishel",
+      "Quantity": "50",
+      "MinimumQuantity": 31,
+      "status": "status 2",
+      "Returnable": false,
+      "id": "6",
+      "StorageLocation": "MIS J6",
+      "minQuantity": "10",
+      "checkbox": true
+    },
+    {
+      "id": 7,
+      "assetName": "Test",
+      "AlertEmail": "asdsd",
+      "Quantity": 1,
+      "StorageLocation": "asdf",
+      "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "id": 8,
+      "assetName": "Paper",
+      "AlertEmail": "asdasdf",
+      "Quantity": 1,
+      "StorageLocation": "asdasdf",
+      "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "id": 9,
+      "assetName": "Glue",
+      "AlertEmail": "asdasd",
+      "Quantity": "10",
+      "StorageLocation": "asdasd",
+      "minQuantity": 4,
+      "checkbox": true
+    }
+  ],
+
+  "users":[
+    {
+      "id": "1",
+      "Name":"Admin",
+      "AlertEmail": "aseguya",
+      "Badge#": "0000",
+      "Department":"IT",
+      "checkbox": true
+    }
+
+  ]
+}

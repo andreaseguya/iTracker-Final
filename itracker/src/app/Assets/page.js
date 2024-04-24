@@ -1,13 +1,14 @@
 "use client"
-import React, { useState } from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react';
+import { Button, Checkbox, Form } from 'semantic-ui-react';
 import { AiOutlineClose } from 'react-icons/ai';
 import axios from 'axios';
+import api from '../api/assetList'
 import Home from '../page';
 import Link from 'next/link';
-
+// import { useNavigate } from 'react-router';
 export default function Create() {
-
+    const [Data, setData] = useState([]);
     const [assetImage, setassetImage] = useState('');
     const [assetName, setassetName] = useState('');
     const [AlertEmail, setAlertEmail] = useState('');
@@ -17,21 +18,57 @@ export default function Create() {
     const [status, setStatus] = useState();
     const [checkbox, setCheckbox] = useState(false);
     const [showForm, hideForm] = useState(true);
-    setTimeout(async () => {
-        const PostData = () => {
-            alert("Asset successfully created");
-            hideForm(false);
-            axios.post(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {
-                assetName,
-                AlertEmail,
-                Quantity,
-                StorageLocation,
-                minQuantity,
-                status,
-                checkbox
-            })
+    // let navigate = useNavigate()
+    // const PostData = () => {
+    //     alert("Asset successfully created");
+    //     hideForm(false);
+    //     axios.post(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {
+    //         assetName,
+    //         AlertEmail,
+    //         Quantity,
+    //         StorageLocation,
+    //         minQuantity,
+    //         status,
+    //         checkbox
+    //     })
+    // }
+    useEffect(() => {
+        const fetchAssets = async () => {
+            try {
+                const response = await api.get('/assets');
+                setData(response.data);
+            } catch (err) {
+                if (err.response) {
+                    // Not in the 200 response range 
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
         }
-    }, 1000)
+
+        fetchAssets();
+    }, [])
+
+    const PostData = async (e) => {
+        alert("Asset successfully created");
+        hideForm(false)
+        e.preventDefault();
+        const id = Data.length + 1;
+        const newAsset = { id, assetName, AlertEmail, Quantity, StorageLocation, minQuantity, status, checkbox };
+        try {
+            const res = await api.post('/assets', newAsset);
+            const allAssets = [...assetList, res.data];
+            setData(allAssets);
+            // navigate.push('/Assets');
+        }
+        catch (err) {
+            console.log(`Error: ${err.message}`);
+        }
+    }
+
 
     return (
         <section>

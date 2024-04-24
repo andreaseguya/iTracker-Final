@@ -1,16 +1,14 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
+import api from '../api/assetList'
 function SearchComponent({ searchCourse, courseSearchUserFunction, addCourseToCartFunction }) {
     const [APIData, setAPIData] = useState([]);
-    const [search, setSearch] = "";
-
-    axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`)
+    // const [search, setSearch] = "";
+    api.get(`/assets`)
         .then((response) => {
             setAPIData(response.data);
         })
-
-
     return (
         <section class="" id="App-header" >
             <div className="search-bar">

@@ -6,7 +6,7 @@ import Link from "next/link"
 export function ReadHelper() {
     return (
         <section class="flex flex-col">
-            <div class="grid grid-cols-2 gap-[10px] ">
+            <div class="grid grid-cols-2 gap-[10px] w-[450px]">
                 <h2 class="mt-3 ml-3 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
   font-family: Inter;">All Assets</h2>
                 <Link href="/Assets" class="">

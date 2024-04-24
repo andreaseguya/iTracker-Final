@@ -1,6 +1,7 @@
 "use client"
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
+import api from '../api/assetList'
 class SearchBar extends Component {
     state = {
         assets: [],
@@ -10,8 +11,7 @@ class SearchBar extends Component {
     };
 
     async componentDidMount() {
-        const { data: assets } = await axios.get(
-            `https://65f8f806df151452461037b3.mockapi.io/Asset`
+        const { data: assets } = await api.get('/assets'
         );
         this.setState({ assets });
     }
