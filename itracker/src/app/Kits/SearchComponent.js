@@ -5,10 +5,30 @@ import api from '../api/assetList'
 function SearchComponent({ searchCourse, courseSearchUserFunction, addCourseToCartFunction }) {
     const [APIData, setAPIData] = useState([]);
     // const [search, setSearch] = "";
-    api.get(`/assets`)
-        .then((response) => {
-            setAPIData(response.data);
-        })
+
+    // api.get(`/assets`)
+    //     .then((response) => {
+    //         setAPIData(response.data);
+    //     })
+    useEffect(() => {
+        const fetchAssets = async () => {
+            try {
+                const response = await api.get('/assets');
+                setAPIData(response.data);
+            } catch (err) {
+                if (err.response) {
+                    // Not in the 200 response range 
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        }
+
+        fetchAssets();
+    }, [])
     return (
         <section class="" id="App-header" >
             <div className="search-bar">

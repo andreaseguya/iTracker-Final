@@ -8,10 +8,49 @@ import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
 import { Select } from "antd";
 // import axios from 'axios'
-export default function Kits() {
+
+// export default function Kits() {
+
+// }
+
+export default function KitForm() {
+    const [step, setStep] = useState(1);
+
+    const handleNext = () => {
+        setStep(step + 1);
+    };
+
+    const handleBack = () => {
+        setStep(step - 1);
+    };
+
+    const renderStep = () => {
+        switch (step) {
+            case 1:
+                return <Step1 onNext={handleNext} />;
+            case 2:
+                return <Step2 onBack={handleBack} onNext={handleNext} />;
+            case 3:
+                return <Step3 onBack={handleBack} onSubmit={handleSubmit} />;
+            default:
+                return null;
+        }
+    };
+    const handleSubmit = (data) => {
+        data.preventDefault();
+        console.log("complete")
+    }
+    return (
+        <section>
+            {renderStep()}
+        </section>
+    );
+};
+const Step1 = ({ onNext }) => {
     const [courses, setCourses] = useState([]);
+    const [kitName, setKitName] = useState('')
     const [cartCourses, setCartCourses] = useState([]);
-    const [users, setUsers] = useState(['Admin, Drip Supervisor']);
+    // const [users, setUsers] = useState(['Admin, Drip Supervisor']);
     const [searchCourse, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
     useEffect(() => {
@@ -19,10 +58,10 @@ export default function Kits() {
             .then((response) => {
                 setCourses(response.data);
             })
-        api.get('/users')
-            .then((res) => {
-                setUsers(res.data);
-            })
+        // api.get('/users')
+        //     .then((res) => {
+        //         setUsers(res.data);
+        //     })
 
     }, [])
 
@@ -36,7 +75,9 @@ export default function Kits() {
                 }
                     : item
             );
+
             setCartCourses(latestCartUpdate);
+
         } else {
             setCartCourses([...cartCourses, { product: GFGcourse, quantity: 1 }]);
         }
@@ -78,7 +119,9 @@ export default function Kits() {
                 <div class="flex flex-row mt-5 mb-2 ">
                     <p class="text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
   font-family: Inter;">Kit name:</p>
-                    <input class=" -mt-3 ml-3 w-[230px] h-8 rounded-lg bg-gray-100"></input>
+                    <input value={kitName}
+                        onChange={(e) => setKitName(e.target.value)}
+                        class=" -mt-3 ml-3 w-[230px] h-8 rounded-lg bg-gray-100"></input>
                 </div>
                 <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
                 <SearchComponent searchCourse={searchCourse}
@@ -133,7 +176,46 @@ export default function Kits() {
                 </AnimatePresence>
 
             </div>
+            <div>
+                <button onClick={onNext}>Next step</button>
+            </div>
 
         </section>
     )
-} 
+};
+
+const Step2 = ({ onBack, onNext }) => {
+    const [email, setEmail] = useState('');
+
+    return (
+        <div>
+            <h1>Step 2</h1>
+            <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <button onClick={onBack}>Back</button>
+            <button onClick={onNext}>Next</button>
+        </div>
+    );
+};
+
+const Step3 = ({ onBack, onSubmit }) => {
+    const [password, setPassword] = useState('');
+
+    return (
+        <div>
+            <h1>Step 3</h1>
+            <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={onBack}>Back</button>
+            <button onClick={onSubmit}>Submit</button>
+        </div>
+    );
+};

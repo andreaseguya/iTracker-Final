@@ -10,7 +10,8 @@ export default function UserCartComponent({
 
     return (
         <section>
-            <h2 class="ml-10">Current Kit Assets</h2>
+            <h2 class="mt-3 ml-10 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
+  font-family: Inter;">Current Kit Assets</h2>
             {openCart ? (
                 <div>
                     <h1 class="text-black">No assets have been added to this kit</h1>
