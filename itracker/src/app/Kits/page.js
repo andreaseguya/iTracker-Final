@@ -6,6 +6,7 @@ import { BsCart4 } from "react-icons/bs";
 import { AiOutlineClose } from 'react-icons/ai';
 import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
+import { Select } from "antd";
 // import axios from 'axios'
 export default function Kits() {
     const [courses, setCourses] = useState([]);
@@ -22,6 +23,7 @@ export default function Kits() {
             .then((res) => {
                 setUsers(res.data);
             })
+
     }, [])
 
     const addCourseToCartFunction = (GFGcourse) => {
@@ -59,6 +61,7 @@ export default function Kits() {
     };
     return (
         <section>
+            {/* Page 1 */}
             <div class="ml-3">
                 <div class="mb-2 flex flex-row gap-[220px]">
                     <h2 class="mt-3 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
