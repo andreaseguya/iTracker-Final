@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
-    "antd": "^5.16.4",
+    "bootstrap": "^5.3.3",
     "chart.js": "^4.4.2",
     "framer-motion": "^11.0.24",
     "react-axios": "^2.0.6",
