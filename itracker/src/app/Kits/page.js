@@ -6,7 +6,8 @@ import { BsCart4 } from "react-icons/bs";
 import { AiOutlineClose } from 'react-icons/ai';
 import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
-// import Select from "react-select"
+import Select from "react-select";
+
 export default function KitForm() {
     const [step, setStep] = useState(1);
     const [kitAnswers, setKitAnswers] = useState([]);
@@ -178,7 +179,14 @@ const Step1 = ({ onNext }) => {
         </section>
     )
 };
+function SelectUsers(){
+    const [value, setValue]=useState<any>({});
+    return(
+        <div>
 
+        </div>
+    )
+}
 const Step2 = ({ onBack, onNext }) => {
     const [email, setEmail] = useState('');
 
