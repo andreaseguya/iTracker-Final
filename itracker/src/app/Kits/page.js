@@ -6,11 +6,16 @@ import { BsCart4 } from "react-icons/bs";
 import { AiOutlineClose } from 'react-icons/ai';
 import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
-import Select from "react-select";
-
+import moment from "moment";
+// import Select from "react-select";
+import { FaRegCalendarXmark } from "react-icons/fa6";
 export default function KitForm() {
     const [step, setStep] = useState(1);
-    const [kitAnswers, setKitAnswers] = useState([]);
+    const [kitAnswers, setKitAnswers] = useState({
+        KitName: "",
+        kitItems: [],
+        loanee: '',
+    });
 
     const handleNext = () => {
         setStep(step + 1);
@@ -23,7 +28,7 @@ export default function KitForm() {
     const renderStep = () => {
         switch (step) {
             case 1:
-                return <Step1 onNext={handleNext} />;
+                return <Step1 onNext={handleNext} setKitAnswers={setKitAnswers} />;
             case 2:
                 return <Step2 onBack={handleBack} onNext={handleNext} />;
             case 3:
@@ -32,9 +37,14 @@ export default function KitForm() {
                 return null;
         }
     };
+
+
     const handleSubmit = (data) => {
         data.preventDefault();
-        console.log("complete")
+        const kitData = new FormData();
+        kitData.append("kitName", FormData.KitName);
+        kitData.append("kitItems", FormData.kitItems);
+        kitData.append("loanee", kitData.loanee);
     }
     return (
         <section>
@@ -42,11 +52,9 @@ export default function KitForm() {
         </section>
     );
 };
-const Step1 = ({ onNext }) => {
+const Step1 = ({ onNext, kitData, setkitData }) => {
     const [courses, setCourses] = useState([]);
-    const [kitName, setKitName] = useState('')
     const [cartCourses, setCartCourses] = useState([]);
-    // const [users, setUsers] = useState(['Admin, Drip Supervisor']);
     const [searchCourse, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
     useEffect(() => {
@@ -96,6 +104,9 @@ const Step1 = ({ onNext }) => {
     const closeModal = () => {
         setShowModal(false);
     };
+    const [kitName, setkitName] = useState('');
+    const [kitItems, setKitItems] = useState([]);
+    const [loanee, setLoanee] = useState('');
     return (
         <section>
             {/* Page 1 */}
@@ -115,8 +126,11 @@ const Step1 = ({ onNext }) => {
                 <div class="flex flex-row mt-5 mb-2 ">
                     <p class="text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
   font-family: Inter;">Kit name:</p>
-                    <input value={kitName}
-                        onChange={(e) => setKitName(e.target.value)}
+                    <input
+                        value={kitName}
+                        // onChange={(e) => setkitData({ ...kitData, kitName: e.target.value })}
+                        // value={kitData.kitName}
+                        onChange={(e) => setkitName(e.target.value)}
                         class=" -mt-3 ml-3 w-[230px] h-8 rounded-lg bg-gray-100"></input>
                 </div>
                 <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
@@ -179,27 +193,60 @@ const Step1 = ({ onNext }) => {
         </section>
     )
 };
-function SelectUsers(){
-    const [value, setValue]=useState<any>({});
-    return(
+function SelectUsers() {
+    const [value, setValue] = useState < any > ({});
+    return (
         <div>
 
         </div>
     )
 }
 const Step2 = ({ onBack, onNext }) => {
-    const [email, setEmail] = useState('');
-
+    // const [email, setEmail] = useState('');
+    const [date, setDate] = useState(new Date());
+    const handleDateChange = (event) => {
+        setDate(event.target.value);
+    };
     return (
         <div>
-            <h1>Step 2</h1>
-            <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <button onClick={onBack}>Back</button>
+            <h1 class=" h-12 flex-col justify-center text-slate-800 text-2xl not-italic font-semibold leading-[26px] tracking-[0.3px]">Let's finalize this deployment</h1>
+            <p class="  flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Select return date</p>
+            <div class="flex flex-row gap-3">
+                <div class="w-[73px] h-[120px] rounded-[10px]
+bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
+                    <h1> {moment(date).format("ddd")}</h1>
+                    <h1> {moment(date).format("DD")}</h1>
+                </div>
+                <div class="w-[73px] h-[120px] rounded-[10px]
+  bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
+                    <h1> {moment(date).add(1, 'days').format("ddd")}</h1>
+                    <h1> {moment(date).add(1, 'days').format("DD")}</h1>
+                </div>
+                <div class="w-[73px] h-[120px] rounded-[10px]
+  bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
+                    <h1> No date </h1>
+                </div>
+                <div class="w-[73px] h-[120px] rounded-[10px]
+  bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
+                    <h1> Other date</h1>
+                </div>
+
+            </div>
+            <div class="flex flex-row">
+                <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Select time</p>
+                <button class="ml-[100px] ">
+                    <div class="flex flex-row gap-2">
+                        <FaRegCalendarXmark class="hover:fill-red-500" />
+                        <p class="text-sm hover:text-red-500">Skip time</p>
+                    </div>
+
+                </button>
+            </div>
+            <div class="bg-[#F4F4F4] w-[328px] h-[88px] rounded-[10px]">
+                .
+            </div>
+            <button class="mr-3" onClick={onBack}>Back</button>
+
             <button onClick={onNext}>Next</button>
         </div>
     );
@@ -207,7 +254,6 @@ const Step2 = ({ onBack, onNext }) => {
 
 const Step3 = ({ onBack, onSubmit }) => {
     const [password, setPassword] = useState('');
-
     return (
         <div>
             <h1>Step 3</h1>
