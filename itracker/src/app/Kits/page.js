@@ -52,7 +52,7 @@ export default function KitForm() {
         </section>
     );
 };
-const Step1 = ({ onNext, kitData, setkitData }) => {
+const Step1 = ({ onNext}) => {
     const [courses, setCourses] = useState([]);
     const [cartCourses, setCartCourses] = useState([]);
     const [searchCourse, setSearchCourse] = useState('');
@@ -143,9 +143,7 @@ const Step1 = ({ onNext, kitData, setkitData }) => {
   font-family: Inter;">Loanee details</h2>
                 <p class="w-[320px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">Next, assign the kit to a loanee or location or select other below</p>
-            </div>
-            <div>
-
+   <button onClick={onNext}>Next step</button>
             </div>
             <div>
                 <AnimatePresence>
@@ -186,21 +184,10 @@ const Step1 = ({ onNext, kitData, setkitData }) => {
                 </AnimatePresence>
 
             </div>
-            <div>
-                <button onClick={onNext}>Next step</button>
-            </div>
-
         </section>
     )
 };
-function SelectUsers() {
-    const [value, setValue] = useState < any > ({});
-    return (
-        <div>
 
-        </div>
-    )
-}
 const Step2 = ({ onBack, onNext }) => {
     // const [email, setEmail] = useState('');
     const [date, setDate] = useState(new Date());
@@ -243,7 +230,8 @@ bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
                 </button>
             </div>
             <div class="bg-[#F4F4F4] w-[328px] h-[88px] rounded-[10px]">
-                .
+                <div class="bg-[url(/images/greater.svg)]"></div>
+            
             </div>
             <button class="mr-3" onClick={onBack}>Back</button>
 
