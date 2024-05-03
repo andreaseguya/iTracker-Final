@@ -7,7 +7,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
 import moment from "moment";
-// import Select from "react-select";
+import Select from "react-select";
 import { FaRegCalendarXmark } from "react-icons/fa6";
 export default function KitForm() {
     const [step, setStep] = useState(1);
@@ -52,7 +52,7 @@ export default function KitForm() {
         </section>
     );
 };
-const Step1 = ({ onNext}) => {
+const Step1 = ({ onNext }) => {
     const [courses, setCourses] = useState([]);
     const [cartCourses, setCartCourses] = useState([]);
     const [searchCourse, setSearchCourse] = useState('');
@@ -105,8 +105,31 @@ const Step1 = ({ onNext}) => {
         setShowModal(false);
     };
     const [kitName, setkitName] = useState('');
-    const [kitItems, setKitItems] = useState([]);
-    const [loanee, setLoanee] = useState('');
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const fetchAssets = async () => {
+            try {
+                const response = await api.get('/users');
+                setUsers(response.data);
+            } catch (err) {
+                if (err.response) {
+                    // Not in the 200 response range 
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        }
+
+        fetchAssets();
+    }, [])
+    function renderUsers() {
+        return (
+            users.map(data => ({ label: data.Name, value: data.value }))
+        )
+    }
     return (
         <section>
             {/* Page 1 */}
@@ -143,54 +166,62 @@ const Step1 = ({ onNext}) => {
   font-family: Inter;">Loanee details</h2>
                 <p class="w-[320px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">Next, assign the kit to a loanee or location or select other below</p>
-   <button onClick={onNext}>Next step</button>
+                <div class="w-[328px]">
+                    {/* <Select options={users.renderList()} /> */}
+
+
+                </div>
+                <button class="mt-3" onClick={onNext}>Next step</button>
             </div>
-            <div>
-                <AnimatePresence>
-                    {showModal && (
-                        <motion.div>
+            <AnimatePresence>
+                {showModal && (
+                    <motion.div>
+                        <motion.div
+                            class=" fixed inset-0 z-50  bg-black bg-opacity-50 "
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        >
                             <motion.div
-                                class=" fixed inset-0 z-50  bg-black bg-opacity-50 "
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
+                                class="bg-[#fff] w-[450px] ml-5 p-5  mt-5 rounded-[20px]"
+                                initial={{ y: '100vh', opacity: 0 }}
+                                animate={{ y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100, damping: 20, duration: 0.5 } }}
+                                exit={{ y: '100vh', opacity: 0, transition: { type: 'spring', stiffness: 100, damping: 20, duration: 2 } }}
                             >
-                                <motion.div
-                                    class="bg-[#fff] w-[450px] ml-5 p-5  mt-5 rounded-[20px]"
-                                    initial={{ y: '100vh', opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100, damping: 20, duration: 0.5 } }}
-                                    exit={{ y: '100vh', opacity: 0, transition: { type: 'spring', stiffness: 100, damping: 20, duration: 2 } }}
-                                >
 
-                                    <button onClick={closeModal} class="ml-5 mt-5">
-                                        <AiOutlineClose size={24} class="fill-[#000] hover:fill-red-600" />
-                                    </button>
+                                <button onClick={closeModal} class="ml-5 mt-5">
+                                    <AiOutlineClose size={24} class="fill-[#000] hover:fill-red-600" />
+                                </button>
 
-                                    <div>
-                                        <UserCartComponent
-                                            cartCourses={cartCourses}
-                                            deleteCourseFromCartFunction={deleteCourseFromCartFunction}
-                                            setCartCourses={setCartCourses}
-                                        />
-                                    </div>
-                                </motion.div>
-
+                                <div>
+                                    <UserCartComponent
+                                        cartCourses={cartCourses}
+                                        deleteCourseFromCartFunction={deleteCourseFromCartFunction}
+                                        setCartCourses={setCartCourses}
+                                    />
+                                </div>
                             </motion.div>
-
 
                         </motion.div>
 
-                    )}
-                </AnimatePresence>
 
-            </div>
+                    </motion.div>
+
+                )}
+            </AnimatePresence>
         </section>
     )
 };
-
+const options = [
+    { value: 'Event', label: 'Event' },
+    { value: 'Drawing', label: 'Drawing' },
+    { value: 'Promotion', label: 'Promotion' },
+    { value: 'Other', label: 'Other' }
+]
 const Step2 = ({ onBack, onNext }) => {
     // const [email, setEmail] = useState('');
     const [date, setDate] = useState(new Date());
+    const [returnable, setReturn] = useState('');
     const handleDateChange = (event) => {
         setDate(event.target.value);
     };
@@ -219,7 +250,7 @@ bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
                 </div>
 
             </div>
-            <div class="flex flex-row">
+            <div class="flex flex-row mt-3">
                 <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Select time</p>
                 <button class="ml-[100px] ">
                     <div class="flex flex-row gap-2">
@@ -229,10 +260,30 @@ bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
 
                 </button>
             </div>
-            <div class="bg-[#F4F4F4] w-[328px] h-[88px] rounded-[10px]">
-                <div class="bg-[url(/images/greater.svg)]"></div>
-            
+            <div class="bg-[#F4F4F4] w-[328px] h-[68px] rounded-[10px] py-5 px-3 ">
+                <div class="bg-[url(/images/greater.svg)] bg-no-repeat bg-center flex flex-row gap-[20px]">
+                    <div></div>
+                    <input type="time" class="rounded-[5px] flex w-[50%] h-6  justify-center text-l not-italic font-bold leading-[26px] tracking-[0.3px]">
+                    </input>
+                    <input type="time" class="ml-[44px] rounded-[5px] flex w-[50%] h-6 justify-center  text-l not-italic font-bold leading-[26px] tracking-[0.3px];
+                    "></input>
+                </div>
             </div>
+            <div class="mt-3 flex flex-row gap-5">
+                <div class="w-[164px]">
+                    <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Category</p>
+                    <Select options={options} />
+                </div>
+                <div>
+                    <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Staff Assigned: </p>
+                    <div class="flex flex-row gap-3">
+                        {/* <input type="radio" value="Yes" /> Yes
+                        <input type="radio" value="No" /> No */}
+                    </div>
+
+                </div>
+            </div>
+
             <button class="mr-3" onClick={onBack}>Back</button>
 
             <button onClick={onNext}>Next</button>

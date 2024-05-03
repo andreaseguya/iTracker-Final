@@ -73,7 +73,7 @@
       "checkbox": true
     },
     {
-      "id": 7,
+      "id": "7",
       "assetName": "Test",
       "AlertEmail": "asdsd",
       "Quantity": 1,
@@ -82,7 +82,7 @@
       "checkbox": true
     },
     {
-      "id": 8,
+      "id": "8",
       "assetName": "Paper",
       "AlertEmail": "asdasdf",
       "Quantity": 1,
@@ -91,25 +91,41 @@
       "checkbox": true
     },
     {
-      "id": 9,
+      "id": "9",
       "assetName": "Glue",
       "AlertEmail": "asdasd",
       "Quantity": "10",
       "StorageLocation": "asdasd",
       "minQuantity": 4,
       "checkbox": true
-    }
-  ],
-
-  "users":[
+    },
     {
-      "id": "1",
-      "Name":"Admin",
-      "AlertEmail": "aseguya",
-      "Badge#": "0000",
-      "Department":"IT",
+      "id": 10,
+      "assetName": "Pens",
+      "AlertEmail": "asdaeqw",
+      "Quantity": 1,
+      "StorageLocation": "wqewe",
+      "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "id": 11,
+      "assetName": "Sticky Notes",
+      "AlertEmail": "qwerqwe",
+      "Quantity": "10",
+      "StorageLocation": "Mis 234",
+      "minQuantity": 4,
       "checkbox": true
     }
-
+  ],
+  "users": [
+    {
+      "id": "1",
+      "Name": "Admin",
+      "AlertEmail": "aseguya",
+      "Badge#": "0000",
+      "Department": "IT",
+      "checkbox": true
+    }
   ]
 }

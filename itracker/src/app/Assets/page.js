@@ -132,7 +132,7 @@ export default function Create() {
 
                     </div>
                     <Form.Field>
-                        <label class="text-black">Status: </label>
+                        <label class="text-black"> Status: </label>
                         <br></br>
                         <select value={status} class="text-black rounded bg-gray-200 border-gray-200  px-4 py-2 pr-8 shadow leading-tight
                             focus:outline-none focus:shadow-outline">
