@@ -1,13 +1,19 @@
 "use client"
 import SearchBar from "../AssetSearch/page";
+import { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 export default function Check() {
+    // const [active, setActive] = useState(false);
+    // const handleClick = (e) => {
+    //     setActive(e.target.id);
+    // }
     return (
         <section class="w-[350px] ml-3">
             <div class="flex flex-row">
                 <h1 class=" text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
                     font-family: Inter; "> Loans</h1>
-                <p class=" pl-20 ml-[110px] text-sm text-red-500 hover:text-black">Check in</p>
+                {/* <p class=" pl-20 ml-[110px] text-sm text-red-500 hover:text-black">Check in</p> */}
             </div>
             <div >
                 <p class="w-[350px]">
@@ -29,7 +35,8 @@ export default function Check() {
                         </div>
                     </TabList>
                     <TabPanel>
-                        <h2>Any content 1</h2>
+                        <div class=""><h2>Any content 1</h2></div>
+
                     </TabPanel>
                     <TabPanel>
                         <h2>Any content 2</h2>
