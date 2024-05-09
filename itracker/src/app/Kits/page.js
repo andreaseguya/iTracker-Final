@@ -11,12 +11,6 @@ import Select from "react-select";
 import { FaRegCalendarXmark } from "react-icons/fa6";
 export default function KitForm() {
     const [step, setStep] = useState(1);
-    const [kitAnswers, setKitAnswers] = useState({
-        KitName: "",
-        kitItems: [],
-        loanee: '',
-    });
-
     const handleNext = () => {
         setStep(step + 1);
     };
@@ -28,7 +22,7 @@ export default function KitForm() {
     const renderStep = () => {
         switch (step) {
             case 1:
-                return <Step1 onNext={handleNext} setKitAnswers={setKitAnswers} />;
+                return <Step1 onNext={handleNext} />;
             case 2:
                 return <Step2 onBack={handleBack} onNext={handleNext} />;
             case 3:
@@ -37,8 +31,6 @@ export default function KitForm() {
                 return null;
         }
     };
-
-
     const handleSubmit = (data) => {
         data.preventDefault();
         const kitData = new FormData();
@@ -52,11 +44,14 @@ export default function KitForm() {
         </section>
     );
 };
+
 const Step1 = ({ onNext }) => {
     const [courses, setCourses] = useState([]);
     const [cartCourses, setCartCourses] = useState([]);
     const [searchCourse, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [users, setUsers] = useState([]);
+
     useEffect(() => {
         api.get(`/assets`)
             .then((response) => {
@@ -66,9 +61,10 @@ const Step1 = ({ onNext }) => {
         //     .then((res) => {
         //         setUsers(res.data);
         //     })
-
     }, [])
-
+    // let Loanee = users.map(function (user) {
+    //     return { value: user.Name, label: user.name }
+    // })
     const addCourseToCartFunction = (GFGcourse) => {
         const alreadyCourses = cartCourses
             .find(item => item.product.id === GFGcourse.id);
@@ -105,31 +101,7 @@ const Step1 = ({ onNext }) => {
         setShowModal(false);
     };
     const [kitName, setkitName] = useState('');
-    const [users, setUsers] = useState([]);
-    useEffect(() => {
-        const fetchAssets = async () => {
-            try {
-                const response = await api.get('/users');
-                setUsers(response.data);
-            } catch (err) {
-                if (err.response) {
-                    // Not in the 200 response range 
-                    console.log(err.response.data);
-                    console.log(err.response.status);
-                    console.log(err.response.headers);
-                } else {
-                    console.log(`Error: ${err.message}`);
-                }
-            }
-        }
 
-        fetchAssets();
-    }, [])
-    function renderUsers() {
-        return (
-            users.map(data => ({ label: data.Name, value: data.value }))
-        )
-    }
     return (
         <section>
             {/* Page 1 */}
@@ -168,7 +140,10 @@ const Step1 = ({ onNext }) => {
   font-family: Inter;">Next, assign the kit to a loanee or location or select other below</p>
                 <div class="w-[328px]">
                     {/* <Select options={users.renderList()} /> */}
-
+                    {/* <Select
+                        value={users.value}
+                        options={users.Name}
+                    /> */}
 
                 </div>
                 <button class="mt-3" onClick={onNext}>Next step</button>
@@ -221,12 +196,14 @@ const options = [
 const Step2 = ({ onBack, onNext }) => {
     // const [email, setEmail] = useState('');
     const [date, setDate] = useState(new Date());
-    const [returnable, setReturn] = useState('');
+    const [returnDate, setReturnDate] = useState('');
+    const [returnTime, setReturnTime] = useState('');
+    const [Notes, setNotes] = useState('');
     const handleDateChange = (event) => {
         setDate(event.target.value);
     };
     return (
-        <div>
+        <div class="">
             <h1 class=" h-12 flex-col justify-center text-slate-800 text-2xl not-italic font-semibold leading-[26px] tracking-[0.3px]">Let's finalize this deployment</h1>
             <p class="  flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Select return date</p>
             <div class="flex flex-row gap-3">
@@ -277,33 +254,42 @@ bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
                 <div>
                     <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Staff Assigned: </p>
                     <div class="flex flex-row gap-3">
+                        <Select />
                         {/* <input type="radio" value="Yes" /> Yes
                         <input type="radio" value="No" /> No */}
                     </div>
-
                 </div>
+            </div>
+            <div class="mt-3 mb-3">
+                <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Notes: </p>
+                <input class="bg-[#F4F4F4] w-[328px] h-[68px] rounded-[10px]"></input>
+
+
             </div>
 
             <button class="mr-3" onClick={onBack}>Back</button>
-
             <button onClick={onNext}>Next</button>
         </div>
     );
 };
 
 const Step3 = ({ onBack, onSubmit }) => {
-    const [password, setPassword] = useState('');
     return (
         <div>
-            <h1>Step 3</h1>
-            <input
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={onBack}>Back</button>
-            <button onClick={onSubmit}>Submit</button>
+            <AllKits />
+            <div class="flex flex-row gap-3">
+                <button onClick={onBack}>Back</button>
+                <button onClick={onSubmit}>Submit</button>
+            </div>
         </div>
     );
 };
+
+function AllKits() {
+    const [showKits, setShowKits] = useState(true);
+    return (
+        <div>
+            {showKits ? (<div>1</div>) : (<div></div>)}
+        </div>
+    )
+}

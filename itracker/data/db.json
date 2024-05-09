@@ -100,7 +100,7 @@
       "checkbox": true
     },
     {
-      "id": 10,
+      "id": "10",
       "assetName": "Pens",
       "AlertEmail": "asdaeqw",
       "Quantity": 1,
@@ -109,11 +109,20 @@
       "checkbox": true
     },
     {
-      "id": 11,
+      "id": "11",
       "assetName": "Sticky Notes",
       "AlertEmail": "qwerqwe",
       "Quantity": "10",
       "StorageLocation": "Mis 234",
+      "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "id": 12,
+      "assetName": "Radios",
+      "AlertEmail": "adama",
+      "Quantity": 1,
+      "StorageLocation": "MIS 4",
       "minQuantity": 4,
       "checkbox": true
     }

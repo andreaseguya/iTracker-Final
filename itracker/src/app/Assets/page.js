@@ -18,20 +18,7 @@ export default function Create() {
     const [status, setStatus] = useState();
     const [checkbox, setCheckbox] = useState(false);
     const [showForm, hideForm] = useState(true);
-    // let navigate = useNavigate()
-    // const PostData = () => {
-    //     alert("Asset successfully created");
-    //     hideForm(false);
-    //     axios.post(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {
-    //         assetName,
-    //         AlertEmail,
-    //         Quantity,
-    //         StorageLocation,
-    //         minQuantity,
-    //         status,
-    //         checkbox
-    //     })
-    // }
+
     useEffect(() => {
         const fetchAssets = async () => {
             try {
@@ -51,7 +38,6 @@ export default function Create() {
 
         fetchAssets();
     }, [])
-
     const PostData = async (e) => {
         alert("Asset successfully created");
         hideForm(false)
@@ -68,12 +54,10 @@ export default function Create() {
             console.log(`Error: ${err.message}`);
         }
     }
-
-
     return (
         <section>
             {showForm ? (
-                <Form className="create-form mx-10 my-10 flex flex-col" >
+                <Form className="mx-10 my-10 flex flex-col" >
 
                     <div class="w-[330px]">
                         <Link href="./">

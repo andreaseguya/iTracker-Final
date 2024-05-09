@@ -4,10 +4,6 @@ import axios from "axios"
 import api from '../api/assetList'
 function LowStock() {
     const [APIData, setAPIData] = useState([]);
-    // setTimeout(async () => {
-    //     let res = await axios.get(`https://65f8f806df151452461037b3.mockapi.io/Asset`, {})
-    //     setAPIData(res.data);
-    // }, 1000)
     useEffect(() => {
         const fetchAssets = async () => {
             try {
@@ -24,7 +20,6 @@ function LowStock() {
                 }
             }
         }
-
         fetchAssets();
     }, [])
 
