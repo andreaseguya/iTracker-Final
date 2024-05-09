@@ -19,9 +19,13 @@ export default function Check() {
             <div>
                 <Tabs>
                     <TabList>
-                        <div class="flex flex-row gap-[50%] h-10 pl-2 pt-2 pb-1 rounded-[10px] bg-[#DFDFDF]">
-                            <Tab>Check out</Tab>
-                            <Tab >Check in</Tab>
+                        <div class="flex flex-row gap-[30%] h-10 pl-2 pt-2 pb-1 rounded-[10px] bg-gray-100">
+                            <Tab>
+                                <button class=" hover:text-white hover:bg-black rounded-[5px] w-[110px]">Check out</button>
+                            </Tab>
+                            <Tab >
+                                < button class="hover:text-white hover:bg-black rounded-[5px] w-[110px] ">Check in</button>
+                            </Tab>
                         </div>
                     </TabList>
                     <TabPanel>
