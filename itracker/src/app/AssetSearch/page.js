@@ -39,7 +39,8 @@ class SearchBar extends Component {
                             if (asset.assetName.toLowerCase().includes(this.state.search.toLowerCase())) {
                                 return (
                                     <div key={asset.id} class="">
-                                        <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] "> </div>
+                                        <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] ">
+                                            <Selected /> </div>
                                         <h1 class="ml-3 mt-0.5 w-[70px]">{asset.assetName}</h1>
                                     </div>
                                 )
@@ -54,6 +55,12 @@ class SearchBar extends Component {
         );
     }
 }
-
+function Selected() {
+    return (
+        <div className="float-right">
+            <input type="radio"></input>
+        </div>
+    )
+}
 
 export default SearchBar;
