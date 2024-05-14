@@ -3,16 +3,19 @@
 import React, { Component } from "react";
 import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react'
 import { useState, useEffect } from 'react'
+import api from '../api/assetList'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import api from '../api/assetList'
 export default function Check() {
+    const [api, setApi] = useState([]);
+
+
     return (
         <section class="w-[350px] ml-3">
             <div class="flex flex-row">
                 <h1 class=" text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
                     font-family: Inter; "> Loans</h1>
                 {/* <p class=" pl-20 ml-[110px] text-sm text-red-500 hover:text-black">Check in</p> */}
-
             </div>
             <div >
                 <p class="w-[350px]">
@@ -31,8 +34,12 @@ export default function Check() {
                             </Tab>
                         </TabList>
                         <TabPanels>
-                            <TabPanel><section>
-                            </section></TabPanel>
+                            <TabPanel>
+                                <section>
+                                    <form>
+                                        <input></input>
+                                    </form>
+                                </section></TabPanel>
                             <TabPanel>2</TabPanel>
 
                         </TabPanels>
@@ -44,30 +51,13 @@ export default function Check() {
         </section>
     )
 }
-
-
-
-function checkOut(props) {
-    const {
-        id,
-        assetName,
-        AlertEmail,
-        Quantity,
-        minQuantity,
-        status,
-        Returnable,
-        StorageLocation
-    } = props.obj;
+const checkOut = () => {
     return (
-        <section>
-            <p class="text-black">2</p>
-            <form>
-
-            </form>
-        </section>
+        <div>
+            <p class="text-black">1</p>
+        </div>
     )
 }
-
 function checkIn(props) {
     return (
         <section>
