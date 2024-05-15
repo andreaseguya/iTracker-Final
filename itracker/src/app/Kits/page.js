@@ -50,21 +50,24 @@ const Step1 = ({ onNext }) => {
     const [cartCourses, setCartCourses] = useState([]);
     const [searchCourse, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [users, setUsers] = useState([]);
-
     useEffect(() => {
         api.get(`/assets`)
             .then((response) => {
                 setCourses(response.data);
             })
-        // api.get('/users')
-        //     .then((res) => {
-        //         setUsers(res.data);
-        //     })
     }, [])
-    // let Loanee = users.map(function (user) {
-    //     return { value: user.Name, label: user.name }
-    // })
+    const [selectedOptions, setSelected] = useState([])
+    const getOptions = async () => {
+        const res = await api.get('/users')
+        const data = res.data
+        const options = data.map(d => ({
+            "value": d.id,
+            "label": d.Name
+        }))
+        setSelected(options)
+    }
+    getOptions();
+
     const addCourseToCartFunction = (GFGcourse) => {
         const alreadyCourses = cartCourses
             .find(item => item.product.id === GFGcourse.id);
@@ -139,12 +142,7 @@ const Step1 = ({ onNext }) => {
                 <p class="w-[320px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">Next, assign the kit to a loanee or location or select other below</p>
                 <div class="w-[328px]">
-                    {/* <Select options={users.renderList()} /> */}
-                    {/* <Select
-                        value={users.value}
-                        options={users.Name}
-                    /> */}
-
+                    <Select options={selectedOptions} onChange={(e) => setSelected({ id: e.value, Name: e.label })} />
                 </div>
                 <button class="mt-3" onClick={onNext}>Next step</button>
             </div>

@@ -133,8 +133,15 @@
       "Name": "Admin",
       "AlertEmail": "aseguya",
       "Badge#": "0000",
-      "Department": "IT",
-      "checkbox": true
-    }
-  ]
+      "Department": "IT" 
+    },
+  {
+    "id": "2",
+      "Name": "Promotions",
+      "AlertEmail": "aseguya",
+      "Badge#": "0000",
+      "Department": "Promotions" 
+  }
+  ], 
+  "loans":[]
 }
