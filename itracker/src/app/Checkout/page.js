@@ -40,7 +40,7 @@ export default function Check() {
                                                 type="search" placeholder="Search for asset to checkout"></input> */}
                                     <SearchBar />
                                 </div>
-                                <Creatable options={users} isMultinoOptionsMessage={() => "name not found"} />
+                               
                             </form>
                         </section></TabPanel>
                     <TabPanel>2</TabPanel>
@@ -51,7 +51,45 @@ export default function Check() {
     )
 }
 
+function CheckOut(){
+    const [assets,setAssets]=useState([]);
+    const [userSelect, setUserSelect]=useState([]);
+    const [search,setSearch]=useState('');
+    const [showModal, setShowModal]=useState(false);
+    useEffect(() => {
+        api.get(`/assets`)
+            .then((response) => {
+                setAssets(response.data);
+            })
+    }, [])
+    const addToCheckOut=(selectedAsset)=>{
+        const already=assets
+        .find(item => item.product.id === selectedAsset.id);
+        if (already) {
+            const latestCartUpdate = assets.map(item =>
+                item.product.id === selectedAsset.id ? {
+                    ...item, quantity: item.quantity + 1
+                }
+                    : item
+            );
+            setAssets(latestCartUpdate);
+        }else {
+            setAssets([...assets, { product: selectedAsset, quantity: 1 }]);
+        }
+    };
+    const deleteCourseFromCartFunction = (selectedAsset) => {
+        const updatedCart = assets
+            .filter(item => item.product.id !== selectedAsset.id);
+        setAssets(updatedCart);
+    };
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
 
+    const closeModal = () => {
+        setShowModal(false);
+    };
+}
 class SearchBar extends Component {
     state = {
         assets: [],
@@ -73,7 +111,7 @@ class SearchBar extends Component {
             <div class="">
                 <input
                     class="  w-[350px]  bg-gray-100 text-blue-gray-700 font-inter font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-1  text-sm px-3 py-2.5 rounded-[7px]  focus:border-gray-900"
-                    type='search' placeholder="Search by name" onChange={this.searchChanged} value={this.state.search} />
+                    type='search' placeholder="Search and select an asset(s) to checkout" onChange={this.searchChanged} value={this.state.search} />
 
                 <div class=" mt-3 w-[370px] flex flex-row gap-3 flex-wrap">
                     {this.state.assets
