@@ -174,12 +174,8 @@ const Step1 = ({ onNext }) => {
                                     />
                                 </div>
                             </motion.div>
-
                         </motion.div>
-
-
                     </motion.div>
-
                 )}
             </AnimatePresence>
         </section>

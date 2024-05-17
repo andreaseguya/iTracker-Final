@@ -20,7 +20,6 @@ function SearchComponent({ searchCourse, courseSearchUserFunction, addCourseToCa
                 }
             }
         }
-
         fetchAssets();
     }, [])
     return (
