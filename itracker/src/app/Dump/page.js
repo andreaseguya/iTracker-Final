@@ -1,5 +1,6 @@
 "use client"
 import React, { createContext, useState, useEffect } from "react";
+import { BsCart4 } from "react-icons/bs";
 import api from '../api/assetList'
 export default function Dump() {
     const [showCart, setShowCart] = useState(false);
@@ -11,7 +12,7 @@ export default function Dump() {
         setShowModal(false);
     };
     return (
-        <section>
+        <section class="flex flex-row">
             <CartProvider>
                 <Cart />
             </CartProvider>
@@ -88,10 +89,11 @@ function Search({ searchC, CSF, addAtoC }) {
         <div>
             <input
                 type="text"
-                placeholder="Search and add assets to your kit"
+                class="w-[350px]  bg-gray-100 text-blue-gray-700 font-inter font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-1  text-sm px-3 py-2.5 rounded-[7px]  focus:border-gray-900"
+                placeholder="Search and add assets to check out"
                 value={searchC}
                 onChange={CSF}
-            />
+            />   
             <div class=" mt-3 w-[370px] flex flex-row gap-3 flex-wrap">
                 {APIData
                     .filter((asset) => {
@@ -126,42 +128,21 @@ function Search({ searchC, CSF, addAtoC }) {
         </div>
     )
 }
-function CheckoutList() {
-    const { cartItems, addItemToCart } = React.useContext(CartContext);
-    const [products, setProducts] = useState([]);
-    const getOptions = async () => {
-        const res = await api.get('/assets')
-        const data = res.data
-        const options = data.map(d => ({
-            "value": d.id,
-            "name": d.assetName
-        }))
-        setProducts(options)
-    }
-    getOptions();
-    return (
-        <ul>
-            {products.map((product) => (
-                <li key={product.id}>
-                    {product.name}
-                    <button onClick={() => addItemToCart(product)}>Add to Cart</button>
-                </li>
-            ))}
-        </ul>
-    );
-}
+
 function Cart() {
     const { cartItems, removeItemFromCart, updateItemQuantity } = React.useContext(CartContext);
-    // useEffect(() => {
-    //     const cartItems = localStorage.getItem("cartItems");
-    //     if (cartItems) {
-    //     setCartItems(JSON.parse(cartItems));
-    //     }
-    // }, []);
+    const [showModal,setShowModal]=useState(false);
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
     return (
         <div>
-            <h1>Cart</h1>
-            <table>
+            <button onClick={toggleModal}><BsCart4 size={24} class="hover:fill-red-600" /></button>
+            {/* <table>
                 <thead>
                     <tr>
                         <th>Product</th>
@@ -186,7 +167,7 @@ function Cart() {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </table> */}
 
         </div>
     )
