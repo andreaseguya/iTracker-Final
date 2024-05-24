@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@emotion/react": "^11.11.4",
     "@headlessui/react": "^2.0.3",
     "chart.js": "^4.4.2",
     "framer-motion": "^11.0.24",
