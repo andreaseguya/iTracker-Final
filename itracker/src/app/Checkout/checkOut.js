@@ -5,8 +5,17 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BsCart4 } from "react-icons/bs";
 import api from '../api/assetList'
 export default function CheckOut() {
+    const [loanee, setLoanee] = useState('');
+    const [due, setDue] = useState();
+    const [indefinite, setIndefinite] = useState(false);
+
     return (
         <section class="flex flex-row gap-2">
+            <div>
+                <div class="flex flex-row">
+                    <div class="rounded-full"></div>
+                </div>
+            </div>
             <CartProvider>
                 <div class="mt-1">
                     <Cart />
