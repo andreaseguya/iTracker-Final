@@ -25,6 +25,15 @@ export default function CheckOut() {
         </section>
     )
 }
+function AddLoanee() {
+    const [changeLoanee, setChangeLoanee] = useState('');
+    const [show, setShow] = useState(false)
+    return (
+        <div>
+
+        </div>
+    )
+}
 const CartContext = createContext();
 function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);

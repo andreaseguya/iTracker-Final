@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
@@ -199,26 +198,6 @@ const Assets = (props) => {
         StorageLocation
     } = props.obj;
 
-    // const handleEdit = async (id) => {
-    //     const update = { id, assetName, AlertEmail, Quantity, StorageLocation, minQuantity, status, checkbox };
-    //     try {
-    //         const res = await api.put(`assets/${id}`, update);
-    //         setData(Data.map(asset => asset.id === id ? { ...response.data } : asset));
-    //     } catch (err) {
-    //         console.log(`Error: ${err.message}`);
-    //     }
-    // }
-    // const handleDelete = async (id) => {
-    //     try {
-    //       await api.delete(`/posts/${id}`);
-    //       const postsList = posts.filter(post => post.id !== id);
-    //       setPosts(postsList);
-    //       history.push('/');
-    //     } catch (err) {
-    //       console.log(`Error: ${err.message}`);
-    //     }
-    //   }
-
     return (
         <section class="ml-5 mt-5 w-[370px]">
 
@@ -294,7 +273,7 @@ const Assets = (props) => {
             </div>
             <div id="LastSection">
                 <h1 class="ml-3 mt-3 w-[182px] text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px];
-  font-family: Inter;">Loans</h1>
+                font-family: Inter;">Loans</h1>
                 <button class=" -mt-6 mr-2 float-right text-base hover:text-red-500">Check in</button>
                 {/* Loans populate here */}
                 <div class=" mt-3 flex w-[375px] h-[1px] bg-gray-200"></div>
