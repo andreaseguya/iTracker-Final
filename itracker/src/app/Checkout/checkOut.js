@@ -8,20 +8,28 @@ export default function CheckOut() {
     const [loanee, setLoanee] = useState('');
     const [due, setDue] = useState();
     const [indefinite, setIndefinite] = useState(false);
-
     return (
-        <section class="flex flex-row gap-2">
-            <div>
-                <div class="flex flex-row">
-                    <div class="rounded-full"></div>
+        <section >
+            <AddLoanee/>
+            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>  
+              <div class="flex flex-row">
+                <div>
+                <p>Due date:</p>
                 </div>
-            </div>
-            <CartProvider>
+                <div>
+                <p>Indefinite Loan</p>
+                </div>
+                
+              </div>
+            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div> 
+           <div class="flex flex-row gap-2">
+           <CartProvider>
                 <div class="mt-1">
                     <Cart />
                 </div>
-
-            </CartProvider>
+          </CartProvider>
+           </div>  
+           <div class="mt-1 flex w-[300px] h-[1px] bg-gray-200 mb-1"></div>     
         </section>
     )
 }
@@ -30,7 +38,21 @@ function AddLoanee() {
     const [show, setShow] = useState(false)
     return (
         <div>
+        <div id="Loanee" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
+            <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
+            </div>
+            <div class="ml-5 " >
+                <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
+font-family: Inter;">Admin</h1>
+                <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
+font-family: Inter">ITSupport@snocasino.com</p>
+                {/* <Link href="/UpdateAsset"> */}
+                    <button  class=" mt-1 w-[150px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change Loanee</button>
+                {/* </Link> */}
+                {/* <button  class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button> */}
+            </div>
 
+        </div>
         </div>
     )
 }
@@ -68,6 +90,7 @@ function CartProvider({ children }) {
                 updateItemQuantity,
             }}
         >
+            
             <Search searchC={searchCourse} CSF={courseSearchUserFunction} addAtoC={addItemToCart} />
             {children}
         </CartContext.Provider>
@@ -96,7 +119,7 @@ function Search({ searchC, CSF, addAtoC }) {
         <div>
             <input
                 type="text"
-                class="w-[300px]  bg-gray-100 text-blue-gray-700 font-inter font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-1  text-sm px-3 py-2.5 rounded-[7px]  focus:border-gray-900"
+                class="w-[300px]  bg-[rgba(151,151,151,0.14)] text-blue-gray-700 font-inter font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-1  text-sm px-3 py-2.5 rounded-[7px]  focus:border-gray-900"
                 placeholder="Search and add assets to check out"
                 value={searchC}
                 onChange={CSF}
