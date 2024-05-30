@@ -20,7 +20,7 @@ export default function Check() {
     return (
         <section class="w-[350px] ml-3">
             <h1 class=" text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
-                    font-family: Inter; "> Loans</h1>
+                    font-family: Inter "> Loans</h1>
             <p class="w-[350px] mb-1"> An asset can be loaned to users or locations on this page. Search for a single asset and assign it to a loanee or search for an asset to check in. </p>
             <TabGroup>
                 <TabList>
