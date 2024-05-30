@@ -2,6 +2,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
+import { FaRegUserCircle } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
 import api from '../api/assetList'
 export default function CheckOut() {
@@ -10,26 +11,44 @@ export default function CheckOut() {
     const [indefinite, setIndefinite] = useState(false);
     return (
         <section >
-            <AddLoanee/>
-            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>  
-              <div class="flex flex-row">
-                <div>
-                <p>Due date:</p>
+            <AddLoanee />
+            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
+            <div class="flex flex-row ">
+                <div class="px-1 border-r-2" >
+                    <p>Due date</p>
+                    <input type="date"></input>
                 </div>
-                <div>
-                <p>Indefinite Loan</p>
+                <div class="px-3 ">
+                    <p>Indefinite Loan</p>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" />
+                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
+                        {/* <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Toggle me</span> */}
+                    </label>
                 </div>
-                
-              </div>
-            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div> 
-           <div class="flex flex-row gap-2">
-           <CartProvider>
-                <div class="mt-1">
-                    <Cart />
+
+            </div>
+            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
+            <div class="flex flex-row gap-2">
+                <CartProvider>
+                    <div class="mt-1">
+                        <Cart />
+                    </div>
+                </CartProvider>
+            </div>
+            <div class="mt-1 flex w-[300px] h-[1px] bg-gray-200 mb-1"></div>
+            <div class="flex flex-row ml-4">
+                <p class="mt-2 mr-2">Staff Assigned:</p>
+                <div class=" flex flex-row flex-wrap p-3 w-[160px] h-[42px] rounded-[6px] bg-[rgba(151,151,151,0.14)]">
+                    <p class=" text-sm">Andrea Seguya</p>
+                    <div class="ml-3 float-right">
+                        <FaRegUserCircle size={22} fill="grey" />
+                    </div>
                 </div>
-          </CartProvider>
-           </div>  
-           <div class="mt-1 flex w-[300px] h-[1px] bg-gray-200 mb-1"></div>     
+            </div>
+            <div class="mt-1 flex w-[300px] h-[1px] bg-gray-200 mb-1"></div>
+            <button class=" mt-1 w-[150px] h-6 bg-[black] rounded-[5px] text-white ml-[150px] hover:text-black hover:bg-[red]">Finish checkout</button>
+
         </section>
     )
 }
@@ -38,21 +57,21 @@ function AddLoanee() {
     const [show, setShow] = useState(false)
     return (
         <div>
-        <div id="Loanee" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
-            <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
-            </div>
-            <div class="ml-5 " >
-                <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
+            <div id="Loanee" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
+                <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
+                </div>
+                <div class="ml-5 " >
+                    <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
 font-family: Inter;">Admin</h1>
-                <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
+                    <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
 font-family: Inter">ITSupport@snocasino.com</p>
-                {/* <Link href="/UpdateAsset"> */}
-                    <button  class=" mt-1 w-[150px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change Loanee</button>
-                {/* </Link> */}
-                {/* <button  class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button> */}
-            </div>
+                    {/* <Link href="/UpdateAsset"> */}
+                    <button class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
+                    {/* </Link> */}
+                    <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
+                </div>
 
-        </div>
+            </div>
         </div>
     )
 }
@@ -90,7 +109,7 @@ function CartProvider({ children }) {
                 updateItemQuantity,
             }}
         >
-            
+
             <Search searchC={searchCourse} CSF={courseSearchUserFunction} addAtoC={addItemToCart} />
             {children}
         </CartContext.Provider>
