@@ -39,6 +39,7 @@ export default function CartControls() {
     const [APIData, setAPIData] = useState([]);
     const [searchC, setSearchCourse] = useState('');
     const courseSearchUserFunction = (event) => {
+        c
         setSearchCourse(event.target.value);
     };
 
