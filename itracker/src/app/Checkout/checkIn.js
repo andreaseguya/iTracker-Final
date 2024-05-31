@@ -1,9 +1,45 @@
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 export default function CheckIn() {
+    const [loans, setLoans] = useState([]);
+    const fetchLoans = async () => {
+        try {
+            const response = await api.get('/loans');
+            setAPIData(response.data);
+        } catch (err) {
+            if (err.response) {
+                // Not in the 200 response range 
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
+            } else {
+                console.log(`Error: ${err.message}`);
+            }
+        }
+    }
+    fetchLoans();
     return (
         <section>
-            <p>Scan or enter asset tags to quickly return items</p>
-            <Search/>
+
+            <p class="mt-2 text-[14px] not-italic font-normal leading-6 w-[303px]">Scan tags or enter keywords to  return items</p>
+            <Search />
+            <div class="mt-1 flex w-[300px] h-[1px] bg-gray-200"></div>
+            <div class="grid grid-cols-4 gap-4 content-between ... p-5 mb-3">
+                {loans.map((data) => {
+                    // while (data.expiredate <= today) {
+                    //for ovedue loans
+                    //     return (
+                    //         <div key="ID" >
+                    //             <div class="bg-[#DFDFDF] h-[62px] rounded-[50%] w-[63px]">
+                    //                 {/* Asset image */}
+                    //             </div>
+                    //             <p class="ml-2">{data.assetName}</p>
+                    //             <p class="text-[#F11919] ml-2">{data.Quantity} unit</p>
+                    //         </div>
+                    //     )
+                    // }
+
+                })}
+            </div>
         </section>
     )
 }

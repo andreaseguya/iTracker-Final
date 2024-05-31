@@ -4,24 +4,35 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
+import { useForm } from "react-hook-form"
 import api from '../api/assetList'
 export default function CheckOut() {
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const onSubmit = async (data) => {
+        try {
+            const response = await api.post("/Loans", data);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     const [loanee, setLoanee] = useState('');
     const [due, setDue] = useState();
     const [indefinite, setIndefinite] = useState(false);
     return (
         <section >
             <AddLoanee />
+
             <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
             <div class="flex flex-row ">
                 <div class="px-1 border-r-2" >
                     <p>Due date</p>
-                    <input type="date"></input>
+                    <input type="date" {...register("dueDate")}></input>
                 </div>
                 <div class="px-3 ">
                     <p>Indefinite Loan</p>
                     <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox" value="" class="sr-only peer" />
+                        <input type="checkbox"{...register("Indefinite")} value="" class="sr-only peer" />
                         <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
                         {/* <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Toggle me</span> */}
                     </label>
@@ -47,7 +58,9 @@ export default function CheckOut() {
                 </div>
             </div>
             <div class="mt-1 flex w-[300px] h-[1px] bg-gray-200 mb-1"></div>
-            <button class=" mt-1 w-[150px] h-6 bg-[black] rounded-[5px] text-white ml-[150px] hover:text-black hover:bg-[red]">Finish checkout</button>
+            <button type="submit" class=" mt-1 w-[150px] h-6 bg-[black] rounded-[5px] text-white ml-[150px] hover:text-black hover:bg-[red]">Finish checkout</button>
+
+
 
         </section>
     )

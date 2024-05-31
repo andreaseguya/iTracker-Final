@@ -7,15 +7,6 @@ import api from '../api/assetList'
 import CheckOut from "./checkOut"
 import CheckIn from "./checkIn"
 export default function Check() {
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = async (data) => {
-        try {
-            const response = await api.post("/Loans", data);
-            console.log(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
     const [users, setUsers] = useState([]);
     return (
         <section class="w-[350px] ml-3">
