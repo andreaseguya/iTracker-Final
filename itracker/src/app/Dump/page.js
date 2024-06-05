@@ -2,10 +2,42 @@
 import React, { createContext, useState, useEffect } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
-import { FaRegUserCircle } from "react-icons/fa";
+// import { FaRegUserCircle } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
 import { useFieldArray, Controller, useForm } from "react-hook-form"
 import api from '../api/assetList'
+
+function EditableText() {
+    const [text, setText] = useState("This is editable text.");
+    const [isEditing, setIsEditing] = useState(false);
+
+    const handleDoubleClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleChange = (event) => {
+        setText(event.target.value);
+    };
+
+    const handleBlur = () => {
+        setIsEditing(false);
+    };
+
+    return (
+        <div>
+            {isEditing ? (
+                <input
+                    type="text"
+                    value={text}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+            ) : (
+                <span onDoubleClick={handleDoubleClick}>{text}</span>
+            )}
+        </div>
+    );
+};
 function Dump(props) {
     const { register, control, handleSubmit } = useForm({
         defaultValues: {
@@ -36,13 +68,11 @@ function Dump(props) {
 }
 let count = 1;
 
-export default function CartControls() {
+export default function CheckOut() {
     const [APIData, setAPIData] = useState([]);
     const [quantity, setQuantity] = useState(count);
     const [searchC, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [Loanee, setloanee] = useState('Admin');
-
     const toggleModal = () => {
         setShowModal(!showModal);
     };
@@ -83,40 +113,57 @@ export default function CartControls() {
         control,
         name: "cartAssets"
     });
-    const LoaneeEdit = ({ loanee, setLoanee }) => {
-        const [editingValue, setEditingValue] = useState(loanee);
-        const onChange = (event) => setEditingValue(event.target.value);
-        const onKeyDown = (event) => {
-            if (event.key === "Enter" || event.key === "Escape") {
-                event.target.blur();
-            }
+    const LoaneeSelect = () => {
+        const [Loanee, setloanee] = useState('Admin');
+        const [isEditing, setIsEditing] = useState(false);
+        const handleDoubleClick = () => {
+            setIsEditing(true);
         }
-        const onBlur = (event) => {
-            if (event.target.value.trim() === "") {
-                setLoanee(loanee);
-            } else {
-                setLoanee(event.target.value)
-            }
+        const handleChange = (event) => {
+            setloanee(event.target.value);
         }
-
+        const handleBlur = () => {
+            setIsEditing(false);
+        }
         return (
-            <input
-                type="text"
-                aria-label="Loanee name"
-                value={editingValue}
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-                onBlur={onBlur}
-            />
+            <div>
+                {isEditing ? (
+                    <input
+                        type="text"
+                        value={Loanee}
+                        onChange={handleChange}
+                        onBlur={handleBlur}>
+
+                    </input>
+                ) : (
+                    <span onDoubleClick={handleDoubleClick}>{Loanee}</span>
+                )}
+            </div>
         )
     }
     const onSubmit = (data) => console.log("data", data);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <LoaneeEdit loanee={Loanee} setLoanee={setloanee} />
+            {/* Loanee section */}
+            <div id="Loanee" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
+                <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
+                </div>
+                <div class="ml-5 " >
+                    {/* <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
+font-family: Inter;">Admin</h1> */}
+                    <LoaneeSelect />
+                    <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
+font-family: Inter">ITSupport@snocasino.com</p>
+                    {/* <Link href="/UpdateAsset"> */}
+                    <button class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
+                    {/* </Link> */}
+                    <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
+                </div>
+
             </div>
+            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
+
             {/* Search */}
             <div class="flex flex-row  gap-4">
                 <input
