@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 // import { FaRegUserCircle } from "react-icons/fa";
+import Select from "react-select";
 import { BsCart4 } from "react-icons/bs";
 import { useFieldArray, Controller, useForm } from "react-hook-form"
 import api from '../api/assetList'
@@ -44,6 +45,19 @@ const Loanee = () => {
                 setUsers(response.data);
             })
     }, [])
+    const [selectedOptions, setSelected] = useState([])
+    const getOptions = async () => {
+        const res = await api.get('/users')
+        const data = res.data
+        const options = data.map(d => ({
+            "value": d.id,
+            "label": d.Name
+        }))
+        setSelected(options)
+    }
+    getOptions();
+
+    
 
     // const [Loanee, setloanee] = useState('Admin');
     const [isEditing, setIsEditing] = useState(false);
@@ -53,14 +67,25 @@ const Loanee = () => {
     const handleChange = (event) => {
         setloanee(event.target.value);
     }
+    const handle=(e)=>{
+        setSelected(e)
+    }
     const handleBlur = () => {
         setIsEditing(false);
     }
+
     return (
         <div>
             {isEditing ? (
                 <div class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
-
+                   <div class="w-[328px]">
+                    <Select options={selectedOptions}
+                     onChange={(e) => setSelected({ id: e.value, Name: e.label })}
+                    // onChange={handle}
+                    // closeMenuOnSelect={false}
+                    // isMulti={true}
+                      />
+                </div>
                     <button onClick={handleBlur} class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]"> Save</button>
                 </div>
             ) : (
@@ -69,7 +94,7 @@ const Loanee = () => {
                     </div>
                     <div class="ml-5 " >
                         <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
-font-family: Inter;">Admin</h1>
+font-family: Inter;"></h1>
                         <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
 font-family: Inter">ITSupport@snocasino.com</p>
                         {/* <Link href="/UpdateAsset"> */}
