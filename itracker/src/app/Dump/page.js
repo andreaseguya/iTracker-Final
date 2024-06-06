@@ -6,73 +6,112 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BsCart4 } from "react-icons/bs";
 import { useFieldArray, Controller, useForm } from "react-hook-form"
 import api from '../api/assetList'
-
-function EditableText() {
-    const [text, setText] = useState("This is editable text.");
+let count = 1;
+const LoaneeSelect = () => {
+    const [Loanee, setloanee] = useState('Admin');
     const [isEditing, setIsEditing] = useState(false);
-
     const handleDoubleClick = () => {
         setIsEditing(true);
-    };
-
+    }
     const handleChange = (event) => {
-        setText(event.target.value);
-    };
-
+        setloanee(event.target.value);
+    }
     const handleBlur = () => {
         setIsEditing(false);
-    };
-
+    }
     return (
         <div>
             {isEditing ? (
                 <input
                     type="text"
-                    value={text}
+                    value={Loanee}
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                />
+                    onBlur={handleBlur}>
+
+                </input>
             ) : (
-                <span onDoubleClick={handleDoubleClick}>{text}</span>
+                <span onDoubleClick={handleDoubleClick}>{Loanee}</span>
             )}
         </div>
-    );
-};
-function Dump(props) {
-    const { register, control, handleSubmit } = useForm({
-        defaultValues: {
-            Loanee: "",
-            dueDate: "",
-            Returnable: true,
-            cart: [],
-            Staff: ""
-        },
-    })
-    const { fields, append, remove, replace } = useFieldArray({
-        control,
-        name: "cart"
-    })
-    // Submit your data into Redux store
-    //   const onSubmit = (data) => props.updateAction(data)
-    const onSubmit = (data) => console.log(data)
-
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("Loanee")} />
-            <input {...register("dueDate")} />
-            <input {...register("Loanee")} />
-            <input {...register("dueDate")} />
-            <input type="submit" />
-        </form>
     )
 }
-let count = 1;
+const Loanee = () => {
+    const [users, setUsers] = useState([])
+    const [loanee, setLoanee] = useState('');
+    useEffect(() => {
+        api.get(`/users`)
+            .then((response) => {
+                setUsers(response.data);
+            })
+    }, [])
 
+    // const [Loanee, setloanee] = useState('Admin');
+    const [isEditing, setIsEditing] = useState(false);
+    const handleClick = () => {
+        setIsEditing(true);
+    }
+    const handleChange = (event) => {
+        setloanee(event.target.value);
+    }
+    const handleBlur = () => {
+        setIsEditing(false);
+    }
+    return (
+        <div>
+            {isEditing ? (
+                <div class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
+
+                    <button onClick={handleBlur} class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]"> Save</button>
+                </div>
+            ) : (
+                <div id="Loanee" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
+                    <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
+                    </div>
+                    <div class="ml-5 " >
+                        <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
+font-family: Inter;">Admin</h1>
+                        <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
+font-family: Inter">ITSupport@snocasino.com</p>
+                        {/* <Link href="/UpdateAsset"> */}
+                        <button onClick={handleClick} class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
+                        {/* </Link> */}
+                        <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
+                    </div>
+
+                </div>
+            )}
+        </div>
+
+    )
+}
+const Loan = (props) => {
+    const {
+        _id,
+        loaneeName,
+        loaneeEmail,
+        staffAssigned,
+        dueDate,
+        assets,
+        indefinite
+    } = props.obj
+    return (
+        <div></div>
+    )
+}
 export default function CheckOut() {
     const [APIData, setAPIData] = useState([]);
     const [quantity, setQuantity] = useState(count);
     const [searchC, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
+
+
+    const LoaneeDisplay = () => {
+        return users.map((res, i) => {
+            if (i + 1 == id) {
+                return <Loanee obj={res} key={i} />
+            }
+        })
+    }
     const toggleModal = () => {
         setShowModal(!showModal);
     };
@@ -113,55 +152,14 @@ export default function CheckOut() {
         control,
         name: "cartAssets"
     });
-    const LoaneeSelect = () => {
-        const [Loanee, setloanee] = useState('Admin');
-        const [isEditing, setIsEditing] = useState(false);
-        const handleDoubleClick = () => {
-            setIsEditing(true);
-        }
-        const handleChange = (event) => {
-            setloanee(event.target.value);
-        }
-        const handleBlur = () => {
-            setIsEditing(false);
-        }
-        return (
-            <div>
-                {isEditing ? (
-                    <input
-                        type="text"
-                        value={Loanee}
-                        onChange={handleChange}
-                        onBlur={handleBlur}>
 
-                    </input>
-                ) : (
-                    <span onDoubleClick={handleDoubleClick}>{Loanee}</span>
-                )}
-            </div>
-        )
-    }
     const onSubmit = (data) => console.log("data", data);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {/* Loanee section */}
-            <div id="Loanee" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
-                <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
-                </div>
-                <div class="ml-5 " >
-                    {/* <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
-font-family: Inter;">Admin</h1> */}
-                    <LoaneeSelect />
-                    <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
-font-family: Inter">ITSupport@snocasino.com</p>
-                    {/* <Link href="/UpdateAsset"> */}
-                    <button class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
-                    {/* </Link> */}
-                    <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
-                </div>
-
-            </div>
+            {/* <div>{LoaneeDisplay()}</div> */}
+            <Loanee />
             <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
 
             {/* Search */}
