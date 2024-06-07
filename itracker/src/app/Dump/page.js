@@ -139,6 +139,7 @@ export default function CheckOut() {
     const [quantity, setQuantity] = useState(count);
     const [searchC, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [Loan, setLoan] = useState([]);
     //setUsers now contains only one Loanee at a time
     const [users, setUsers] = useState([]);
     useEffect(() => {
@@ -199,7 +200,22 @@ export default function CheckOut() {
         control,
         name: "cartAssets"
     });
+    const PostData = async (e) => {
+        alert("Processing Loan...")
+        //hideForm(true)
+        e.preventDefault();
+        const id = Loan.length;
+        const newLoan = { id, cartAssets, users }
+        try {
+            const res = await api.post('/loans', newLoan);
+            const allLoans = [...Loan, res.data];
+            setLoan(allLoans)
+        }
+        catch (err) {
+            console.log(`Failed to post to API Error: ${err.message}`);
+        }
 
+    }
     const onSubmit = (data) => {
         console.log("loanee:", users);
         console.log("cart:", data);
@@ -301,7 +317,7 @@ export default function CheckOut() {
                 </AnimatePresence>
             </div>
             {/* Append and reset functionality */}
-            <section>
+            {/* <section>
                 <button
                     class="mr-2"
                     type="button"
@@ -322,7 +338,7 @@ export default function CheckOut() {
                 >
                     reset
                 </button>
-            </section>
+            </section> */}
 
             <input type="submit" />
         </form>
