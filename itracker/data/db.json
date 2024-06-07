@@ -118,12 +118,21 @@
       "checkbox": true
     },
     {
-      "id": 12,
+      "id": "12",
       "assetName": "Radios",
       "AlertEmail": "adama",
       "Quantity": 1,
       "StorageLocation": "MIS 4",
       "minQuantity": 4,
+      "checkbox": true
+    },
+    {
+      "id": 13,
+      "assetName": "Pens",
+      "AlertEmail": "asdfasdf",
+      "Quantity": "100",
+      "StorageLocation": "afsdad",
+      "minQuantity": "10",
       "checkbox": true
     }
   ],
@@ -133,15 +142,15 @@
       "Name": "Admin",
       "AlertEmail": "aseguya",
       "Badge#": "0000",
-      "Department": "IT" 
+      "Department": "IT"
     },
-  {
-    "id": "2",
+    {
+      "id": "2",
       "Name": "Promotions",
-      "AlertEmail": "aseguya",
+      "AlertEmail": "promotions",
       "Badge#": "0000",
-      "Department": "Promotions" 
-  }
-  ], 
-  "loans":[]
+      "Department": "Promotions"
+    }
+  ],
+  "loans": []
 }

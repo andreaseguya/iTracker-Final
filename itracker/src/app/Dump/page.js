@@ -8,107 +8,7 @@ import { BsCart4 } from "react-icons/bs";
 import { useFieldArray, Controller, useForm } from "react-hook-form"
 import api from '../api/assetList'
 let count = 1;
-const LoaneeSelect = () => {
-    const [Loanee, setloanee] = useState('Admin');
-    const [isEditing, setIsEditing] = useState(false);
-    const handleDoubleClick = () => {
-        setIsEditing(true);
-    }
-    const handleChange = (event) => {
-        setloanee(event.target.value);
-    }
-    const handleBlur = () => {
-        setIsEditing(false);
-    }
-    return (
-        <div>
-            {isEditing ? (
-                <input
-                    type="text"
-                    value={Loanee}
-                    onChange={handleChange}
-                    onBlur={handleBlur}>
 
-                </input>
-            ) : (
-                <span onDoubleClick={handleDoubleClick}>{Loanee}</span>
-            )}
-        </div>
-    )
-}
-const Loanee = () => {
-    const [users, setUsers] = useState([])
-    const [loanee, setLoanee] = useState('');
-    useEffect(() => {
-        api.get(`/users`)
-            .then((response) => {
-                setUsers(response.data);
-            })
-    }, [])
-    const [selectedOptions, setSelected] = useState([])
-    const getOptions = async () => {
-        const res = await api.get('/users')
-        const data = res.data
-        const options = data.map(d => ({
-            "value": d.id,
-            "label": d.Name
-        }))
-        setSelected(options)
-    }
-    getOptions();
-
-    
-
-    // const [Loanee, setloanee] = useState('Admin');
-    const [isEditing, setIsEditing] = useState(false);
-    const handleClick = () => {
-        setIsEditing(true);
-    }
-    const handleChange = (event) => {
-        setloanee(event.target.value);
-    }
-    const handle=(e)=>{
-        setSelected(e)
-    }
-    const handleBlur = () => {
-        setIsEditing(false);
-    }
-
-    return (
-        <div>
-            {isEditing ? (
-                <div class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
-                   <div class="w-[328px]">
-                    <Select options={selectedOptions}
-                     onChange={(e) => setSelected({ id: e.value, Name: e.label })}
-                    // onChange={handle}
-                    // closeMenuOnSelect={false}
-                    // isMulti={true}
-                      />
-                </div>
-                    <button onClick={handleBlur} class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]"> Save</button>
-                </div>
-            ) : (
-                <div id="Loanee" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
-                    <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.
-                    </div>
-                    <div class="ml-5 " >
-                        <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
-font-family: Inter;"></h1>
-                        <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
-font-family: Inter">ITSupport@snocasino.com</p>
-                        {/* <Link href="/UpdateAsset"> */}
-                        <button onClick={handleClick} class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
-                        {/* </Link> */}
-                        <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
-                    </div>
-
-                </div>
-            )}
-        </div>
-
-    )
-}
 const Loan = (props) => {
     const {
         _id,
@@ -123,20 +23,142 @@ const Loan = (props) => {
         <div></div>
     )
 }
+function Search({ searchL, searchU, setAsL }) {
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await api.get('/users');
+                setUsers(response.data);
+            } catch (err) {
+                if (err.response) {
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        }
+        fetchUsers();
+    }, [])
+    return (
+        <div>
+            {/* Search Bar */}
+            <input type="text"
+                class="w-[300px]  bg-[rgba(151,151,151,0.14)] text-blue-gray-700 font-inter font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-1  text-sm px-3 py-2.5 rounded-[7px]  focus:border-gray-900"
+                value={searchL}
+                onChange={searchU}
+                placeholder="Search for user or location"></input>
+            {/* Results */}
+            <div>
+                {users
+                    .filter((user) => {
+                        if (searchL == "") {
+                            return "";
+                        }
+                        else if (user.Name.toLowerCase().includes(searchL.toLowerCase()))
+                            return user
+                    })
+                    .map((user) => {
+                        if (user.Name.toLowerCase().includes(searchL.toLowerCase())) {
+                            return (
+                                <div key={user.id} class="ml-2 mt-2">
+                                    <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] "> </div>
+                                    <h1 class="ml-3 mt-0.5 w-[70px]">{user.Name}</h1>
+                                    <button
+                                        className="mt-3 ml-2 w-[100px] text-white rounded-[5px] bg-black hover:bg-red-500 p-1"
+                                        onClick={() => setAsL(user)}
+                                    >
+                                        Select
+                                    </button>
+                                </div>
+                            )
+                        }
+                    })
+                }
+
+            </div>
+        </div>
+    )
+}
+function Loanee({ users, setLoanee }) {
+    const [searchLoanee, setSearchLoanee] = useState('');
+    const [editing, setIsEditing] = useState(false);
+
+    const searchUser = (event) => {
+        setSearchLoanee(event.target.value)
+    }
+    const setAsLoanee = (item) => {
+        alert("Loanee has been updated. Click save to go back")
+        setLoanee([item])
+    }
+    const ChangeLoanee = () => {
+        setIsEditing(true);
+    }
+    const SaveLoanee = () => {
+        setIsEditing(false)
+    }
+
+    return (
+        <div>
+            {editing ? (
+                <div class="flex flex-row">
+                    <Search searchL={searchLoanee} searchU={searchUser} setAsL={setAsLoanee} />
+                    <button onClick={SaveLoanee} class=" ml-2 w-[50px] h-9 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Save</button>
+                </div>
+            ) : (
+                <div>
+                    {users.map((loanees, index) => {
+                        if (index == 0) {
+                            return (
+                                <div class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
+                                    <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.</div>
+                                    <div class="ml-5">
+                                        <h1 class=" text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
+                                    font-family: Inter;">{loanees.Name}</h1>
+                                        <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
+                                    font-family: Inter">{loanees.AlertEmail}@snocasino.com</p>
+                                        {/* <Link href="/UpdateAsset"> */}
+                                        <button onClick={ChangeLoanee} class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
+                                        {/* </Link> */}
+                                        <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
+                                    </div>
+
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
+            )}
+        </div>
+    )
+}
 export default function CheckOut() {
     const [APIData, setAPIData] = useState([]);
     const [quantity, setQuantity] = useState(count);
     const [searchC, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
-
-
-    const LoaneeDisplay = () => {
-        return users.map((res, i) => {
-            if (i + 1 == id) {
-                return <Loanee obj={res} key={i} />
+    //setUsers now contains only one Loanee at a time
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await api.get('/users');
+                setUsers(response.data);
+            } catch (err) {
+                if (err.response) {
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
             }
-        })
-    }
+        }
+        fetchUsers();
+
+    }, [])
     const toggleModal = () => {
         setShowModal(!showModal);
     };
@@ -178,15 +200,14 @@ export default function CheckOut() {
         name: "cartAssets"
     });
 
-    const onSubmit = (data) => console.log("data", data);
-
+    const onSubmit = (data) => {
+        console.log("loanee:", users);
+        console.log("cart:", data);
+    }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            {/* Loanee section */}
-            {/* <div>{LoaneeDisplay()}</div> */}
-            <Loanee />
+            <Loanee users={users} setLoanee={setUsers} />
             <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
-
             {/* Search */}
             <div class="flex flex-row  gap-4">
                 <input
