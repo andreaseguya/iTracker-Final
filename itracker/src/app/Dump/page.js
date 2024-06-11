@@ -91,6 +91,7 @@ function Loanee({ users, setLoanee }) {
     }
     const setAsLoanee = (item) => {
         alert("Loanee has been updated. Click save to go back")
+
         setLoanee([item])
     }
     const ChangeLoanee = () => {
@@ -189,7 +190,7 @@ export default function CheckOut() {
     }, [])
     const { register, control, handleSubmit, reset } = useForm({
         defaultValues: {
-            cartAssets: [{ assetName: "test" }]
+            cartAssets: []
         }
     })
     const {
@@ -224,6 +225,21 @@ export default function CheckOut() {
         <form onSubmit={handleSubmit(onSubmit)}>
             <Loanee users={users} setLoanee={setUsers} />
             <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
+            <div class="flex flex-row ">
+                <div class="px-1 border-r-2" >
+                    <p>Due date</p>
+                    <input type="date" {...register("dueDate")}></input>
+                </div>
+                <div class="px-3 ">
+                    <p>Indefinite Loan</p>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox"{...register("Indefinite")} value="" class="sr-only peer" />
+                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
+                        {/* <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Toggle me</span> */}
+                    </label>
+                </div>
+            </div>
+            <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
             {/* Search */}
             <div class="flex flex-row  gap-4">
                 <input
@@ -256,8 +272,12 @@ export default function CheckOut() {
                                         className="mt-3 ml-2 w-[50px] text-white rounded-[5px] bg-black hover:bg-red-500 p-1"
                                         onClick={() => {
                                             append(asset);
+                                            alert("Asset Added! Check shopping cart for full list of selected assets")
                                             setQuantity(count);
                                         }}
+                                    // onClick={() => {
+                                    //     append({ assetName: "", Quantity: 1 });
+                                    // }}
                                     >
                                         Add
                                     </button>
@@ -293,6 +313,7 @@ export default function CheckOut() {
                                             <div key={item.id}>
                                                 <div class="w-[121px] h-[102px] bg-[#F6F7FC] rounded-[10px]"></div>
                                                 <p>{item.assetName}</p>
+                                                <p>{quantity}</p>
                                                 {/* <div class="flex flex-row gap-2">
                                                 <input
                                                     class=" w-[122px] bg-[#F6F7FC] text-blue-gray-700 font-inter font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-1  text-xs px-3 py-2.5 rounded-[7px]  focus:border-gray-900"
@@ -316,29 +337,7 @@ export default function CheckOut() {
                     )}
                 </AnimatePresence>
             </div>
-            {/* Append and reset functionality */}
-            {/* <section>
-                <button
-                    class="mr-2"
-                    type="button"
-                    onClick={() => {
-                        append({ assetName: "", Quantity: 1 });
-                    }}
-                >
-                    append
-                </button>
 
-                <button
-                    type="button"
-                    onClick={() =>
-                        reset({
-                            cartAssets: [{ assetName: "newAsset" }]
-                        })
-                    }
-                >
-                    reset
-                </button>
-            </section> */}
 
             <input type="submit" />
         </form>
