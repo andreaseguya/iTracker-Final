@@ -5,14 +5,42 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BsCart4 } from "react-icons/bs";
 import { useFieldArray, Controller, useForm } from "react-hook-form"
 import api from '../api/assetList'
-let count = 1;
 
 export default function Loans() {
     // Loanee Controls & Search
     const [users, setUsers] = useState([]);
-    const [searchLoanee, setSearchLoanee] = useState('');
-    const [loanee, setLoanee] = useState([]);
+    const [loanID,setLoanID]=useState(0)
+    const [quantity,setQuantity]=useState(1)
+    const [APIData, setAPIData] = useState([]);
     const [editing, setIsEditing] = useState(false);
+    const [searchLoanee, setSearchLoanee] = useState('');
+   const increment =()=>{
+
+   }
+    const [loanee, setLoanee] = useState([  {
+        "id": "0",
+        "Name": "No Loanee",
+        "AlertEmail": "ITSupport",
+        "Badge#": "0000",
+        "Department": "IT"
+      }]);
+      useEffect(() => {
+        const fetchAssets = async () => {
+            try {
+                const response = await api.get('/assets');
+                setAPIData(response.data);
+            } catch (err) {
+                if (err.response) {
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        }
+        fetchAssets();
+    }, [])
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -30,6 +58,7 @@ export default function Loans() {
         }
         fetchUsers();
     }, [])
+    
     const searchUser = (event) => {
         setSearchLoanee(event.target.value)
     }
@@ -45,7 +74,24 @@ export default function Loans() {
     const SaveLoanee = () => {
         setIsEditing(false)
     }
-
+    const { register, control, handleSubmit, reset } = useForm({
+        defaultValues: {
+            cartAssets: []
+        }
+    })
+    const {
+        fields,
+        append,
+        remove,
+    } = useFieldArray({
+        control,
+        name: "cartAssets"
+    });
+    const onSubmit = (data) => {
+        console.log("loanee:", finalLoanee);
+        console.log("cart:", data);
+        const newLoan={}
+    }
     return (
         <div>
             {/* Loanee search controls */}
@@ -90,6 +136,7 @@ export default function Loans() {
 
                 </div>) : (
                 <div>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                     {loanee.map((loanees, index) => {
                         if (index == 0) {
                             return (
@@ -110,6 +157,9 @@ export default function Loans() {
                             )
                         }
                     })}
+                    </form>
+                    
+                    
                 </div>
             )}
         </div>
