@@ -2,8 +2,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
-// import { FaRegUserCircle } from "react-icons/fa";
-import Select from "react-select";
 import { BsCart4 } from "react-icons/bs";
 import { useFieldArray, Controller, useForm } from "react-hook-form"
 import api from '../api/assetList'
@@ -21,6 +19,62 @@ const Loan = (props) => {
     } = props.obj
     return (
         <div></div>
+    )
+}
+
+function Loanee({ users, setLoanee }) {
+
+    const [searchLoanee, setSearchLoanee] = useState('');
+    const [editing, setIsEditing] = useState(false);
+
+    const searchUser = (event) => {
+        setSearchLoanee(event.target.value)
+    }
+    const setAsLoanee = (item) => {
+        alert("Loanee has been updated. Click save to go back")
+        setLoanee([item])
+    }
+
+    const ChangeLoanee = () => {
+        setIsEditing(true);
+    }
+    const SaveLoanee = () => {
+        setIsEditing(false)
+    }
+
+
+    return (
+        <div>
+            {editing ? (
+                <div class="flex flex-row">
+                    <Search searchL={searchLoanee} searchU={searchUser} setAsL={setAsLoanee} />
+                    <button onClick={SaveLoanee} class=" ml-2 w-[50px] h-9 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Save</button>
+                </div>
+            ) : (
+                <div>
+                    {users.map((loanees, index) => {
+                        if (index == 0) {
+                            return (
+                                <div key="id" class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
+                                    <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.</div>
+                                    <div class="ml-5">
+                                        <h1 class=" text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
+                                    font-family: Inter;">{loanees.Name}</h1>
+                                        <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
+                                    font-family: Inter">{loanees.AlertEmail}@snocasino.com</p>
+                                        {/* <Link href="/UpdateAsset"> */}
+                                        <button onClick={ChangeLoanee} class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
+                                        {/* </Link> */}
+                                        <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
+                                    </div>
+
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
+            )}
+        </div>
     )
 }
 function Search({ searchL, searchU, setAsL }) {
@@ -82,67 +136,14 @@ function Search({ searchL, searchU, setAsL }) {
         </div>
     )
 }
-function Loanee({ users, setLoanee }) {
-    const [searchLoanee, setSearchLoanee] = useState('');
-    const [editing, setIsEditing] = useState(false);
 
-    const searchUser = (event) => {
-        setSearchLoanee(event.target.value)
-    }
-    const setAsLoanee = (item) => {
-        alert("Loanee has been updated. Click save to go back")
-
-        setLoanee([item])
-    }
-    const ChangeLoanee = () => {
-        setIsEditing(true);
-    }
-    const SaveLoanee = () => {
-        setIsEditing(false)
-    }
-
-    return (
-        <div>
-            {editing ? (
-                <div class="flex flex-row">
-                    <Search searchL={searchLoanee} searchU={searchUser} setAsL={setAsLoanee} />
-                    <button onClick={SaveLoanee} class=" ml-2 w-[50px] h-9 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Save</button>
-                </div>
-            ) : (
-                <div>
-                    {users.map((loanees, index) => {
-                        if (index == 0) {
-                            return (
-                                <div class="flex flex-row rounded-[20px] p-3 w-[300px] bg-[rgba(151,151,151,0.14)]">
-                                    <div class="rounded-[50%] bg-[#fff] w-[70px] h-[70px]">.</div>
-                                    <div class="ml-5">
-                                        <h1 class=" text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
-                                    font-family: Inter;">{loanees.Name}</h1>
-                                        <p class="text-black text-[13px] not-italic font-medium leading-5 tracking-[-0.24px];
-                                    font-family: Inter">{loanees.AlertEmail}@snocasino.com</p>
-                                        {/* <Link href="/UpdateAsset"> */}
-                                        <button onClick={ChangeLoanee} class=" mt-1 w-[100px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Change</button>
-                                        {/* </Link> */}
-                                        <button class="ml-1 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Edit</button>
-                                    </div>
-
-                                </div>
-                            )
-                        }
-                    })}
-                </div>
-            )}
-        </div>
-    )
-}
 export default function CheckOut() {
     const [APIData, setAPIData] = useState([]);
     const [quantity, setQuantity] = useState(count);
     const [searchC, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [Loan, setLoan] = useState([]);
-    //setUsers now contains only one Loanee at a time
     const [users, setUsers] = useState([]);
+    const [finalLoanee, setFinal] = useState([]);
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -217,13 +218,17 @@ export default function CheckOut() {
         }
 
     }
+
     const onSubmit = (data) => {
-        console.log("loanee:", users);
+        console.log("loanee:", finalLoanee);
         console.log("cart:", data);
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Loanee users={users} setLoanee={setUsers} />
+            <Loanee users={users} setLoanee={setUsers} setFinal={finalLoanee} />
+            {/* Loanee section */}
+
+            {/* Due Dates  */}
             <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
             <div class="flex flex-row ">
                 <div class="px-1 border-r-2" >
