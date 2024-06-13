@@ -33,7 +33,10 @@ export default function Returns() {
                             return loan.loanee.map((loanee) => {
                                 // Getting assets & Loanees  from Loan API
 
-                                return loanee.Name
+                                return  (
+                                    <div></div>
+                            
+                              ) 
                             })
                         })}
 
