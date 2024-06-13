@@ -127,7 +127,7 @@
       "checkbox": true
     },
     {
-      "id": 13,
+      "id": "13",
       "assetName": "Pens",
       "AlertEmail": "asdfasdf",
       "Quantity": "100",
@@ -152,5 +152,106 @@
       "Department": "Promotions"
     }
   ],
-  "loans": []
+  "loans": [
+    {
+      "id": "ea99",
+      "loanee": [
+        {
+          "id": "1",
+          "Name": "Admin",
+          "AlertEmail": "aseguya",
+          "Badge#": "0000",
+          "Department": "IT"
+        }
+      ],
+      "data": {
+        "cartAssets": [
+          {
+            "id": "8",
+            "assetName": "Paper",
+            "AlertEmail": "asdasdf",
+            "Quantity": 1,
+            "StorageLocation": "asdasdf",
+            "minQuantity": 4,
+            "checkbox": true
+          }
+        ],
+        "Indefinite": true,
+        "dueDate": "2024-07-05"
+      }
+    },
+    {
+      "id": "fbfa",
+      "loanee": [
+        {
+          "id": "2",
+          "Name": "Promotions",
+          "AlertEmail": "promotions",
+          "Badge#": "0000",
+          "Department": "Promotions"
+        }
+      ],
+      "data": {
+        "cartAssets": [
+          {
+            "id": "9",
+            "assetName": "Glue",
+            "AlertEmail": "asdasd",
+            "Quantity": "10",
+            "StorageLocation": "asdasd",
+            "minQuantity": 4,
+            "checkbox": true
+          },
+          {
+            "assetName": "Toner",
+            "AlertEmail": "aseguya",
+            "Quantity": "3",
+            "MinimumQuantity": 48,
+            "status": "status 1",
+            "Returnable": false,
+            "id": "1",
+            "StorageLocation": "MIS 2A",
+            "minQuantity": 4,
+            "checkbox": true
+          }
+        ],
+        "Indefinite": false
+      }
+    },
+    {
+      "id": "8e66",
+      "loanee": [
+        {
+          "id": "1",
+          "Name": "Admin",
+          "AlertEmail": "aseguya",
+          "Badge#": "0000",
+          "Department": "IT"
+        }
+      ],
+      "data": {
+        "cartAssets": [
+          {
+            "id": "9",
+            "assetName": "Glue",
+            "AlertEmail": "asdasd",
+            "Quantity": "10",
+            "StorageLocation": "asdasd",
+            "minQuantity": 4,
+            "checkbox": true
+          },
+          {
+            "id": "10",
+            "assetName": "Pens",
+            "AlertEmail": "asdaeqw",
+            "Quantity": 1,
+            "StorageLocation": "wqewe",
+            "minQuantity": 4,
+            "checkbox": true
+          }
+        ],
+        "Indefinite": false
+      }
+    }
+  ]
 }
