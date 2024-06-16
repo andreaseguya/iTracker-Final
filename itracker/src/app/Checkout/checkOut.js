@@ -18,7 +18,6 @@ export default function Loans() {
     const [searchLoanee, setSearchLoanee] = useState('');
     const [showModal, setShowModal] = useState(false);
     const increment = () => {
-
         setQuantity(quantity + 1)
     }
     const searchHelper = (event) => {
