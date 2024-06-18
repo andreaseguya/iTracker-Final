@@ -1,1 +1,1 @@
-
+iTracker is a software inventory system designed to support the IT department at the Snoqualmie Entertainment Authority. The goal of the application is to keep track of consumables, accessories and loanable assets within the casino.  
