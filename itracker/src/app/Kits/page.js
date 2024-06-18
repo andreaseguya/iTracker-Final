@@ -8,48 +8,61 @@ import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
 import moment from "moment";
 import Select from "react-select";
+import { StateMachineProvider, createStore } from "little-state-machine";
+import { useStateMachine } from "little-state-machine"
+import updateAction from "./updateAction";
 import { FaRegCalendarXmark } from "react-icons/fa6";
+createStore({});
 export default function KitForm() {
-    const [step, setStep] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
     const handleNext = () => {
-        setStep(step + 1);
+        setCurrentPage(currentPage + 1);
     };
 
     const handleBack = () => {
-        setStep(step - 1);
+        setCurrentPage(currentPage - 1);
     };
 
     const renderStep = () => {
-        switch (step) {
+        switch (currentPage) {
             case 1:
-                return <Step1 onNext={handleNext} />;
+                return <Step1 />;
             case 2:
-                return <Step2 onBack={handleBack} onNext={handleNext} />;
+                return <Step2 />;
             case 3:
-                return <Step3 onBack={handleBack} onSubmit={handleSubmit} />;
+                return <Step3 />;
             default:
                 return null;
         }
     };
     const handleSubmit = (data) => {
         data.preventDefault();
-        const kitData = new FormData();
-        kitData.append("kitName", FormData.KitName);
-        kitData.append("kitItems", FormData.kitItems);
-        kitData.append("loanee", kitData.loanee);
+
     }
     return (
-        <section>
-            {renderStep()}
-        </section>
+        <StateMachineProvider>
+            <div className="wizard-content">
+                {renderStep()}
+            </div>
+            <div className="wizard-footer" class="flex flex-row gap-4">
+                <button onClick={handleBack} disabled={currentPage === 1}>
+                    Back
+                </button>
+                <button onClick={handleNext} disabled={currentPage === 3}>
+                    Next
+                </button>
+            </div>
+        </StateMachineProvider>
     );
 };
 
-const Step1 = ({ onNext }) => {
+const Step1 = () => {
     const [courses, setCourses] = useState([]);
     const [cartCourses, setCartCourses] = useState([]);
     const [searchCourse, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const { actions, state } = useStateMachine({ updateAction });
     useEffect(() => {
         api.get(`/assets`)
             .then((response) => {
@@ -103,12 +116,13 @@ const Step1 = ({ onNext }) => {
     const closeModal = () => {
         setShowModal(false);
     };
-    const [kitName, setkitName] = useState('');
+
 
     return (
         <section>
             {/* Page 1 */}
             <div class="ml-3">
+                <form onSubmit={handleSubmit(onSubmit)}></form>
                 <div class="mb-2 flex flex-row gap-[220px]">
                     <h2 class="mt-3 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
   font-family: Inter;">Kits</h2>
@@ -124,11 +138,7 @@ const Step1 = ({ onNext }) => {
                 <div class="flex flex-row mt-5 mb-2 ">
                     <p class="text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
   font-family: Inter;">Kit name:</p>
-                    <input
-                        value={kitName}
-                        // onChange={(e) => setkitData({ ...kitData, kitName: e.target.value })}
-                        // value={kitData.kitName}
-                        onChange={(e) => setkitName(e.target.value)}
+                    <input {...register("kitName")}
                         class=" -mt-3 ml-3 w-[230px] h-8 rounded-lg bg-gray-100"></input>
                 </div>
                 <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
@@ -144,7 +154,7 @@ const Step1 = ({ onNext }) => {
                 <div class="w-[328px]">
                     <Select options={selectedOptions} onChange={(e) => setSelected({ id: e.value, Name: e.label })} />
                 </div>
-                <button class="mt-3" onClick={onNext}>Next step</button>
+                {/* <button class="mt-3" onClick={onNext}>Next step</button> */}
             </div>
             <AnimatePresence>
                 {showModal && (
@@ -187,7 +197,7 @@ const options = [
     { value: 'Promotion', label: 'Promotion' },
     { value: 'Other', label: 'Other' }
 ]
-const Step2 = ({ onBack, onNext }) => {
+const Step2 = () => {
     // const [email, setEmail] = useState('');
     const [date, setDate] = useState(new Date());
     const [returnDate, setReturnDate] = useState('');
@@ -260,9 +270,9 @@ bg-[#F4F4F4] p-5 hover:bg-black hover:text-white">
 
 
             </div>
-
+            {/* 
             <button class="mr-3" onClick={onBack}>Back</button>
-            <button onClick={onNext}>Next</button>
+            <button onClick={onNext}>Next</button> */}
         </div>
     );
 };
