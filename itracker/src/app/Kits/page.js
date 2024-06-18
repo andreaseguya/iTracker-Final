@@ -8,11 +8,18 @@ import UserCartComponent from './UserCartComponent';
 import SearchComponent from './SearchComponent';
 import moment from "moment";
 import Select from "react-select";
+import { useFieldArray, useForm } from "react-hook-form"
 import { StateMachineProvider, createStore } from "little-state-machine";
 import { useStateMachine } from "little-state-machine"
 import updateAction from "./updateAction";
 import { FaRegCalendarXmark } from "react-icons/fa6";
-createStore({});
+createStore({
+    Kits: {
+        kitName: "",
+        cart: [],
+
+    }
+});
 export default function KitForm() {
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -63,6 +70,20 @@ const Step1 = () => {
     const [searchCourse, setSearchCourse] = useState('');
     const [showModal, setShowModal] = useState(false);
     const { actions, state } = useStateMachine({ updateAction });
+    const { register, control, unregister, handleSubmit, reset, watch, errors } = useForm({
+        defaultValues: {
+            cartAssets: [],
+        }
+    })
+    const {
+        fields,
+        append,
+        remove,
+    } = useFieldArray({
+        control,
+        name: "cartAssets"
+    });
+
     useEffect(() => {
         api.get(`/assets`)
             .then((response) => {
@@ -80,7 +101,9 @@ const Step1 = () => {
         setSelected(options)
     }
     getOptions();
+    const addtoCart = (newAsset) => {
 
+    }
     const addCourseToCartFunction = (GFGcourse) => {
         const alreadyCourses = cartCourses
             .find(item => item.product.id === GFGcourse.id);
@@ -116,13 +139,19 @@ const Step1 = () => {
     const closeModal = () => {
         setShowModal(false);
     };
-
+    const onSubmit = async (data) => {
+        actions.updateAction(data)
+        // props.history.push("./step2")
+    }
 
     return (
         <section>
             {/* Page 1 */}
-            <div class="ml-3">
-                <form onSubmit={handleSubmit(onSubmit)}></form>
+            <div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {/*  */}
+                    {/* <input type="submit"></input> */}
+                </form>
                 <div class="mb-2 flex flex-row gap-[220px]">
                     <h2 class="mt-3 text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
   font-family: Inter;">Kits</h2>
@@ -138,7 +167,7 @@ const Step1 = () => {
                 <div class="flex flex-row mt-5 mb-2 ">
                     <p class="text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
   font-family: Inter;">Kit name:</p>
-                    <input {...register("kitName")}
+                    <input {...register("kitName")} defaultValue={state.kitName}
                         class=" -mt-3 ml-3 w-[230px] h-8 rounded-lg bg-gray-100"></input>
                 </div>
                 <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
@@ -203,11 +232,18 @@ const Step2 = () => {
     const [returnDate, setReturnDate] = useState('');
     const [returnTime, setReturnTime] = useState('');
     const [Notes, setNotes] = useState('');
+    const { register, handleSubmit } = useForm();
+    const { state, actions } = useStateMachine({ updateAction });
+    const onSubmit = (data) => {
+        actions.updateAction(data);
+        props.history.push("./result");
+    };
     const handleDateChange = (event) => {
         setDate(event.target.value);
     };
     return (
         <div class="">
+            <form onSubmit={handleSubmit(onSubmit)}></form>
             <h1 class=" h-12 flex-col justify-center text-slate-800 text-2xl not-italic font-semibold leading-[26px] tracking-[0.3px]">Let's finalize this deployment</h1>
             <p class="  flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Select return date</p>
             <div class="flex flex-row gap-3">

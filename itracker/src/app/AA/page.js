@@ -156,7 +156,6 @@ export default function Kits() {
                                                     alert("Asset Added! Check shopping cart for full list of selected assets")
                                                     // setQuantity(count);
                                                 }}
-
                                             >
                                                 Add
                                             </button>
