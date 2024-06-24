@@ -73,6 +73,7 @@ export default function Kits() {
                 cartAssets: [],
             }
         })
+        // Cart Settings 
         const {
             fields,
             append,
@@ -84,15 +85,16 @@ export default function Kits() {
         const searchHelper = (event) => {
             setSearchAsset(event.target.value)
         }
+        // Modal Settings
         const toggleModal = () => {
             setShowModal(!showModal);
         };
         const closeModal = () => {
             setShowModal(false);
         };
-        const addtoCart = (newAsset) => {
-            cartAssets.append(newAsset)
-        }
+        // const addtoCart = (newAsset) => {
+        //     cartAssets.append(newAsset)
+        // }
         const onSubmit = (data) => {
             actions.updateAction(data);
             // props.history.push("./step2");
@@ -119,55 +121,8 @@ export default function Kits() {
                     </div>
                     <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
                     {/* Search Bar */}
-                    {/* search bar */}
-                    <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
-                    <div class="flex flex-row  gap-4">
-                        <input
-                            type="text"
-                            class="w-[300px]  bg-[rgba(151,151,151,0.14)] text-blue-gray-700 font-inter font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-1  text-sm px-3 py-2.5 rounded-[7px]  focus:border-gray-900"
-                            placeholder="Search and add assets to check out"
-                            value={searchAsset}
-                            onChange={searchHelper}
-                        />
-                        <button type="button" onClick={toggleModal}><BsCart4 size={24} class="hover:fill-red-600" /></button>
-                    </div>
-                    {/* Cart */}
-                    <div class=" mt-3 w-[300px] flex flex-row gap-3 flex-wrap">
-                        {assets
-                            .filter((asset) => {
-                                if (searchAsset == "") {
-                                    return "";
-                                }
-                                else if (asset.assetName.toLowerCase().includes(searchAsset.toLowerCase()))
-                                    return asset
-
-                            })
-                            .map((asset) => {
-                                if (asset.assetName.toLowerCase().includes(searchAsset.toLowerCase())) {
-                                    return (
-                                        <div key={asset.id} class="">
-                                            <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] "> </div>
-                                            <h1 class="ml-3 mt-0.5 w-[70px]">{asset.assetName}</h1>
-                                            {/* <h1 class="ml-3 mt-0.5 w-[70px]">{quantity}</h1> */}
-                                            <button
-                                                type="button" className="mt-3 ml-2 w-[50px] text-white rounded-[5px] bg-black hover:bg-red-500 p-1"
-                                                onClick={() => {
-                                                    append(asset);
-                                                    alert("Asset Added! Check shopping cart for full list of selected assets")
-                                                    // setQuantity(count);
-                                                }}
-                                            >
-                                                Add
-                                            </button>
-                                        </div>
-                                    )
-                                }
-                            }
-                            )
-                        }
-                    </div>
-                    <div class="mt-2 flex w-[320px] h-[1px] bg-gray-200"></div>
-
+                   
+                 <input></input>
                     <input type="submit" />
                 </form>
 
