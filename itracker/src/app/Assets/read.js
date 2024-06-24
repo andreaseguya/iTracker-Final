@@ -198,6 +198,32 @@ const Assets = (props) => {
         StorageLocation
     } = props.obj;
 
+    const setData = (data) => {
+        // let { id, assetName, AlertEmail, Quantity, minQuantity, status, Returnable, StorageLocation } = data;
+        data = { id, assetName, AlertEmail, Quantity, minQuantity, status, Returnable, StorageLocation }
+        localStorage.setItem('ID', id);
+        localStorage.setItem('Asset Name', assetName);
+        localStorage.setItem('Email', AlertEmail);
+        localStorage.setItem('Quantity', Quantity)
+        localStorage.setItem('MinQuantity', minQuantity);
+        localStorage.setItem('Status', status);
+        localStorage.setItem('Returnable', Returnable);
+        localStorage.setItem('Location', StorageLocation)
+        // console.log(data);
+    }
+    // const [API, setAPI] = useState(props.obj)
+    // const getData = () => {
+    //     api.get(`/assets`)
+    //         .then((getData) => {
+    //             setAPI(getData.data);
+    //         })
+    // }
+    // const handleDelete = (id) => {
+    //     api.delete('/assets/' + id,)
+    //         .then(() => {
+    //             getData();
+    //         })
+    // }
     return (
         <section class="ml-5 mt-5 w-[370px]">
 
@@ -208,10 +234,13 @@ const Assets = (props) => {
                 <div class="ml-5 " >
                     <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
   font-family: Inter;">{assetName}</h1>
+                    <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
+  font-family: Inter;">{id}</h1>
                     <p class="text-black text-[15px] not-italic font-medium leading-5 tracking-[-0.24px];
   font-family: Inter">Last modified by Admin</p>
-                    <Link href="/UpdateAsset">
-                        <button onClick={() => handleEdit(id)} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
+                    <Link href="/Update">
+                        <button onClick={() => setData(props)} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
+                        {/* <button onClick={() => handleEdit(id)} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button> */}
                     </Link>
                     <button onClick={() => handleDelete(id)} class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button>
                 </div>

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 import { AiOutlineClose } from 'react-icons/ai';
-import axios from 'axios';
 import api from '../api/assetList'
 import Home from '../page';
 import Link from 'next/link';
