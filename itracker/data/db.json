@@ -7,7 +7,7 @@
       "MinimumQuantity": 31,
       "status": "status 2",
       "Returnable": false,
-      "id": "3",
+      "id": "1",
       "StorageLocation": "MIS J6",
       "minQuantity": "10",
       "checkbox": true
@@ -19,7 +19,7 @@
       "MinimumQuantity": 31,
       "status": "status 2",
       "Returnable": false,
-      "id": "4",
+      "id": "2",
       "StorageLocation": "MIS J6",
       "minQuantity": "10",
       "checkbox": true
@@ -32,20 +32,20 @@
       "status": "status 2",
       "checkbox": "undefined",
       "StorageLocation": "MIS J6",
-      "id": "5"
+      "id": "3"
     },
     {
-      "assetName": "Monitor Stand",
+      "assetName": "Monitor Stands",
       "AlertEmail": "asdsd",
-      "Quantity": "1",
+      "Quantity": "3",
       "minQuantity": "4",
       "status": "undefined",
       "checkbox": "undefined",
       "StorageLocation": "asdf",
-      "id": "6"
+      "id": "4"
     },
     {
-      "id": "7",
+      "id": "5",
       "assetName": "Papers",
       "AlertEmail": "asdasdf",
       "Quantity": "1",
@@ -53,10 +53,9 @@
       "status": "undefined",
       "checkbox": "undefined",
       "StorageLocation": "asdasdf"
-      
     },
     {
-      "id": "8",
+      "id": "6",
       "assetName": "Glue",
       "AlertEmail": "asdasd",
       "Quantity": "10",
@@ -65,7 +64,7 @@
       "checkbox": true
     },
     {
-      "id": "9",
+      "id": "7",
       "assetName": "Pens",
       "AlertEmail": "asdaeqw",
       "Quantity": "100",
@@ -73,10 +72,9 @@
       "status": "undefined",
       "checkbox": "undefined",
       "StorageLocation": "wqewe"
-      
     },
     {
-      "id": "10",
+      "id": "8",
       "assetName": "Sticky Notes",
       "AlertEmail": "qwerqwe",
       "Quantity": "10",
@@ -85,7 +83,7 @@
       "checkbox": true
     },
     {
-      "id": "11",
+      "id": "9",
       "assetName": "Radios",
       "AlertEmail": "adama",
       "Quantity": 1,

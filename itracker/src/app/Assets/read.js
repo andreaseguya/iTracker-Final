@@ -109,6 +109,7 @@ export default function Read() {
                     {data.length > 0 &&
                         data.map((asset, index) => {
                             return (
+
                                 <div key={index} class="mx-2 my-2" onClick={(e) => setId(asset.id)}>
                                     <div class="w-[104px] h-[102px] bg-[#F6F7FC] rounded-[10px]" >
                                         <button onClick={toggleModal} class="fill-[#979797] w-[20px] m-2 float-right bg-[url(/images/edit.svg)] bg-no-repeat bg-center h-[20px]">
@@ -145,7 +146,6 @@ export default function Read() {
                                 <div class="mb-10">
                                     {AssetDisplay()}
                                 </div>
-
                             </motion.div>
 
                         </motion.div>
@@ -211,13 +211,7 @@ const Assets = (props) => {
         localStorage.setItem('Location', StorageLocation)
         // console.log(data);
     }
-    // const [API, setAPI] = useState(props.obj)
-    // const getData = () => {
-    //     api.get(`/assets`)
-    //         .then((getData) => {
-    //             setAPI(getData.data);
-    //         })
-    // }
+
     // const handleDelete = (id) => {
     //     api.delete('/assets/' + id,)
     //         .then(() => {
@@ -234,13 +228,10 @@ const Assets = (props) => {
                 <div class="ml-5 " >
                     <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
   font-family: Inter;">{assetName}</h1>
-                    <h1 class="text-black text-[22px] not-italic font-bold leading-7 tracking-[0.35px]
-  font-family: Inter;">{id}</h1>
                     <p class="text-black text-[15px] not-italic font-medium leading-5 tracking-[-0.24px];
   font-family: Inter">Last modified by Admin</p>
                     <Link href="/Update">
                         <button onClick={() => setData(props)} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button>
-                        {/* <button onClick={() => handleEdit(id)} class=" mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white hover:text-black hover:bg-[white]">Edit</button> */}
                     </Link>
                     <button onClick={() => handleDelete(id)} class="ml-2 mt-1 w-[65px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Delete</button>
                 </div>
