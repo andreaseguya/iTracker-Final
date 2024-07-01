@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 import { AiOutlineClose } from 'react-icons/ai';
 import api from '../api/assetList'
