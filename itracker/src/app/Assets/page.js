@@ -72,7 +72,7 @@ export default function Create() {
                         <Form.Field>
                             <label class="text-black">Asset Name</label>
                             <input aria-invalid="true" aria-describedby='reqerrmsg' value={assetName} onChange={(e) => setassetName(e.target.value)} className='text-black flex w-[175px] h-[20px] pl-3 py-[17px] rounded
-           bg-gray-200  text-black-700' />
+           bg-gray-200  text-black-700'  />
 
                             <p id="reqerrmsg" class="text-red-500">Required</p>
                         </Form.Field>
