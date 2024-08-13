@@ -51,7 +51,7 @@ export default function Admin() {
                 </div>
             </div>
             {/* Calendar */}
-            <div> <Calendar /></div>
+
         </section>
     )
 }
