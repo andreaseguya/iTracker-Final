@@ -121,8 +121,8 @@ export default function Kits() {
                     </div>
                     <div class="flex w-[320px] h-[1px] bg-gray-200"></div>
                     {/* Search Bar */}
-                   
-                 <input></input>
+
+                    <input></input>
                     <input type="submit" />
                 </form>
 
