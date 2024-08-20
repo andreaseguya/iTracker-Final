@@ -15,14 +15,12 @@
     {
       "assetName": "POS Scanner",
       "AlertEmail": "kishel",
-      "Quantity": "50",
-      "MinimumQuantity": 31,
-      "status": "status 2",
-      "Returnable": false,
-      "id": "2",
-      "StorageLocation": "MIS J6",
+      "Quantity": "60",
       "minQuantity": "10",
-      "checkbox": true
+      "status": "status 2",
+      "checkbox": "false",
+      "StorageLocation": "MIS J6",
+      "id": "2"
     },
     {
       "assetName": "Ethernet",
@@ -37,7 +35,7 @@
     {
       "assetName": "Monitor Stand",
       "AlertEmail": "asdsd",
-      "Quantity": "3",
+      "Quantity": "100",
       "minQuantity": "4",
       "status": "undefined",
       "checkbox": "undefined",
@@ -90,6 +88,15 @@
       "StorageLocation": "MIS 4",
       "minQuantity": 4,
       "checkbox": true
+    },
+    {
+      "id": 10,
+      "assetName": "Gaft Tape",
+      "AlertEmail": "aseguya",
+      "Quantity": "15",
+      "StorageLocation": "MIS 1 A2",
+      "minQuantity": "10",
+      "checkbox": false
     }
   ],
   "users": [
