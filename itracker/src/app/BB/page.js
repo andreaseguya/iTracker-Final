@@ -5,16 +5,21 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-export default function DemoApp() {
+export default function Scheduler() {
     const [weekendsVisible, setWeekendsVisible] = useState(true)
     const [currentEvents, setCurrentEvents] = useState([])
+    function formatEvents() {
+        return (
+            <div></div>
+        )
+    }
     return (
-        <section class="">
+        <section class="w-[400px]">
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 headerToolbar={{
-                    left: 'prev,next today',
-                    center: 'title',
+                    left: 'prev,next',
+                    // center: 'today',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 }}
                 initialView='dayGridMonth'
@@ -23,6 +28,12 @@ export default function DemoApp() {
                 selectMirror={true}
                 dayMaxEvents={true}
                 weekends={weekendsVisible}
+                // 8/26
+                // eventDrop={this.handleEventDrop}
+                // eventClick={this.handleEventClick}
+                events={formatEvents()}
+
+            //previous paste
             // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
             // select={handleDateSelect}
             // eventContent={renderEventContent} // custom render function
@@ -34,6 +45,7 @@ export default function DemoApp() {
             eventRemove={function(){}}
             */
             />
+
         </section>
     )
 }
