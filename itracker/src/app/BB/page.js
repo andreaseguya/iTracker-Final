@@ -1,14 +1,15 @@
 "use client"
 import React, { useState } from 'react'
-import { formatDate } from '@fullcalendar/core'
+import { Calendar } from '@fullcalendar/core'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
+
 export default function Scheduler() {
     const [weekendsVisible, setWeekendsVisible] = useState(true)
     const [currentEvents, setCurrentEvents] = useState([])
-    // const [appointments, setAppointments] = useState([])
+    // const [appointments, setAppointments] = useState([]
     function formatEvents() {
         return currentEvents.map(appointment => {
             const { title, end, start } = appointment
@@ -24,13 +25,16 @@ export default function Scheduler() {
             }
         })
     }
-    function handleEventClick({ event }) {
+    function handleDateClick(e) {
+        // alert(e.dateStr)
 
     }
     return (
         <section class="w-[400px]">
+
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                droppable={true}
                 headerToolbar={{
                     left: 'prev,next',
                     // center: 'today',
@@ -44,7 +48,7 @@ export default function Scheduler() {
                 weekends={weekendsVisible}
                 // 8/26
                 // eventDrop={this.handleEventDrop}
-                eventClick={handleEventClick}
+                dateClick={handleDateClick}
                 events={formatEvents()}
 
             //previous paste
@@ -80,3 +84,4 @@ handleEventDrop = (info) => {
         </section>
     )
 }
+
