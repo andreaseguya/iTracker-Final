@@ -1,137 +1,136 @@
 "use client"
-import React, { useState } from 'react'
-// import { Calendar } from '@fullcalendar/core'
+import React, { useState, useRef } from 'react'
+import { formatDate } from '@fullcalendar/core'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin, { Draggable } from '@fullcalendar/interaction'
-import { Calendar } from '@fullcalendar/core'
+import interactionPlugin from '@fullcalendar/interaction'
+import { INITIAL_EVENTS, createEventId } from './event-utils'
+import AddModal from './addLoanModal'
+// function Scheduler() {
+//     const [weekendsVisible, setWeekendsVisible] = useState(true)
+//     const [currentEvents, setCurrentEvents] = useState([])
+//     function rental() {
+//         return (
+//             <form>
+//                 <label>Test</label>
+//                 <input></input>
+//             </form>
+//         )
+//     }
+//     function handleWeekendsToggle() {
+//         setWeekendsVisible(!weekendsVisible)
+//     }
+//     function handleDateSelect(selectInfo) {
+//         let title = prompt('Please enter a new title for your event')
 
-function Scheduler() {
-    const [weekendsVisible, setWeekendsVisible] = useState(true)
-    const [currentEvents, setCurrentEvents] = useState([])
-    // const [appointments, setAppointments] = useState([]
-    // function formatEvents() {
-    //     return currentEvents.map(appointment => {
-    //         const { title, end, start } = appointment
+//         let calendarApi = selectInfo.view.calendar
 
-    //         let startTime = new Date(start)
-    //         let endTime = new Date(end)
+//         calendarApi.unselect() // clear date selection
 
-    //         return {
-    //             title,
-    //             start: startTime,
-    //             end: endTime,
-    //             extendedProps: { ...appointment }
-    //         }
-    //     })
-    // }
-    function handleDateClick(e) {
-        // alert(e.dateStr)
+//         if (title) {
+//             calendarApi.addEvent({
+//                 id: createEventId(),
+//                 title,
+//                 start: selectInfo.startStr,
+//                 end: selectInfo.endStr,
+//                 allDay: selectInfo.allDay
+//             })
+//         }
+//     }
+//     return (
+//         <section>
+//             {/* <div class="w-[400px]"> */}
+//             <FullCalendar
+//                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+//                 headerToolbar={{
+//                     left: 'prev,next',
+//                     center: 'title',
+//                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
+//                 }}
+//                 initialView='dayGridMonth'
+//                 editable={true}
+//                 selectable={true}
+//                 selectMirror={true}
+//                 dayMaxEvents={true}
+//                 weekends={weekendsVisible}
+//                 initialEvents={INITIAL_EVENTS}
+//                 select={handleDateSelect}
+//             />
+//             {/* </div> */}
+//             {/* <div>
+//                 <label class="mr-3">Toggle Weekends</label>
+//                 <input type="checkbox" onChange={(e) => setWeekendsVisible(!weekendsVisible)}></input>
+//             </div> */}
+//         </section>
+//     )
+// }
 
+export default function Loans() {
+    const [modalOpen, setModalOpen] = useState(false)
+    const calendarRef = useRef(null)
+
+    const onEventAdded = event => {
+        let calendarApi = calendarRef.current.getApi()
+        calendarApi.addEvent(event)
     }
     return (
-        <section class="w-[400px]">
-
-            <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                // droppable={true}
-                headerToolbar={{
-                    left: 'prev,next',
-                    // center: 'today',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                }}
-                //custom button for edit
-                customButtons={{
-                    addEvent: {
-                        text: 'add event',
-                        click: () => { }
-                    }
-                }}
-                initialView='dayGridMonth'
-                editable={true}
-                selectable={true}
-                selectMirror={true}
-                dayMaxEvents={true}
-                weekends={weekendsVisible}
-                // 8/26
-                // eventDrop={this.handleEventDrop}
-                dateClick={handleDateClick}
-            // events={formatEvents()}
-
-            //previous paste
-            // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            // select={handleDateSelect}
-            // eventContent={renderEventContent} // custom render function
-            // eventClick={handleEventClick}
-            // eventsSet={handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-//8/27
-            handleEventClick= ({event}) => {
-    // openAppointment is a function I wrote to open a form to edit that appointment
-    this.props.openAppointment(event.extendedProps)
-}
-
-handleEventDrop = (info) => {
-        if(window.confirm("Are you sure you want to change the event date?")){
-            console.log('change confirmed')
-
-            // updateAppointment is another custom method
-            this.props.updateAppointment({...info.event.extendedProps, start: info.event.start, end: info.event.end})
-
-        } else {
-            console.log('change aborted')
-        }
-   }
-            */
-            />
-
-        </section>
-    )
-}
-
-export default function CalenderTest() {
-    return (
-        <section class="w-[400px]">
+        <section>
+            <button onClick={() => setModalOpen(true)}>Add Loan</button>
             <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+                ref={calendarRef}
                 headerToolbar={{
-                    left: 'prev,next addEvent',
+                    left: 'prev,next',
                     // center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 }}
-                footerToolbar={{
-                    // center: 'title',
-                }}
-                customButtons={{
-                    addEvent: {
-                        text: 'Reserve',
-                        click: () => {
-                            // var tempdate = prompt('Enter a date in YYYY-MM-DD format')
-                            // var date = new Date(tempdate + 'T00:00:00')
-                            // if (!isNaN(date.valueOf())) {
-                            //     calendar.addEvent({
-                            //         title: 'dynamic event',
-                            //         start: date,
-                            //         allDay: true
-                            //     })
-                            // }// valid date?
-                        }
-                    }
-                }}
-
                 initialView="dayGridMonth"
-                events={[
-                    {
-                        title: 'event 1',
-                        start: '2024-09-09T10:00:00',
-                        end: '2024-09-08T11:00:00',
-                    }
-                ]}
             />
+            <AddModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onEventAdded={event => onEventAdded(event)} />
         </section>
     )
 }
+// function CalenderTest() {
+
+//     return (
+//         <section class="w-[400px]">
+//             <FullCalendar
+//                 plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+//                 headerToolbar={{
+//                     left: 'prev,next addEvent',
+//                     // center: 'title',
+//                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
+//                 }}
+//                 footerToolbar={{
+//                     // center: 'title',
+//                 }}
+//                 customButtons={{
+//                     addEvent: {
+//                         text: 'Reserve',
+//                         click: () => {
+//                             // var tempdate = prompt('Enter a date in YYYY-MM-DD format')
+//                             // var date = new Date(tempdate + 'T00:00:00')
+//                             // if (!isNaN(date.valueOf())) {
+//                             //     calendar.addEvent({
+//                             //         title: 'dynamic event',
+//                             //         start: date,
+//                             //         allDay: true
+//                             //     })
+//                             // }// valid date?
+//                         }
+//                     }
+//                 }}
+
+//                 initialView="dayGridMonth"
+//                 events={[
+//                     {
+//                         title: 'event 1',
+//                         start: '2024-09-09T10:00:00',
+//                         end: '2024-09-08T11:00:00',
+//                     }
+//                 ]}
+//             />
+//         </section>
+//     )
+// }
