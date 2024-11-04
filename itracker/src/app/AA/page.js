@@ -1,45 +1,115 @@
 "use client"
 import { useState } from "react";
 import { useRef } from "react";
-export default function Importer() {
-    const [fileName, setFileName] = useState("");
-    const handleFile = (file) => {
-        setFileName(file.name);
-        console.log("testing output: ", fileName)
+import Modal from 'react-modal';
+import './importdata.css'
+function Import() {
+    const [csvData, setCsvData] = useState([]);
+    const [jsonData, setJsonData] = useState(null);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            const csvText = event.target.result;
+            const rows = csvText.split('\n');
+            const headers = rows[0].split(',');
+            const data = rows.slice(1).map((row) => {
+                const values = row.split(',');
+                return headers.reduce((obj, header, index) => {
+                    obj[header] = values[index];
+                    return obj;
+                }, {});
+            });
+
+            setCsvData(data);
+            setJsonData(JSON.stringify(data));
+        };
+
+        reader.readAsText(file);
     };
-    const FileUploader = ({ handleFile }) => {
+    const FileUploader = ({ newAsset }) => {
         // Create a reference to the hidden file input element
         const hiddenFileInput = useRef(null);
-
-        // Programatically click the hidden file input element
-        // when the Button component is clicked
         const handleClick = (event) => {
             hiddenFileInput.current.click();
         };
-        // Call a function (passed as a prop from the parent component)
-        // to handle the user-selected file
-        const handleChange = (event) => {
-            const fileUploaded = event.target.files[0];
-            handleFile(fileUploaded);
-        };
         return (
-            <>
-                <div class="  bg-[#979797] rounded-[10px] text-center w-[97px] ml-2">
-                    <button className="button-upload" onClick={handleClick} class=" hover:text-white text-black text-[15px] not-italic font-semibold leading-5 tracking-[-0.24px]
-  font-family: Inter"> +IMPORT </button> </div>
+            <div class="  bg-[#979797] rounded-[10px] text-center w-[97px] ml-2">
+                <button className="button-upload" onClick={handleClick} class=" hover:text-white text-black text-[15px] not-italic font-semibold leading-5 tracking-[-0.24px]
+ font-family: Inter"> +IMPORT </button>
                 <input
                     type="file"
-                    onChange={handleChange}
+                    onChange={handleFileChange}
+                    accept=".csv"
                     ref={hiddenFileInput}
                     style={{ display: "none" }} // Make the file input element invisible
                 />
-            </>
-        );
-    };
+            </div>
+        )
+    }
+    const FileViewer = () => {
+        const [modalIsOpen, setIsOpen] = useState(true)
+        function openModal() {
+            setIsOpen(true);
+        }
+        function afterOpenModal() {
+            // references are now sync'd and can be accessed.
+            // subtitle.style.color = '#f00';
+        }
+        function closeModal() {
+            setIsOpen(false);
+        }
+        return (
+            <div>
+
+                <Modal classname="FileModal" isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal}>
+                    {/* {jsonData && (
+                        <div>
+                            <h2>JSON Data:</h2>
+                            <pre>{jsonData}</pre>
+                            <button onClick={closeModal}>close</button>
+                        </div>
+                    )} */
+                        <table>
+                            <thead>
+                                <tr>
+                                    {csvData[0] && Object.keys(csvData[0]).map((key) => (
+                                        <th key={key}>{key}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {csvData.map((row, index) => (
+                                    <tr key={index}>
+                                        {Object.values(row).map((value, i) => (
+                                            <td key={i}>{value}</td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    }
+
+                </Modal>
+            </div>
+        )
+    }
+
     return (
         <div>
-            <FileUploader handleFile={handleFile} />
-            {/* {fileName ? <p>Uploaded file: {fileName}</p> : null} */}
+            <FileUploader />
+            {csvData.length > 0 && (
+                <div>
+                    <FileViewer />
+                </div>
+            )}
+
+
+
         </div>
-    )
+    );
 }
+
+
+export default Import;
