@@ -18,7 +18,7 @@
       "Quantity": "60",
       "minQuantity": "10",
       "status": "status 2",
-      "checkbox": "false",
+      "checkbox": false,
       "StorageLocation": "MIS J6",
       "id": "2"
     },
@@ -99,13 +99,49 @@
       "checkbox": false
     },
     {
-      "id": 11,
+      "id": "11",
       "assetName": "Toner",
       "AlertEmail": "sdfsdf",
       "Quantity": "40",
       "StorageLocation": "2",
       "minQuantity": 4,
       "checkbox": true
+    },
+    {
+      "0": {
+        "id": "5A1A8A2A",
+        "assetName": "Pens",
+        "Alert Email": "aseguya@snocasino.com",
+        "Quantity": "5",
+        "minQuantity": "1",
+        "status": "Ready",
+        "Returnable": "Yes",
+        "StorageLocation\r": "A1\r"
+      },
+      "1": {
+        "id": "25CE26A3",
+        "assetName": "Toner Cart",
+        "Alert Email": "aseguya@snocasino.com",
+        "Quantity": "16",
+        "minQuantity": "2",
+        "status": "Ready",
+        "Returnable": "No",
+        "StorageLocation\r": "B2\r"
+      },
+      "2": {
+        "id": "86DFA84D",
+        "assetName": "Waste Toner ",
+        "Alert Email": "aseguya@snocasino.com",
+        "Quantity": "10",
+        "minQuantity": "3",
+        "status": "Ready",
+        "Returnable": "No",
+        "StorageLocation\r": "C4\r"
+      },
+      "3": {
+        "id": ""
+      },
+      "id": "5721"
     }
   ],
   "users": [
@@ -224,6 +260,44 @@
         ],
         "Indefinite": false
       }
+    }
+  ],
+  "imports": [
+    {
+      "0": {
+        "id": "5A1A8A2A",
+        "assetName": "Pens",
+        "Alert Email": "aseguya@snocasino.com",
+        "Quantity": "5",
+        "minQuantity": "1",
+        "status": "Ready",
+        "Returnable": "Yes",
+        "StorageLocation\r": "A1\r"
+      },
+      "1": {
+        "id": "25CE26A3",
+        "assetName": "Toner Cart",
+        "Alert Email": "aseguya@snocasino.com",
+        "Quantity": "16",
+        "minQuantity": "2",
+        "status": "Ready",
+        "Returnable": "No",
+        "StorageLocation\r": "B2\r"
+      },
+      "2": {
+        "id": "86DFA84D",
+        "assetName": "Waste Toner ",
+        "Alert Email": "aseguya@snocasino.com",
+        "Quantity": "10",
+        "minQuantity": "3",
+        "status": "Ready",
+        "Returnable": "No",
+        "StorageLocation\r": "C4\r"
+      },
+      "3": {
+        "id": ""
+      },
+      "id": "fc17"
     }
   ]
 }

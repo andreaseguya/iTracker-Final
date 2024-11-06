@@ -2,10 +2,14 @@
 import { useState } from "react";
 import { useRef } from "react";
 import Modal from 'react-modal';
+import { IoClose } from "react-icons/io5";
 import './importdata.css'
+import api from '../api/assetList'
 function Import() {
     const [csvData, setCsvData] = useState([]);
     const [jsonData, setJsonData] = useState(null);
+    const [importData, setImportData] = useState([]);
+    const formData = new FormData();
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -27,6 +31,7 @@ function Import() {
         };
 
         reader.readAsText(file);
+
     };
     const FileUploader = ({ newAsset }) => {
         // Create a reference to the hidden file input element
@@ -34,6 +39,7 @@ function Import() {
         const handleClick = (event) => {
             hiddenFileInput.current.click();
         };
+        console.log(csvData)
         return (
             <div class="  bg-[#979797] rounded-[10px] text-center w-[97px] ml-2">
                 <button className="button-upload" onClick={handleClick} class=" hover:text-white text-black text-[15px] not-italic font-semibold leading-5 tracking-[-0.24px]
@@ -47,6 +53,18 @@ function Import() {
                 />
             </div>
         )
+    }
+    //TODO: will post but with additional lines and content
+    const PostData = async (e) => {
+        const newAsset = jsonData;
+
+        try {
+            const res = await api.post('/imports', newAsset);
+            const allAssets = [...assetList, res.data];
+        }
+        catch (err) {
+            console.log(`Error: ${err.message}`);
+        }
     }
     const FileViewer = () => {
         const [modalIsOpen, setIsOpen] = useState(true)
@@ -64,14 +82,19 @@ function Import() {
             <div>
 
                 <Modal classname="FileModal" isOpen={modalIsOpen} onAfterOpen={afterOpenModal} onRequestClose={closeModal}>
+                    <div class="float-end">
+                        <button onClick={closeModal}>
+                            <IoClose class="size-[30px]" />
+                        </button></div>
                     {/* {jsonData && (
                         <div>
                             <h2>JSON Data:</h2>
                             <pre>{jsonData}</pre>
-                            <button onClick={closeModal}>close</button>
+                            
                         </div>
                     )} */
-                        <table>
+
+                        <table id="imports">
                             <thead>
                                 <tr>
                                     {csvData[0] && Object.keys(csvData[0]).map((key) => (
@@ -87,9 +110,14 @@ function Import() {
                                         ))}
                                     </tr>
                                 ))}
+
                             </tbody>
                         </table>
                     }
+                    <div class="ml-2 flex flex-row gap-2">
+                        <button onClick={PostData} >Add to Inventory</button>
+                        <button onClick={closeModal}>Cancel Import</button>
+                    </div>
 
                 </Modal>
             </div>
