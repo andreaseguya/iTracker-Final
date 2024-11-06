@@ -264,6 +264,9 @@
   ],
   "imports": [
     {
+      "id": "e3ae"
+    },
+    {
       "0": {
         "id": "5A1A8A2A",
         "assetName": "Pens",
@@ -272,7 +275,7 @@
         "minQuantity": "1",
         "status": "Ready",
         "Returnable": "Yes",
-        "StorageLocation\r": "A1\r"
+        "StorageLocation": "A1"
       },
       "1": {
         "id": "25CE26A3",
@@ -282,7 +285,7 @@
         "minQuantity": "2",
         "status": "Ready",
         "Returnable": "No",
-        "StorageLocation\r": "B2\r"
+        "StorageLocation": "B2"
       },
       "2": {
         "id": "86DFA84D",
@@ -292,12 +295,12 @@
         "minQuantity": "3",
         "status": "Ready",
         "Returnable": "No",
-        "StorageLocation\r": "C4\r"
+        "StorageLocation": "C4"
       },
       "3": {
         "id": ""
       },
-      "id": "fc17"
+      "id": "5346"
     }
   ]
 }

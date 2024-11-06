@@ -18,7 +18,7 @@ export function ReadHelper() {
   font-family: Inter;">This includes all assets regardless of loan or kit status. Assets can be checkout and updated as needed.To update an asset, click the respective profile and apply edits.
             </p>
             <div class="flex flex-row w-[350px]  gap-[100px] mt-2">
-                <div class="  bg-[#979797] rounded-[10px] text-center w-[97px] ml-2">
+                <div  >
                     {/* <button class=" hover:text-white text-black text-[15px] not-italic font-semibold leading-5 tracking-[-0.24px]
   font-family: Inter">+IMPORT</button> */}
                     <Import />

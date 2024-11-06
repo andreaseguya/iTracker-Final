@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Modal from 'react-modal';
 import { IoClose } from "react-icons/io5";
 import './importdata.css'
+import Papa from 'papaparse';
 import api from '../api/assetList'
 function Import() {
     const [csvData, setCsvData] = useState([]);
@@ -14,24 +15,36 @@ function Import() {
         const file = e.target.files[0];
         const reader = new FileReader();
 
-        reader.onload = (event) => {
-            const csvText = event.target.result;
-            const rows = csvText.split('\n');
-            const headers = rows[0].split(',');
-            const data = rows.slice(1).map((row) => {
-                const values = row.split(',');
-                return headers.reduce((obj, header, index) => {
-                    obj[header] = values[index];
-                    return obj;
-                }, {});
-            });
+        // reader.onload = (event) => {
+        //     const csvText = event.target.result;
+        //     const rows = csvText.split('\n');
+        //     const headers = rows[0].split(',');
+        //     const data = rows.slice(1).map((row) => {
+        //         const values = row.split(',');
+        //         return headers.reduce((obj, header, index) => {
+        //             obj[header] = values[index];
+        //             return obj;
+        //         }, {});
+        //     });
 
-            setCsvData(data);
-            setJsonData(JSON.stringify(data));
-        };
+        //     setCsvData(data);
+        //     setJsonData(JSON.stringify(data));
+        // };
 
-        reader.readAsText(file);
-
+        // reader.readAsText(file);
+        const fileType = file.name.split('.').pop().toLowerCase();
+        if (fileType !== 'csv') {
+            alert('Please upload a CSV file.');
+            return;
+        }
+        Papa.parse(file, {
+            complete: (result) => {
+                setCsvData(result.data);
+            },
+            header: true,
+        });
+        const res = JSON.stringify(csvData, null, 2);
+        setJsonData(res)
     };
     const FileUploader = ({ newAsset }) => {
         // Create a reference to the hidden file input element
@@ -39,7 +52,7 @@ function Import() {
         const handleClick = (event) => {
             hiddenFileInput.current.click();
         };
-        console.log(csvData)
+
         return (
             <div class="  bg-[#979797] rounded-[10px] text-center w-[97px] ml-2">
                 <button className="button-upload" onClick={handleClick} class=" hover:text-white text-black text-[15px] not-italic font-semibold leading-5 tracking-[-0.24px]
@@ -56,11 +69,14 @@ function Import() {
     }
     //TODO: will post but with additional lines and content
     const PostData = async (e) => {
+        e.preventDefault();
         const newAsset = jsonData;
-
         try {
-            const res = await api.post('/imports', newAsset);
-            const allAssets = [...assetList, res.data];
+            const res = await api.post('/imports', csvData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
         }
         catch (err) {
             console.log(`Error: ${err.message}`);
@@ -86,34 +102,25 @@ function Import() {
                         <button onClick={closeModal}>
                             <IoClose class="size-[30px]" />
                         </button></div>
-                    {/* {jsonData && (
-                        <div>
-                            <h2>JSON Data:</h2>
-                            <pre>{jsonData}</pre>
-                            
-                        </div>
-                    )} */
-
-                        <table id="imports">
-                            <thead>
-                                <tr>
-                                    {csvData[0] && Object.keys(csvData[0]).map((key) => (
-                                        <th key={key}>{key}</th>
+                    <table id="imports">
+                        <thead>
+                            <tr>
+                                {csvData[0] && Object.keys(csvData[0]).map((key) => (
+                                    <th key={key}>{key}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {csvData.map((row, index) => (
+                                <tr key={index}>
+                                    {Object.values(row).map((value, i) => (
+                                        <td key={i}>{value}</td>
                                     ))}
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {csvData.map((row, index) => (
-                                    <tr key={index}>
-                                        {Object.values(row).map((value, i) => (
-                                            <td key={i}>{value}</td>
-                                        ))}
-                                    </tr>
-                                ))}
+                            ))}
 
-                            </tbody>
-                        </table>
-                    }
+                        </tbody>
+                    </table>
                     <div class="ml-2 flex flex-row gap-2">
                         <button onClick={PostData} >Add to Inventory</button>
                         <button onClick={closeModal}>Cancel Import</button>
@@ -123,7 +130,13 @@ function Import() {
             </div>
         )
     }
+    const AssetCreater = () => {
+        return (
+            <div>
 
+            </div>
+        )
+    }
     return (
         <div>
             <FileUploader />
