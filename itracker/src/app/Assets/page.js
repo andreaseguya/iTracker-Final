@@ -5,6 +5,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import api from '../api/assetList'
 import Home from '../page';
 import Link from 'next/link';
+
 // import { useNavigate } from 'react-router';
 export default function Create() {
     const [Data, setData] = useState([]);

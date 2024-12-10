@@ -2,6 +2,7 @@
 import Read from "./read"
 import Link from "next/link"
 import Import from "./import"
+import Export from './export';
 
 export function ReadHelper() {
     return (
@@ -24,10 +25,11 @@ export function ReadHelper() {
                     <Import />
                 </div>
 
-                <div class=" bg-[#979797] rounded-[10px] text-center w-[97px] ml-10">
+                {/* <div class=" bg-[#979797] rounded-[10px] text-center w-[97px] ml-10">
                     <button class="text-center hover:text-white text-black text-[15px] not-italic font-semibold leading-5 tracking-[-0.24px]
   font-family: Inter">- EXPORT</button>
-                </div>
+                </div> */}
+                <div><Export /></div>
             </div>
             <section class="mt-5"><Read /></section>
 
