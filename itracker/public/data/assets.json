@@ -1,0 +1,144 @@
+
+    [
+      {
+        "assetName": "Kiosk Paper",
+        "AlertEmail": "kishel",
+        "Quantity": "50",
+        "MinimumQuantity": 31,
+        "status": "status 2",
+        "Returnable": false,
+        "id": "1",
+        "StorageLocation": "MIS J6",
+        "minQuantity": "10",
+        "checkbox": true
+      },
+      {
+        "assetName": "POS Scanner",
+        "AlertEmail": "kishel",
+        "Quantity": "60",
+        "minQuantity": "10",
+        "status": "status 2",
+        "checkbox": false,
+        "StorageLocation": "MIS J6",
+        "id": "2"
+      },
+      {
+        "assetName": "Ethernet",
+        "AlertEmail": "kishel",
+        "Quantity": "50",
+        "minQuantity": "10",
+        "status": "status 2",
+        "checkbox": "undefined",
+        "StorageLocation": "MIS J6",
+        "id": "3"
+      },
+      {
+        "assetName": "Monitor Stand",
+        "AlertEmail": "asdsd",
+        "Quantity": "100",
+        "minQuantity": "4",
+        "status": "undefined",
+        "checkbox": "undefined",
+        "StorageLocation": "asdf",
+        "id": "4"
+      },
+      {
+        "id": "5",
+        "assetName": "Papers",
+        "AlertEmail": "asdasdf",
+        "Quantity": "1",
+        "minQuantity": "4",
+        "status": "undefined",
+        "checkbox": "undefined",
+        "StorageLocation": "asdasdf"
+      },
+      {
+        "id": "6",
+        "assetName": "Glue",
+        "AlertEmail": "asdasd",
+        "Quantity": "10",
+        "StorageLocation": "asdasd",
+        "minQuantity": 4,
+        "checkbox": true
+      },
+      {
+        "id": "7",
+        "assetName": "Pens",
+        "AlertEmail": "asdaeqw",
+        "Quantity": "100",
+        "minQuantity": "4",
+        "status": "undefined",
+        "checkbox": "undefined",
+        "StorageLocation": "wqewe"
+      },
+      {
+        "id": "8",
+        "assetName": "Sticky Notes",
+        "AlertEmail": "qwerqwe",
+        "Quantity": "10",
+        "StorageLocation": "Mis 234",
+        "minQuantity": 4,
+        "checkbox": true
+      },
+      {
+        "id": "9",
+        "assetName": "Radios",
+        "AlertEmail": "adama",
+        "Quantity": 1,
+        "StorageLocation": "MIS 4",
+        "minQuantity": 4,
+        "checkbox": true
+      },
+      {
+        "id": "10",
+        "assetName": "Gaft Tape",
+        "AlertEmail": "aseguya",
+        "Quantity": "15",
+        "StorageLocation": "MIS 1 A2",
+        "minQuantity": "10",
+        "checkbox": false
+      },
+      {
+        "id": "11",
+        "assetName": "Toner",
+        "AlertEmail": "sdfsdf",
+        "Quantity": "40",
+        "StorageLocation": "2",
+        "minQuantity": 4,
+        "checkbox": true
+      },
+      {
+        "0": {
+          "id": "5A1A8A2A",
+          "assetName": "Pens",
+          "Alert Email": "aseguya@snocasino.com",
+          "Quantity": "5",
+          "minQuantity": "1",
+          "status": "Ready",
+          "Returnable": "Yes",
+          "StorageLocation\r": "A1\r"
+        },
+        "1": {
+          "id": "25CE26A3",
+          "assetName": "Toner Cart",
+          "Alert Email": "aseguya@snocasino.com",
+          "Quantity": "16",
+          "minQuantity": "2",
+          "status": "Ready",
+          "Returnable": "No",
+          "StorageLocation\r": "B2\r"
+        },
+        "2": {
+          "id": "86DFA84D",
+          "assetName": "Waste Toner ",
+          "Alert Email": "aseguya@snocasino.com",
+          "Quantity": "10",
+          "minQuantity": "3",
+          "status": "Ready",
+          "Returnable": "No",
+          "StorageLocation\r": "C4\r"
+        },
+        "id": "cb91"
+      }
+    ] 
+    

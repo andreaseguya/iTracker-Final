@@ -137,7 +137,8 @@
         "status": "Ready",
         "Returnable": "No",
         "StorageLocation\r": "C4\r"
-      }
+      },
+      "id": "cb91"
     }
   ],
   "users": [
@@ -256,10 +257,25 @@
         ],
         "Indefinite": false
       }
+    },
+    {
+      "id": "9348",
+      "loanee": [
+        {
+          "id": "0",
+          "Name": "No Loanee",
+          "AlertEmail": "ITSupport",
+          "Badge#": "0000",
+          "Department": "IT"
+        }
+      ],
+      "data": {
+        "cartAssets": [],
+        "Indefinite": false
+      }
     }
   ],
   "imports": [
-   
     {
       "0": {
         "id": "5A1A8A2A",

@@ -129,9 +129,9 @@ const Step1 = () => {
     const courseSearchUserFunction = (event) => {
         setSearchCourse(event.target.value);
     };
-    const filterCourseFunction = courses.filter((course) =>
-        course.assetName.toLowerCase().includes(searchCourse.toLowerCase())
-    );
+    // const filterCourseFunction = courses.filter((course) =>
+    //     course.assetName.toLowerCase().includes(searchCourse.toLowerCase())
+    // );
     const toggleModal = () => {
         setShowModal(!showModal);
     };
