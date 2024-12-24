@@ -66,12 +66,20 @@ export default function Loans() {
             </div>
             <div>
                 {/* Change to kits when youre done troubleshooting */}
-                {apidata.map((item) => (
-                    <div key={item.id}>
+                {apidata
+                    .filter((item) => {
+                        if (search == "") {
+                            return "";
+                        }
+                        else return item
+                    })
+                    .map((item) => (
 
-                        <h1>{item.assetName}</h1>
-                    </div>
-                ))}
+                        <div key={item.id} class="mt-2">
+                            <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] "> </div>
+                            <h1 class="ml-3 mt-0.5 w-[70px]">{item.assetName}</h1>
+                        </div>
+                    ))}
             </div>
         </section>
     )
