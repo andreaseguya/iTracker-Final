@@ -1,50 +1,25 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { FaRegCalendarXmark } from "react-icons/fa6";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 export default function AddKit() {
     const [apidata, setapidata] = useState([]);
+    const [skipDate, setSkip] = useState(true)
     const [kitName, setKitName] = useState('');
     const [kitAssets, setkit] = useState([]);
     const [quantity, setQuantity] = useState(0);
     const [Loanee, setLoanee] = useState([])
-    const [returnDate, setReturn] = useState();
+    const [returnDate, setReturn] = useState(new Date());
     const [EventType, setEvent] = useState();
     const [staff, setStaff] = useState('')
     const [notes, setNotes] = useState('')
     const [search, setSearch] = useState('');
     useEffect(() => {
         fetchAssets();
-        fetchData();
-    }, [])
-    async function fetchData() {
-        // Fetch data
-        let data = await fetch(`/api/users`, { method: "GET" });
-        const results = []
-        // Store results in the results array
-        data.forEach((value) => {
-            results.push({
-                key: value.name,
-                value: value.id,
-            });
-        });
-        // Update the options state
-        setLoanee([
-            { key: 'Select a loanee', value: '' },
-            ...results
-        ])
-    }
-    // const fetchLoanee=async function fetchData(){
-    //     //Fetch users from API
-    //     let data = await fetch(`/api/users`,{method:"GET"});
-    //     data=await data.json();
-    //     const results=[]
-    //     //store results in Results array 
-    //     data.forEach((value)=>{results.push({key:value.Name, value:value.id})  })
-    //    setLoanee([ {key:'Select a loanee', value:''}, ...results])
-    //    //trigger:
-    //    fetchLoanee()
 
-    // }, []);
+    }, [])
     const fetchAssets = async (searchValue = '') => {
         let data = await fetch(`/api/assets?search=${searchValue}`, {
             method: "GET"
@@ -124,17 +99,35 @@ export default function AddKit() {
                 <p class="w-[320px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">Next, assign the kit to a loanee or location or select other below</p>
                 <div class="w-[328px]">
-                    <Select>
-                        {Loanee.map((user) => {
-                            return (
-                                <option key={user.value} value={user.value}>{user.key}</option>
-                            )
-                        })}
-                    </Select>
-
+                    <Select></Select>
                 </div>
+                {/* separator */}
+                <div class="flex w-[320px] mt-2 h-[1px] bg-gray-200"></div>
+                {/* Return Date */}
+                <div></div>
+                <div class="">
+                    <p class="   text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]"> Return date: </p>
+                    {skipDate ? (<DatePicker class="picker" selected={returnDate} onChange={(date) => setReturn(date)} />) : (<div></div>)}
+                    {/* <p class="text-sm hover:text-red-500">Skip time</p> */}
+                </div>
+                {/* Skip Time button */}
+                {/* TODO: skip time hides when  */}
+                <div class="flex flex-row">
+                    <input type="checkbox" onChange={(hide) => setSkip(false)}></input>
+                    <label class="ml-1">Skip date</label>
+                </div>
+                {/* separator */}
+                <div class="flex w-[320px] mt-2 h-[1px] bg-gray-200"></div>
+
             </form>
         </section>
     )
 
 }
+
+// const options = [
+//     { value: 'Event', label: 'Event' },
+//     { value: 'Drawing', label: 'Drawing' },
+//     { value: 'Promotion', label: 'Promotion' },
+//     { value: 'Other', label: 'Other' }
+// ]
