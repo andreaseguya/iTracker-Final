@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { FaRegCalendarXmark } from "react-icons/fa6";
+import { IoMdCloseCircle } from "react-icons/io";
 import DatePicker from "react-datepicker";
+import Link from "next/link"
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 export default function AddKit() {
@@ -12,10 +13,16 @@ export default function AddKit() {
     const [quantity, setQuantity] = useState(0);
     const [Loanee, setLoanee] = useState([])
     const [returnDate, setReturn] = useState(new Date());
-    const [EventType, setEvent] = useState();
+    const [EventType, setEvent] = useState(null);
     const [staff, setStaff] = useState('')
     const [notes, setNotes] = useState('')
     const [search, setSearch] = useState('');
+    const options = [
+        { value: 'Event', label: 'Event' },
+        { value: 'Drawing', label: 'Drawing' },
+        { value: 'Promotion', label: 'Promotion' },
+        { value: 'Other', label: 'Other' }
+    ]
     useEffect(() => {
         fetchAssets();
 
@@ -28,6 +35,9 @@ export default function AddKit() {
         data = await data.json();
         setapidata(data.data);
     }
+    function addToKits(checkbox) {
+
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newKit = {
@@ -39,11 +49,34 @@ export default function AddKit() {
             staff: staff,
             notes: notes,
         };
+        let response = await fetch('/api/kits/add', {
+            method: "POST",
+            body: JSON.stringify(newKit),
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+        response = await response.json()
+
+        if (response.success) {
+            setkitName('');
+            setkit([]);
+            setLoanee();
+            setReturn('');
+            setEvent('');
+            setStaff('');
+            setNotes('')
+            return alert(response.message)
+        };
     }
 
     return (
-        <section>
-            <form onSubmit={handleSubmit} class="w-[400px]">
+        <section class="w-[400px]">
+            <Link href="/">
+                <IoMdCloseCircle size={24} class="hover:fill-red-600" />
+            </Link>
+            <form onSubmit={handleSubmit} class="ml-6">
+
                 <div class="flex flex-row mt-5 mb-2 ">
                     <p class="text-black text-[15px] not-italic font-semibold leading-4 tracking-[-0.41px];
   font-family: Inter;">Kit name:</p>
@@ -105,20 +138,45 @@ export default function AddKit() {
                 <div class="flex w-[320px] mt-2 h-[1px] bg-gray-200"></div>
                 {/* Return Date */}
                 <div></div>
-                <div class="">
-                    <p class="   text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]"> Return date: </p>
-                    {skipDate ? (<DatePicker class="picker" selected={returnDate} onChange={(date) => setReturn(date)} />) : (<div></div>)}
-                    {/* <p class="text-sm hover:text-red-500">Skip time</p> */}
+                <div class="flex flex-row gap-3 mt-1">
+                    <p class="   text-black text-[17px] not-italic font-semibold "> Return date: </p>
+                    {skipDate ? (<DatePicker class="picker" selected={returnDate} onChange={(date) => setReturn(date)} />) : (<p>N/A</p>)}
+
                 </div>
                 {/* Skip Time button */}
                 {/* TODO: skip time hides when  */}
                 <div class="flex flex-row">
-                    <input type="checkbox" onChange={(hide) => setSkip(false)}></input>
+                    <div class="flex flex-row">
+                        <input type="checkbox" onChange={(hide) => setSkip(false)}></input>
+                    </div>
                     <label class="ml-1">Skip date</label>
                 </div>
                 {/* separator */}
                 <div class="flex w-[320px] mt-2 h-[1px] bg-gray-200"></div>
+                {/* Category  & Staff*/}
+                <div class="mt-3 flex flex-row gap-5">
+                    <div class="w-[164px]">
+                        <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Category</p>
+                        <Select value={EventType} onChange={setEvent} options={options} />
+                    </div>
+                    <div>
+                        <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Staff Assigned: </p>
+                        <div class="flex flex-row gap-3">
+                            <Select />
+                            {/* <input type="radio" value="Yes" /> Yes
+                        <input type="radio" value="No" /> No */}
+                        </div>
+                    </div>
+                </div>
+                {/* separator */}
+                <div class="flex w-[320px] mt-2 h-[1px] bg-gray-200"></div>
+                {/* Notes */}
+                <div class="mt-2 mb-3">
+                    <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Notes: </p>
+                    <input class="bg-[#F4F4F4] w-[328px] h-[68px] rounded-[10px]"></input>
 
+                </div>
+                <button type="submit">Create a Kit</button>
             </form>
         </section>
     )
