@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import Link from "next/link"
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
+import { createSlice } from '@reduxjs/toolkit';
 export default function AddKit() {
     const [apidata, setapidata] = useState([]);
     const [skipDate, setSkip] = useState(true)
@@ -35,9 +36,7 @@ export default function AddKit() {
         data = await data.json();
         setapidata(data.data);
     }
-    function addToKits(checkbox) {
 
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newKit = {
@@ -49,7 +48,7 @@ export default function AddKit() {
             staff: staff,
             notes: notes,
         };
-        let response = await fetch('/api/kits/add', {
+        let response = await fetch('/api/Kits/add', {
             method: "POST",
             body: JSON.stringify(newKit),
             headers: {
@@ -163,8 +162,6 @@ export default function AddKit() {
                         <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Staff Assigned: </p>
                         <div class="flex flex-row gap-3">
                             <Select />
-                            {/* <input type="radio" value="Yes" /> Yes
-                        <input type="radio" value="No" /> No */}
                         </div>
                     </div>
                 </div>
@@ -176,12 +173,25 @@ export default function AddKit() {
                     <input class="bg-[#F4F4F4] w-[328px] h-[68px] rounded-[10px]"></input>
 
                 </div>
-                <button type="submit">Create a Kit</button>
+                {/* Buttons */}
+                <div class="flex flex-row">
+                    <button type="submit">Create a Kit</button>
+
+                </div>
+
             </form>
         </section>
     )
 
 }
+
+const initialKit = () => { value: [] }
+
+//Log rocket example
+const cartSlice = createSlice({
+
+})
+
 
 // const options = [
 //     { value: 'Event', label: 'Event' },
