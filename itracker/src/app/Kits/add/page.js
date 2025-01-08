@@ -1,16 +1,20 @@
 "use client";
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { IoMdCloseCircle } from "react-icons/io";
 import DatePicker from "react-datepicker";
 import Link from "next/link"
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
-import { createSlice } from '@reduxjs/toolkit';
-export default function AddKit() {
+// redux 
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/app/Redux/cart.slice';
+import CartPage from './kitCart';
+export default function AddKit({ kitAsset }) {
     const [apidata, setapidata] = useState([]);
     const [skipDate, setSkip] = useState(true)
     const [kitName, setKitName] = useState('');
-    const [kitAssets, setkit] = useState([]);
+    // const [kitAssets, setkit] = useState([]);
     const [quantity, setQuantity] = useState(0);
     const [Loanee, setLoanee] = useState([])
     const [returnDate, setReturn] = useState(new Date());
@@ -26,7 +30,6 @@ export default function AddKit() {
     ]
     useEffect(() => {
         fetchAssets();
-
     }, [])
     const fetchAssets = async (searchValue = '') => {
         let data = await fetch(`/api/assets?search=${searchValue}`, {
@@ -36,44 +39,50 @@ export default function AddKit() {
         data = await data.json();
         setapidata(data.data);
     }
+    // Redux
+    const dispatch = useDispatch();
 
+    // Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newKit = {
-            kitName: kitNName,
-            kitAssets: kitAssets,
+            kitName: kitName,
+            // kitAssets: kitAssets,
             Loanee: Loanee,
             returnDate: returnDate,
-            EventType: EventType,
-            staff: staff,
-            notes: notes,
+            EventType: EventType,//category
+            staff: staff,//staff assigned
+            // notes: notes,
         };
-        let response = await fetch('/api/Kits/add', {
+        let response = await fetch('/api/kits/add', {
             method: "POST",
             body: JSON.stringify(newKit),
             headers: {
                 "content-type": "application/json"
             }
         })
+        // TODO:no post on kits 
         response = await response.json()
 
         if (response.success) {
-            setkitName('');
-            setkit([]);
+            setkitName();
+            // setkit([]);
             setLoanee();
-            setReturn('');
-            setEvent('');
-            setStaff('');
-            setNotes('')
+            setReturn();
+            setEvent();
+            setStaff();
+            // setNotes('')
             return alert(response.message)
         };
     }
 
     return (
+
         <section class="w-[400px]">
             <Link href="/">
                 <IoMdCloseCircle size={24} class="hover:fill-red-600" />
             </Link>
+
             <form onSubmit={handleSubmit} class="ml-6">
 
                 <div class="flex flex-row mt-5 mb-2 ">
@@ -85,7 +94,7 @@ export default function AddKit() {
                         onChange={(e) => setKitName(e.target.value)}
                         class=" -mt-3 ml-3 w-[230px] h-8 rounded-lg bg-gray-100"
                         placeholder=" "
-                        required
+
                     />
                 </div>
                 {/* separator */}
@@ -119,6 +128,7 @@ export default function AddKit() {
                                 <div key={item.id} class="mt-2">
                                     <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] "> </div>
                                     <h1 class="ml-3 mt-0.5 w-[70px]">{item.assetName}</h1>
+                                    <button onClick={() => dispatch(addToCart(item))} class="text-white bg-black p-2 rounded-[5px] ml-3">Add</button>
                                 </div>
                             ))}
                     </div>
@@ -168,29 +178,31 @@ export default function AddKit() {
                 {/* separator */}
                 <div class="flex w-[320px] mt-2 h-[1px] bg-gray-200"></div>
                 {/* Notes */}
-                <div class="mt-2 mb-3">
+                {/* <div class="mt-2 mb-3">
                     <p class=" w-32 flex-col justify-center text-slate-800 text-base not-italic font-medium leading-[26px] tracking-[0.3px]">Notes: </p>
                     <input class="bg-[#F4F4F4] w-[328px] h-[68px] rounded-[10px]"></input>
 
+                </div> */}
+                <div class="bg-black rounded-[10px] w-[329px]">
+                    <h2 class='ml-2 "mt-3 text-white text-[20px] not-italic font-bold leading-[30px] tracking-[0.35px]
+  font-family: Inter;'>Current Kit Items: </h2>
+                    <CartPage />
                 </div>
                 {/* Buttons */}
                 <div class="flex flex-row">
-                    <button type="submit">Create a Kit</button>
-
+                    <button type="submit" className="mt-3 ml-2 p-2 text-white rounded-[5px] bg-black hover:bg-red-500 ">Create a Kit</button>
                 </div>
-
             </form>
+
+
         </section>
+
+
     )
 
 }
 
-const initialKit = () => { value: [] }
 
-//Log rocket example
-const cartSlice = createSlice({
-
-})
 
 
 // const options = [

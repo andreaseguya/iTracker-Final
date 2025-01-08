@@ -47,7 +47,6 @@ export default function Returns() {
                                         <div key={loaner.id} class="bg-[rgba(151,151,151,0.86)] p-2 rounded-[5px]">
                                             <div class="w-[60px] h-[60px] bg-[#FFFF] rounded-[10px] ml-1"></div>
                                             <h1 class="text-[#ffff] ml-2 ">{loaner.Name}</h1>
-                                            <button className="mt-3 ml-2 w-[60px] text-white rounded-[5px] bg-black hover:bg-red-500 p-1">Return</button>
                                         </div>
                                     )
                                 }

@@ -1,25 +1,8 @@
 "use client"
 import { useState, useEffect } from 'react'
-import Calendar from './Calendar';
+
 export default function Admin() {
-    const [loans, setLoans] = useState([]);
-    useEffect(() => {
-        const fetchLoans = async () => {
-            try {
-                const response = await api.get('/loans');
-                setLoans(response.data);
-            } catch (err) {
-                if (err.response) {
-                    console.log(err.response.data);
-                    console.log(err.response.status);
-                    console.log(err.response.headers);
-                } else {
-                    console.log(`Error: ${err.message}`);
-                }
-            }
-        }
-        fetchLoans();
-    }, [])
+
     return (
         <section>
             <div class="ml-3 w-[330px]">
