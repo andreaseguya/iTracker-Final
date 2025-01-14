@@ -28,9 +28,23 @@ const cartSlice = createSlice({
             const index = state.findIndex((item) => item.id === action.payload);
             state.splice(index, 1);
         },
+
     },
 })
+// const postSlice = createSlice({
+//     name: 'assets',
+//     initialState: { assets: [] },
+//     reducers: {
+//         addPost: (state, action) => {
+//             state.assets.push(action.payload);
+//         }
+
+//     }
+
+// });
+
 export const cartReducer = cartSlice.reducer;
+// export const { addPost } = postSlice.actions;
 export const {
     addToCart,
     incrementQuantity,

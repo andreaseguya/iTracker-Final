@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from "react";
-import axios from "axios"
 import api from '../api/assetList'
 function LowStock() {
     const [APIData, setAPIData] = useState([]);
@@ -24,21 +23,23 @@ function LowStock() {
     }, [])
 
     return (
-        <div class="grid grid-cols-4 gap-4 content-between ... p-5 mb-3">
-            {APIData.map((data) => {
-                while (data.Quantity <= data.minQuantity) {
-                    return (
-                        <div key="ID" >
-                            <div class="bg-[#DFDFDF] h-[62px] rounded-[50%] w-[63px]">
-                                {/* Asset image */}
+        <div>
+            <div class="grid grid-cols-4 gap-4 content-between ... p-5 mb-3">
+                {APIData.map((data) => {
+                    if (data.Quantity <= data.minQuantity) {
+                        return (
+                            <div key="ID" >
+                                <div class="bg-[#DFDFDF] h-[62px] rounded-[50%] w-[63px]">
+                                    {/* Asset image */}
+                                </div>
+                                <p class="ml-2">{data.assetName}</p>
+                                <p class="text-[#F11919] ml-2">{data.Quantity} unit</p>
                             </div>
-                            <p class="ml-2">{data.assetName}</p>
-                            <p class="text-[#F11919] ml-2">{data.Quantity} unit</p>
-                        </div>
-                    )
-                }
+                        )
+                    }
 
-            })}
+                })}
+            </div>
         </div>
     )
 }

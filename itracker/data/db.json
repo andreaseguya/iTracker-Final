@@ -1,16 +1,14 @@
 {
   "assets": [
     {
-      "assetName": "Kiosk Paper",
+      "assetName": "Kiosk Papers",
       "AlertEmail": "kishel",
       "Quantity": "50",
-      "MinimumQuantity": 31,
-      "status": "status 2",
-      "Returnable": false,
-      "id": "1",
-      "StorageLocation": "MIS J6",
       "minQuantity": "10",
-      "checkbox": true
+      "status": "status 2",
+      "checkbox": "false",
+      "StorageLocation": "MIS J6",
+      "id": "1"
     },
     {
       "assetName": "POS Scanner",
