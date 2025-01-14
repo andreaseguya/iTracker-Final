@@ -47,7 +47,6 @@ export default function AddKit({ kitAsset }) {
         e.preventDefault();
         const newKit = {
             kitName: kitName,
-            // kitAssets: kitAssets,
             Loanee: Loanee,
             returnDate: returnDate,
             EventType: EventType,//category
@@ -61,19 +60,19 @@ export default function AddKit({ kitAsset }) {
                 "content-type": "application/json"
             }
         })
-        // TODO:no post on kits 
+        // // TODO:no post on kits 
         response = await response.json()
 
-        if (response.success) {
-            setkitName();
-            // setkit([]);
-            setLoanee();
-            setReturn();
-            setEvent();
-            setStaff();
-            // setNotes('')
-            return alert(response.message)
-        };
+        // if (response.success) {
+        //     setkitName();
+        //     // setkit([]);
+        //     setLoanee();
+        //     setReturn();
+        //     setEvent();
+        //     setStaff();
+        //     // setNotes('')
+        //     return alert(response.message)
+        // };
     }
 
     return (
@@ -128,7 +127,7 @@ export default function AddKit({ kitAsset }) {
                                 <div key={item.id} class="mt-2">
                                     <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] "> </div>
                                     <h1 class="ml-3 mt-0.5 w-[70px]">{item.assetName}</h1>
-                                    <button onClick={() => dispatch(addToCart(item))} class="text-white bg-black p-2 rounded-[5px] ml-3">Add</button>
+                                    <button type="button" onClick={() => dispatch(addToCart(item))} class="text-white bg-black p-2 rounded-[5px] ml-3">Add</button>
                                 </div>
                             ))}
                     </div>
@@ -183,16 +182,19 @@ export default function AddKit({ kitAsset }) {
                     <input class="bg-[#F4F4F4] w-[328px] h-[68px] rounded-[10px]"></input>
 
                 </div> */}
-                <div class="bg-black rounded-[10px] w-[329px]">
-                    <h2 class='ml-2 "mt-3 text-white text-[20px] not-italic font-bold leading-[30px] tracking-[0.35px]
-  font-family: Inter;'>Current Kit Items: </h2>
-                    <CartPage />
-                </div>
+
                 {/* Buttons */}
                 <div class="flex flex-row">
                     <button type="submit" className="mt-3 ml-2 p-2 text-white rounded-[5px] bg-black hover:bg-red-500 ">Create a Kit</button>
                 </div>
             </form>
+            {/* separator */}
+            <div class="flex w-[320px] mt-2 ml-6 h-[1px] bg-gray-200"></div>
+            <div class="bg-black rounded-[10px] w-[329px] ml-6">
+                <h2 class='ml-2 "mt-3 text-white text-[20px] not-italic font-bold leading-[30px] tracking-[0.35px]
+  font-family: Inter;'>Current Kit Items: </h2>
+                <CartPage />
+            </div>
 
 
         </section>

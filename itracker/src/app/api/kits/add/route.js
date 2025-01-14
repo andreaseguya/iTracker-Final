@@ -10,5 +10,4 @@ export async function POST(request) {
     await fs.writeFile(`${process.cwd()}/public/data/kits.json`, JSON.stringify(products, null, 4))
     return NextResponse.json({ success: true, message: "New Kit Added Successfully" })
 
-
 }

@@ -32,14 +32,14 @@ export default function Kits() {
     return (
         <section class="ml-3 w-[450px]">
             {/* Title,  Add Btn, Intro paragraph */}
-            <div class="flex flex-row gap-[300px] ml-1">
+            <div class="flex flex-row gap-[250px]">
                 <h2 class=" text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]
                   font-family: Inter;">Kits</h2>
                 <Link href="/Kits/add">
                     <IoIosAddCircle size={25} class="hover:fill-red-600" /></Link>
             </div>
             <div class="w-[330px] ml-1">
-                <p class=" w-[370px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
+                <p class=" w-[340px] text-black text-[15px] not-italic font-normal leading-[30px] tracking-[0.35px]
   font-family: Inter;">Kits cater to bundling assets together into one loanable item. They can be checked out to a user or location. To get started, select which items you would like to add to your first kit.  Alternatively, scan a bar code to add  item</p>
             </div>
             {/* Search Bar for kits */}

@@ -28,7 +28,7 @@ export default function Admin() {
                         <select class=" mt-1 ml-1 w-[52px]  h-[14px] rounded-[5px]">
                         </select>
                     </div>
-                    <p class=" ml-3 text-black text-xl not-italic font-medium leading-7 tracking-[0.5px];">{loans.length}</p>
+                    {/* <p class=" ml-3 text-black text-xl not-italic font-medium leading-7 tracking-[0.5px];">{loans.length}</p> */}
                     <p class=" mt-1 ml-1  text-[#333] text-[12px] not-italic font-medium leading-[22px] tracking-[0.5px];
   font-family: Inter;">Kits in Use</p>
                 </div>
