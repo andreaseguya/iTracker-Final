@@ -8,7 +8,6 @@ import { BsDatabaseFillGear } from "react-icons/bs";
 import { ReadHelper } from './Assets/ReadHelper';
 import Inventory from './Stock/page';
 import Kits from './Kits/page';
-// import Kits from './KitsOld/page';
 import Check from './Checkout/page';
 import Admin from './Admin/page';
 

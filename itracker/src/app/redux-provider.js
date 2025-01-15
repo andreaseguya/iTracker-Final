@@ -1,4 +1,4 @@
-// redux-provider.js
+
 'use client'; // Important for client-side rendering
 
 import { Provider } from 'react-redux';

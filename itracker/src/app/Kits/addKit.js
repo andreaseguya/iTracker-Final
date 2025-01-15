@@ -1,23 +1,25 @@
 "use client";
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { IoMdCloseCircle } from "react-icons/io";
+// import { IoMdCloseCircle } from "react-icons/io";
 import DatePicker from "react-datepicker";
-import Link from "next/link"
+// import Link from "next/link"
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 // redux 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/app/Redux/cart.slice';
 import CartPage from './kitCart';
-export default function AddKit({ kitAsset }) {
+//api
+import api from '../api/assetList'
+export default function AddKit() {
     const [apidata, setapidata] = useState([]);
     const [skipDate, setSkip] = useState(true)
     const [kitName, setKitName] = useState('');
     // const [kitAssets, setkit] = useState([]);
     const [quantity, setQuantity] = useState(0);
     const [Loanee, setLoanee] = useState([])
-    const [returnDate, setReturn] = useState(new Date());
+    const [returnDate, setReturn] = useState(new Date().toLocaleDateString());
     const [EventType, setEvent] = useState(null);
     const [staff, setStaff] = useState('')
     const [notes, setNotes] = useState('')
@@ -41,7 +43,7 @@ export default function AddKit({ kitAsset }) {
     }
     // Redux
     const dispatch = useDispatch();
-
+    const cart = useSelector((state) => state.cart);
     // Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,36 +53,24 @@ export default function AddKit({ kitAsset }) {
             returnDate: returnDate,
             EventType: EventType,//category
             staff: staff,//staff assigned
-            // notes: notes,
+            KitItems: cart
         };
-        let response = await fetch('/api/kits/add', {
-            method: "POST",
-            body: JSON.stringify(newKit),
-            headers: {
-                "content-type": "application/json"
-            }
-        })
-        // // TODO:no post on kits 
-        response = await response.json()
-
-        // if (response.success) {
-        //     setkitName();
-        //     // setkit([]);
-        //     setLoanee();
-        //     setReturn();
-        //     setEvent();
-        //     setStaff();
-        //     // setNotes('')
-        //     return alert(response.message)
-        // };
+        try {
+            const res = await api.post('/kits', newKit)
+            alert("Successfully created a Kit")
+        } catch (error) {
+            alert("Unable to post to API because: ", error.message)
+            console.log(error.message)
+        }
     }
+
 
     return (
 
         <section class="w-[400px]">
-            <Link href="/">
+            {/* <Link href="/">
                 <IoMdCloseCircle size={24} class="hover:fill-red-600" />
-            </Link>
+            </Link> */}
 
             <form onSubmit={handleSubmit} class="ml-6">
 
@@ -148,7 +138,7 @@ export default function AddKit({ kitAsset }) {
                 <div></div>
                 <div class="flex flex-row gap-3 mt-1">
                     <p class="   text-black text-[17px] not-italic font-semibold "> Return date: </p>
-                    {skipDate ? (<DatePicker class="picker" selected={returnDate} onChange={(date) => setReturn(date)} />) : (<p>N/A</p>)}
+                    {skipDate ? (<DatePicker dateFormat="MM/dd/yyyy" class="picker" selected={returnDate} onChange={(date) => setReturn(date)} />) : (<p>N/A</p>)}
 
                 </div>
                 {/* Skip Time button */}

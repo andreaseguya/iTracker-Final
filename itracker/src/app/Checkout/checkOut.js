@@ -2,27 +2,28 @@
 import { useState, useEffect } from "react"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/app/Redux/cart.slice';
-import CartPage from "../Kits/add/kitCart";
+import CartPage from "../Kits/kitCart";
 import { FaRegUserCircle } from "react-icons/fa";
+import api from '../api/assetList'
+
 export default function Loans() {
     const [assets, setAssets] = useState([])
     const [loanee, setLoanees] = useState([
-        { name: 'Aarav Sharma' },
-        { name: 'Vivaan Patel' },
-        { name: 'Aditya Verma' },
-        { name: 'Vihaan Kumar' },
-        { name: 'Reyansh Gupta' },
-        { name: 'Aanya Singh' },
-        { name: 'Isha Reddy' },
-        { name: 'Mira Nair' },
-        { name: 'Saanvi Joshi' }])
+        { name: 'Andrea Seguya' },
+        { name: 'AJ Kishel' },
+        { name: 'Austin Calvert' },
+        { name: 'Dennis Graham' },
+        { name: 'Kyle Sylvain' },
+        { name: 'Kyle Templeton' },
+        { name: 'Adam Armstrong' },
+        { name: 'Bobbie McCullah' },
+        { name: 'Alex Pokrandt' }])
     const [search, setSearch] = useState('');
     const [selectedLoanee, setSelectedLoanee] = useState('');
-    const [selectedAssetId, setSelectedAssetId] = useState('');
     const [editing, setIsEditing] = useState(false);
-    const [returnDate, setReturn] = useState(new Date());
+    const [returnDate, setReturn] = useState(new Date().toLocaleDateString());
     const [skipDate, setSkip] = useState(true)
     const [staff, setStaff] = useState('Andrea Seguya')
     useEffect(() => {
@@ -45,19 +46,34 @@ export default function Loans() {
     const SaveLoanee = () => {
         setIsEditing(false)
     }
-    const handleSubmit = (e) => {
+
+    // Redux
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart);
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(addPost(e));// Sends the 'addPost' action with 'newPost' payload
+        if (skipDate == true) {
+            returnDate == "none"
+        }
+
+
         const newLoan = {
             Loanee: selectedLoanee,
             returnDate: returnDate,
             staff: staff,
+            LoanedItems: cart
+        }
+        try {
+            const res = await api.post('/loans', newLoan)
+            alert("Posted to API")
 
+        } catch (error) {
+            alert("Unable to post to API because: ", error.message)
+            console.log(error.message)
         }
 
     }
-    // Redux
-    const dispatch = useDispatch();
+
 
     return (
         <section>
@@ -107,6 +123,7 @@ export default function Loans() {
                 className="block p-2 pl-5 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Search for Assets to check out"
             />
+            {/* Search Results */}
             <div class="flex flex-row">
                 {/* Change to kits when youre done troubleshooting */}
                 {assets
@@ -130,7 +147,7 @@ export default function Loans() {
             {/* Return Date */}
             <div class="flex flex-row gap-3 mt-1">
                 <p class="   text-black text-[17px] not-italic font-semibold "> Return date: </p>
-                {skipDate ? (<DatePicker class="picker" selected={returnDate} onChange={(date) => setReturn(date)} />) : (<p>N/A</p>)}
+                {skipDate ? (<DatePicker class="picker" selected={returnDate} onChange={(date) => setReturn(date)} dateFormat="MM/dd/yyyy" />) : (<p>N/A</p>)}
 
             </div>
             {/* Skip Time button */}
@@ -162,7 +179,7 @@ export default function Loans() {
             </div>
             {/* Separator */}
             <div class="mt-2 flex w-[300px] h-[1px] bg-gray-200 mb-2"></div>
-            <button type="button" class=" mt-1 w-[150px] ml-[150px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Finish checkout</button>
+            <button onClick={handleSubmit} type="button" class=" mt-1 w-[150px] ml-[150px] h-6 bg-[black] rounded-[5px] text-white  hover:text-black hover:bg-[red]">Finish checkout</button>
         </section>
     )
 }

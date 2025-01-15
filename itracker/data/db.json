@@ -97,13 +97,14 @@
       "checkbox": false
     },
     {
-      "id": "11",
       "assetName": "Toner",
       "AlertEmail": "sdfsdf",
       "Quantity": "40",
-      "StorageLocation": "2",
-      "minQuantity": 4,
-      "checkbox": true
+      "minQuantity": "4",
+      "status": "undefined",
+      "checkbox": "undefined",
+      "StorageLocation": "LIS2",
+      "id": "11"
     },
     {
       "0": {
@@ -157,158 +158,164 @@
   ],
   "loans": [
     {
-      "id": "ea99",
-      "loanee": [
+      "id": "3b91",
+      "Loanee": "Saanvi Joshi",
+      "returnDate": "2025-02-01",
+      "staff": "Andrea Seguya",
+      "LoanedItems": [
         {
-          "id": "1",
-          "Name": "Admin",
+          "id": "11",
+          "assetName": "Toner",
+          "AlertEmail": "sdfsdf",
+          "Quantity": "40",
+          "StorageLocation": "2",
+          "minQuantity": 4,
+          "checkbox": true,
+          "quantity": 1
+        },
+        {
+          "id": "5",
+          "assetName": "Papers",
+          "AlertEmail": "asdasdf",
+          "Quantity": "1",
+          "minQuantity": "4",
+          "status": "undefined",
+          "checkbox": "undefined",
+          "StorageLocation": "asdasdf",
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "id": "bc20",
+      "Loanee": "Vihaan Kumar",
+      "returnDate": "2025-01-15",
+      "staff": "Andrea Seguya",
+      "LoanedItems": [
+        {
+          "id": "10",
+          "assetName": "Gaft Tape",
           "AlertEmail": "aseguya",
-          "Badge#": "0000",
-          "Department": "IT"
+          "Quantity": "15",
+          "StorageLocation": "MIS 1 A2",
+          "minQuantity": "10",
+          "checkbox": false,
+          "quantity": 1
         }
-      ],
-      "data": {
-        "cartAssets": [
-          {
-            "id": "8",
-            "assetName": "Paper",
-            "AlertEmail": "asdasdf",
-            "Quantity": 1,
-            "StorageLocation": "asdasdf",
-            "minQuantity": 4,
-            "checkbox": true
-          }
-        ],
-        "Indefinite": true,
-        "dueDate": "2024-07-05"
-      }
+      ]
     },
     {
-      "id": "fbfa",
-      "loanee": [
+      "id": "7e10",
+      "Loanee": "Austin Calvert",
+      "returnDate": "2025-01-15",
+      "staff": "Andrea Seguya",
+      "LoanedItems": [
         {
-          "id": "2",
-          "Name": "Promotions",
-          "AlertEmail": "promotions",
-          "Badge#": "0000",
-          "Department": "Promotions"
-        }
-      ],
-      "data": {
-        "cartAssets": [
-          {
-            "id": "9",
-            "assetName": "Glue",
-            "AlertEmail": "asdasd",
-            "Quantity": "10",
-            "StorageLocation": "asdasd",
-            "minQuantity": 4,
-            "checkbox": true
-          },
-          {
-            "assetName": "Toner",
-            "AlertEmail": "aseguya",
-            "Quantity": "3",
-            "MinimumQuantity": 48,
-            "status": "status 1",
-            "Returnable": false,
-            "id": "1",
-            "StorageLocation": "MIS 2A",
-            "minQuantity": 4,
-            "checkbox": true
-          }
-        ],
-        "Indefinite": false
-      }
-    },
-    {
-      "id": "8e66",
-      "loanee": [
+          "id": "11",
+          "assetName": "Toner",
+          "AlertEmail": "sdfsdf",
+          "Quantity": "40",
+          "StorageLocation": "2",
+          "minQuantity": 4,
+          "checkbox": true,
+          "quantity": 1
+        },
         {
-          "id": "1",
-          "Name": "Admin",
+          "id": "10",
+          "assetName": "Gaft Tape",
           "AlertEmail": "aseguya",
-          "Badge#": "0000",
-          "Department": "IT"
+          "Quantity": "15",
+          "StorageLocation": "MIS 1 A2",
+          "minQuantity": "10",
+          "checkbox": false,
+          "quantity": 1
+        },
+        {
+          "id": "5",
+          "assetName": "Papers",
+          "AlertEmail": "asdasdf",
+          "Quantity": "1",
+          "minQuantity": "4",
+          "status": "undefined",
+          "checkbox": "undefined",
+          "StorageLocation": "asdasdf",
+          "quantity": 1
         }
-      ],
-      "data": {
-        "cartAssets": [
-          {
-            "id": "9",
-            "assetName": "Glue",
-            "AlertEmail": "asdasd",
-            "Quantity": "10",
-            "StorageLocation": "asdasd",
-            "minQuantity": 4,
-            "checkbox": true
-          },
-          {
-            "id": "10",
-            "assetName": "Pens",
-            "AlertEmail": "asdaeqw",
-            "Quantity": 1,
-            "StorageLocation": "wqewe",
-            "minQuantity": 4,
-            "checkbox": true
-          }
-        ],
-        "Indefinite": false
-      }
+      ]
     },
     {
-      "id": "9348",
-      "loanee": [
+      "id": "8ada",
+      "Loanee": "Adam Armstrong",
+      "returnDate": "2025-02-20",
+      "staff": "Andrea Seguya",
+      "LoanedItems": [
         {
-          "id": "0",
-          "Name": "No Loanee",
-          "AlertEmail": "ITSupport",
-          "Badge#": "0000",
-          "Department": "IT"
+          "id": "11",
+          "assetName": "Toner",
+          "AlertEmail": "sdfsdf",
+          "Quantity": "40",
+          "StorageLocation": "2",
+          "minQuantity": 4,
+          "checkbox": true,
+          "quantity": 1
+        },
+        {
+          "id": "5",
+          "assetName": "Papers",
+          "AlertEmail": "asdasdf",
+          "Quantity": "1",
+          "minQuantity": "4",
+          "status": "undefined",
+          "checkbox": "undefined",
+          "StorageLocation": "asdasdf",
+          "quantity": 1
         }
-      ],
-      "data": {
-        "cartAssets": [],
-        "Indefinite": false
-      }
+      ]
+    },
+    {
+      "id": "2191",
+      "Loanee": "AJ Kishel",
+      "returnDate": "2025-02-21T08:00:00.000Z",
+      "staff": "Andrea Seguya",
+      "LoanedItems": [
+        {
+          "id": "5",
+          "assetName": "Papers",
+          "AlertEmail": "asdasdf",
+          "Quantity": "1",
+          "minQuantity": "4",
+          "status": "undefined",
+          "checkbox": "undefined",
+          "StorageLocation": "asdasdf",
+          "quantity": 1
+        }
+      ]
     }
   ],
-  "imports": [
+  "kits": [
     {
-      "0": {
-        "id": "5A1A8A2A",
-        "assetName": "Pens",
-        "Alert Email": "aseguya@snocasino.com",
-        "Quantity": "5",
-        "minQuantity": "1",
-        "status": "Ready",
-        "Returnable": "Yes",
-        "StorageLocation": "A1"
+      "id": "003e",
+      "kitName": "test",
+      "Loanee": [],
+      "returnDate": "2025-01-25",
+      "EventType": {
+        "value": "Promotion",
+        "label": "Promotion"
       },
-      "1": {
-        "id": "25CE26A3",
-        "assetName": "Toner Cart",
-        "Alert Email": "aseguya@snocasino.com",
-        "Quantity": "16",
-        "minQuantity": "2",
-        "status": "Ready",
-        "Returnable": "No",
-        "StorageLocation": "B2"
-      },
-      "2": {
-        "id": "86DFA84D",
-        "assetName": "Waste Toner ",
-        "Alert Email": "aseguya@snocasino.com",
-        "Quantity": "10",
-        "minQuantity": "3",
-        "status": "Ready",
-        "Returnable": "No",
-        "StorageLocation": "C4"
-      },
-      "3": {
-        "id": ""
-      },
-      "id": "5346"
+      "staff": "",
+      "KitItems": [
+        {
+          "id": "10",
+          "assetName": "Gaft Tape",
+          "AlertEmail": "aseguya",
+          "Quantity": "15",
+          "StorageLocation": "MIS 1 A2",
+          "minQuantity": "10",
+          "checkbox": false,
+          "quantity": 2
+        }
+      ]
     }
-  ]
+  ],
+  "imports": []
 }

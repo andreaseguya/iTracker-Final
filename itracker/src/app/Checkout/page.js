@@ -1,13 +1,9 @@
 "use client"
 import React from "react"
-import { useForm } from "react-hook-form"
-import { useState, useEffect } from 'react'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
-import api from '../api/assetList'
 import CheckOut from "./checkOut"
 import CheckIn from "./checkIn"
 export default function Check() {
-    const [users, setUsers] = useState([]);
     return (
         <section class="w-[350px] ml-3">
             <h1 class=" text-black text-[22px] not-italic font-bold leading-[30px] tracking-[0.35px]

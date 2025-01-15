@@ -2,6 +2,54 @@
 import React, { useState, useEffect } from "react";
 import api from '../api/assetList'
 export default function Returns() {
+    const [Loans, setLoans] = useState([])
+    const [searchLoanee, setSearchLoanee] = useState('')
+    const [showModal, setShowModal] = useState(false);
+    const Today = new Date().toDateString();
+    useEffect(() => {
+        const fetchLoans = async () => {
+            try {
+                const response = await api.get('/loans');
+                setLoans(response.data);
+            } catch (err) {
+                if (err.response) {
+                    console.log(err.response.data);
+                    console.log(err.response.status);
+                    console.log(err.response.headers);
+                } else {
+                    console.log(`Error: ${err.message}`);
+                }
+            }
+        }
+        fetchLoans();
+    }, [])
+    const LoaneeSearch = (e) => {
+        setSearchLoanee(e.target.value)
+    }
+    return (
+        <section>
+            <div class="flex flex-row flex-wrap gap-1" >
+                {Loans.map((loan) => (
+                    <div key={loan.id} class="mt-1" >
+                        <div class="bg-[rgba(0,0,0,0.86)] p-2 rounded-[5px] w-[150px] ml-1">
+                            <div class="bg-gray-200 rounded-[50%] w-[70px] h-[70px] ml-5"> </div>
+                            <p class="text-white ml-1">{loan.Loanee}</p>
+                            {/* separator */}
+                            {/* separator */}
+                            <div class=" mt-2 h-[1px] bg-gray-200"></div>
+                            <div class=" flex flex-row gap-1">
+                                <p class="text-xs text-white">DUE:</p><p class="text-white text-xs">{loan.returnDate.split('')}</p>
+                            </div>
+                            <button className="mt-2 ml-8  w-[60px] text-white rounded-[5px] bg-black hover:bg-red-500 p-1">Return</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+        </section>
+    )
+}
+function Dump() {
     const [allLoans, setLoans] = useState([])
     const [searchLoanee, setSearchLoanee] = useState('')
     useEffect(() => {
